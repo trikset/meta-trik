@@ -1,0 +1,3 @@
+DEPENDS_remove = "freeglut"
+EXTRA_OECMAKE += " -DBUILD_EXAMPLES=OFF"
+
