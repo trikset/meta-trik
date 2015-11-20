@@ -12,10 +12,10 @@ function sendNetworkData(paramString) {
             if (xhr.status == 200) {
                 successMessage.style.display = 'block';
             } else if (xhr.status == 422) {
-                errorMessage.innerHTML = 'Размер пароля должен быть в диапазоне 8..63 символов!';
+                errorMessage.innerHTML = 'Passphrase must be 8..63 characters!';
                 errorMessage.style.display = 'block';
             } else if (xhr.status == 500) {
-                errorMessage.innerHTML = 'Внутреняя ошибка сервера. Пожалуйста, попробуйте снова.';
+                errorMessage.innerHTML = 'Internal server error. Please try again.';
                 errorMessage.style.display = 'block';
             }
         }
@@ -33,7 +33,7 @@ for(var i = 0; i < links.length; i++) {
         errorMessage.style.display = 'none';
         var essid = event.target.text;
         if (hasClass(event.target, 'encrypted')) {
-            var password = prompt("Введите пароль для сети " + essid);
+            var password = prompt("Input password for " + essid);
             if (password) {
                 sendNetworkData('essid=' + essid + '&password=' + password);
             }

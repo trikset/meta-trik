@@ -8,8 +8,8 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     
     essid=${essidParam#essid=}
 
-    ENCRYPTED_PRIORITY=5
-    NOT_ENCRYPTED_PRIPROTY=3
+    priority=$(echo $OUTPUT | awk '$1 ~ /network=\{/ {++c} END {print c}' FS=: /etc/wpa_supplicant.conf) 
+    ((priority++))
 
     if [ "$passwordParam" != "$essidParam" ]; then
         password=${passwordParam#password=}
@@ -25,7 +25,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
         else
             passphraseRes=$(echo -e "$passphraseRes" | grep -v ^$'\t\#') 
             networkStr="${passphraseRes::-2}"
-            networkStr=$(printf "$networkStr\n\tpriority=%d\n}" $ENCRYPTED_PRIORITY)
+            networkStr=$(printf "$networkStr\n\tpriority=%d\n}" $priority)
             $(echo -e "$networkStr" >> /etc/wpa_supplicant.conf)
             if [ "$?" = "0" ]; then
                 sync
@@ -35,7 +35,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
             fi
         fi
     else
-        networkStr=$(printf "network={\n\tssid=\"%s\"\n\tkey_mgmt=NONE\n\tpriority=%d\n}" $essid $NOT_ENCRYPTED_PRIPROTY)
+        networkStr=$(printf "network={\n\tssid=\"%s\"\n\tkey_mgmt=NONE\n\tpriority=%d\n}" $essid $priority)
         $(echo -e "$networkStr" >> /etc/wpa_supplicant.conf)
         if [ "$?" = "0" ]; then
             sync

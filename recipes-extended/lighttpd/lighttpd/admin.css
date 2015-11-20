@@ -1,0 +1,27 @@
+html {
+    text-align: center;
+    display: table;
+    margin: auto;
+    padding: 20px;
+}
+
+body {
+    width: 600px;
+    max-width: 90%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.main-button {
+    background: #0a76b5;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    text-shadow: 1px 1px 1px #555555;
+    cursor: pointer;
+    width: 95%;
+    max-width: 95%;
+    font: 1em "typewriter", sans-serif;
+}
+
