@@ -27,7 +27,7 @@ inherit image-prelink
 
 TRIKIMG_USER_PARTION = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.user-part.vfat"
 TRIKIMG_USER_PARTION_LABEL ?= "user-part"
-TRIKIMG_USER_PARTION_SIZE ?= "102400" 
+TRIKIMG_USER_PARTION_SIZE ?= "512000" 
 
 TRIKIMG_ROOTFS =  "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
 TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.sdimg"
@@ -56,29 +56,22 @@ create_trik_sd_image (){
 	echo "We are create_trik_sd_image" 
 	ROOTFS_SIZE=`du --dereference --apparent-size --block-size=1K --summarize ${TRIKIMG_ROOTFS} | cut -f 1`
 	# TODO : check size of images 
+	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1 )
+	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_ALIGMENT} - ${IMAGE_ROOTFS_ALIGNMENT} % ${IMAGE_ROOTFS_ALIGNMENT})
+	TRIKIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${TRIKIMG_USER_PARTION_ALIGMENT} + ${ROOTFS_SIZE})
 
-        # reserve room for rootfs  	
-	truncate "-s >${ROOTFS_SIZE}K" ${TRIKIMG_FILE}  
-	
-	# #round upto alignment
-	truncate "-s %${IMAGE_ROOTFS_ALIGNMENT}K" ${TRIKIMG_FILE}  
-
-	# # reserve space for FAT partition
-	truncate "-s +${TRIKIMG_USER_PARTION_SIZE}K" ${TRIKIMG_FILE}  
-
- #        #round to alignment again
-	truncate "-s %${IMAGE_ROOTFS_ALIGNMENT}K" ${TRIKIMG_FILE}  
-
-    parted -s ${TRIKIMG_FILE} -- \
+	truncate "-s >${TRIKIMG_SIZE}K" ${TRIKIMG_FILE}  
+	parted -s ${TRIKIMG_FILE} -- \
            unit KiB \
            mklabel msdos \
-           mkpart primary ext4 ${TRIKIMG_USER_PARTION_SIZE} -1s \
-           set 1 hidden on \
-           mkpart primary fat32 1 ${TRIKIMG_USER_PARTION_SIZE} \
+           mkpart primary ext4 $(expr ${TRIKIMG_USER_PARTION_ALIGMENT} \+ ${IMAGE_ROOTFS_ALIGNMENT}) -1s \
+           mkpart primary fat32 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${TRIKIMG_USER_PARTION_ALIGMENT} \+ ${IMAGE_ROOTFS_ALIGNMENT})  \
            print
 
-    dd if=${TRIKIMG_USER_PARTION} of=${TRIKIMG_FILE} conv=fsync bs=1K seek=1
-    dd if=${TRIKIMG_ROOTFS} of=${TRIKIMG_FILE} conv=fsync bs=${TRIKIMG_USER_PARTION_SIZE}K seek=1
+    dd if=${TRIKIMG_USER_PARTION} \
+		of=${TRIKIMG_FILE} conv=fsync bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) seek=1
+    dd if=${TRIKIMG_ROOTFS} \
+	of=${TRIKIMG_FILE} conv=fsync bs=$(expr 1024 \* ${TRIKIMG_USER_PARTION_ALIGMENT} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) seek=1
 
 }
 
