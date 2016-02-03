@@ -1,6 +1,7 @@
 require video-sensor-ov7670-common.inc
 SUMMARY		 = "Init script  for ov7670 camera "
-TAG="${PN}_150813"
+
+SENSOR_RELEASE_DATE = "150813"
 
 do_install() {
 	install -d -m 0755 ${D}/etc/trik/
