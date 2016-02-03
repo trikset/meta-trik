@@ -9,7 +9,7 @@ inherit module
 
 KERNEL_MODULE_AUTOLOAD += "cmemk" 
 KERNEL_MODULE_PROBECONF +="cmemk"
-module_conf_cmemk="options cmemk phys_start=0xc8000000 phys_end=0xca000000 pools=100x4096,20x131072,10x1440000"
+module_conf_cmemk="options cmemk allowOverlap=1 phys_start=0xc8000000 phys_end=0xc9000000 pools=50x4096,10x131072,5x1440000"
 KERNEL_MODULE_AUTOLOAD += "syslink"
 
 SRC_URI = "http://downloads.trikset.com/sources/${PN}-${PV}.tar.gz"
