@@ -46,6 +46,7 @@ RDEPENDS_${PN} = "\
   dstat \
   smem \
   fbgrab \
+  fim \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 

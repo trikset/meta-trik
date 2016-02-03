@@ -1,0 +1,12 @@
+
+--- fim-0.5-trunk/src/Makefile.am	2016-01-09 23:32:52.947920755 +0300
++++ fim-0.5-trunk/src/Makefile.am	2016-01-09 23:32:27.303920829 +0300
+@@ -65,7 +65,7 @@
+ 	$(ECHO) '//#endif' >> $@
+ 
+ b2ba: b2ba.c
+-	$(CC) -o $@ $<
++	$(BUILD_CC) -o $@ $<
+ 
+ if FIM_WANT_CUSTOM_HARDCODED_CONSOLEFONT
+ default_font_byte_array.h: $(FIM_CUSTOM_HARDCODED_CONSOLEFONT) b2ba
