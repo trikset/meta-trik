@@ -15,8 +15,9 @@ DEPENDS = "flex-native bison-native flex"
 SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz\
       file://cross_cc.patch"
 
-#SRC_URI[sha256sum] = "f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
-SRC_URI[sha256sum] = "fde8ec22634505bba84fc2578c502fbc5eef942b5c9c69eb7aec138cd624328b"
+SRC_URI[md5sum] = "03d4dd36c894c1d319b5d5ca7a82dfb3"
+SRC_URI[sha256sum] = "7c90171adb36f1ec51ea035a71aff41136fed4b8c5ac4ca3390a7c3439a31ebb"
+
 PARALLEL_MAKE = ""
 
 inherit autotools pkgconfig
