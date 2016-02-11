@@ -6,6 +6,13 @@ RRECOMMENDS_${PN} = "vlc"
 
 inherit qt4e
 
+TAG = "${PV}"
+
+SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG} \
+          file://trikGui.sh \
+          file://qws_display.sh"
+
+
 S = "${WORKDIR}/git"
 
 do_compile(){
