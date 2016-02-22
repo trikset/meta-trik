@@ -26,6 +26,8 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-triksensors \
 		distro-feed-configs \
 		roslaunch \
+		roslaunch-systemd \
+		trik-ros \
 		formfactor \
 "
 
