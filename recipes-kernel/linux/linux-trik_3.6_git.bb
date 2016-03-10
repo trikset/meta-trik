@@ -1,10 +1,10 @@
 SECTION = "Kernel"
-DESCRIPTION = "Linux Kernel for DaVinci Trik linux"
+DESCRIPTION = "Linux Kernel for DaVinci TRIK linux"
 LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
 KERNEL_VERSION ="3.6.7"
 
-PR = "r9"
+PR = "r10"
 
 inherit kernel
 
