@@ -4,6 +4,7 @@ IMAGE_INSTALL += "\
 		mono \
 		fsharp \
 		erlang \
+		freenect-launch\
 "
 
 
