@@ -15,7 +15,7 @@ do_compile() {
 }
 
 do_install(){
-	install -d ${D}/lib/modules/${KERNEL_VERSION}/extra
-	install -m 0755 ${WORKDIR}/syslink.ko ${D}/lib/modules/${KERNEL_VERSION}/extra
-    install -m 0755 ${WORKDIR}/cmemk.ko   ${D}/lib/modules/${KERNEL_VERSION}/extra
+	install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/ 
+	install -m 0755 ${WORKDIR}/syslink.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/
+    install -m 0755 ${WORKDIR}/cmemk.ko   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/
 }
