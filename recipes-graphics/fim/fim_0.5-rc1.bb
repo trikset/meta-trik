@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 
 
 # flex with provide /usr/include/FlexLexer.h
-DEPENDS = "flex-native bison-native flex"
+DEPENDS = "flex-native bison-native flex libexif"
 
 SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz\
       file://cross_cc.patch"
