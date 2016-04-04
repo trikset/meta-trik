@@ -8,9 +8,9 @@ BRANCH = "trik-master"
 SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/dmitry42nd/mjpg-streamer.git;protocol=https;branch=${BRANCH} \
 	   file://mjpg-streamer-ov7670.sh"
-PR = "r0"
+PR = "r1"
 DEPENDS = "jpeg"
-RDEPENDS_${PN} = "mjpg-encoder-ov7670"
+RRECOMMENDS_${PN} = "jpeg-encoder-ov7670"
 
 S ="${WORKDIR}/git/mjpg-streamer-experimental"
 
