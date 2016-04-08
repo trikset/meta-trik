@@ -1,7 +1,9 @@
 
 IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
-XZ_COMPRESSION_LEVEL ?= " -6 --armthumb --lzma2 "
+XZ_DICTIONARY_SIZE = "128"
+
+XZ_COMPRESSION_LEVEL ?= " --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}M,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024 "
 EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
