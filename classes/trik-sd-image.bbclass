@@ -1,14 +1,16 @@
 
 IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
-XZ_COMPRESSION_LEVEL ?= " -6 --armthumb --lzma2 "
+XZ_DICTIONARY_SIZE = "128"
+
+XZ_COMPRESSION_LEVEL ?= " --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}M,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024 "
 EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
 
-IMAGE_TYPES += "ext4 ext4.xz sdimg sdimg.xz"
+IMAGE_TYPES += "ext4 ext4.xz img img.xz"
 IMAGE_TYPEDEP_sdimg = "ext4"
-IMAGE_TYPEDEP_sdimg.xz = "sdimg"
+IMAGE_TYPEDEP_sdimg.xz = "img"
 
 IMAGE_DEPENDS_sdimg = 	"\
 			parted-native \
@@ -17,9 +19,9 @@ IMAGE_DEPENDS_sdimg = 	"\
 			mtools-native \
 			"
 
-IMAGE_FSTYPES_append = "sdimg.xz sdimg"
+IMAGE_FSTYPES_append = "img.xz img"
 
-#IMAGE_TYPES_MASKED = "sdimg"
+#IMAGE_TYPES_MASKED = "img"
 
 EXCLUDE_FROM_WORLD = "1"
 
@@ -30,7 +32,7 @@ TRIKIMG_USER_PARTION_LABEL ?= "user-part"
 TRIKIMG_USER_PARTION_SIZE ?= "512000" 
 
 TRIKIMG_ROOTFS =  "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.sdimg"
+TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.img"
 
 IMAGE_CMD_sdimg () {
 	create_user_partion
@@ -82,7 +84,7 @@ python do_sdimg() {
 
 do_sdimg[depends] += "parted-native:do_populate_sysroot ${PN}:do_rootfs"
 
-#addtask sdimg after do_rootfs
+#addtask img after do_rootfs
 do_user_roofs[depens] = "${PN}:do_rootfs"
 
 ROOTFS_POSTPROCESS_COMMAND_append = "do_user_rootfs"
