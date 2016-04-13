@@ -55,7 +55,6 @@ create_user_partion () {
 }
 
 create_trik_sd_image (){
-	echo "We are create_trik_sd_image" 
 	ROOTFS_SIZE=`du --dereference --apparent-size --block-size=1K --summarize ${TRIKIMG_ROOTFS} | cut -f 1`
 	# TODO : check size of images 
 	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1 )
