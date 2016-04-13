@@ -9,10 +9,10 @@ EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 inherit image_types logging user-partion
 
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
-IMAGE_TYPEDEP_sdimg = "ext4"
-IMAGE_TYPEDEP_sdimg.xz = "img"
+IMAGE_TYPEDEP_img = "ext4"
+IMAGE_TYPEDEP_img.xz = "img"
 
-IMAGE_DEPENDS_sdimg = 	"\
+IMAGE_DEPENDS_img = 	"\
 			parted-native \
 			e2fsprogs-native \
 			dosfstools-native \
@@ -34,7 +34,7 @@ TRIKIMG_USER_PARTION_SIZE ?= "512000"
 TRIKIMG_ROOTFS =  "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
 TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.img"
 
-IMAGE_CMD_sdimg () {
+IMAGE_CMD_img () {
 	create_user_partion
         create_trik_sd_image
 
