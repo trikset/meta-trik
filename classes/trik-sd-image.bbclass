@@ -83,8 +83,8 @@ python do_sdimg() {
 
 do_sdimg[depends] += "parted-native:do_populate_sysroot ${PN}:do_rootfs"
 
-#addtask img after do_rootfs
-do_user_roofs[depens] = "${PN}:do_rootfs"
+#addtask sdimg after do_rootfs
+do_user_rootfs[depens] = "${PN}:do_rootfs"
 
 ROOTFS_POSTPROCESS_COMMAND_append = "do_user_rootfs"
 
