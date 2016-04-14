@@ -8,8 +8,8 @@ PR="r1"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
-SRC_URI	="git://github.com/iakov/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
-SRC_URI += "git://github.com/iakov/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
+SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
 
 S_DSP ="${WORKDIR}/dsp"
 S_ARM ="${WORKDIR}/arm"
