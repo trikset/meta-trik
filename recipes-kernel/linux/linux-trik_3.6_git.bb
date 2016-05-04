@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
 KERNEL_VERSION ="3.6.7"
 
-PR = "r11"
+PR = "r12"
 
 inherit kernel
 
@@ -13,7 +13,7 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV = "${AUTOREV}"
-BRANCH = "trik-linux-3.6.7-release-2016-03-10"
+BRANCH = "trik-linux-3.6.7-release-2016-05-07"
 SRC_URI = "git://github.com/trikset/trik-linux.git;branch=${BRANCH} \
 	   file://defconfig"
 
