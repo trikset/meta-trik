@@ -1,0 +1,1 @@
+PACKAGECONFIG = "--without-jack"
