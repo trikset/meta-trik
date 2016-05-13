@@ -15,4 +15,4 @@ EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qtopia"
 OECMAKE_CXX_FLAGS_prepend = "-std=c++11"
 inherit catkin
 
-FILES_${PN} = "${datadir}/* ${libdir}/*"
+FILES_${PN} = "${ros_datadir}/* ${ros_libdir}/*"
