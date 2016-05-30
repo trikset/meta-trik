@@ -1,1 +1,1 @@
-PACKAGECONFIG = "--without-jack"
+PACKAGECONFIG = "alsa"
