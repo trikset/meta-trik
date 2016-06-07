@@ -30,7 +30,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-ros \
 		formfactor \
 		live555 \
-		ffmpeg \
+		libav \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
