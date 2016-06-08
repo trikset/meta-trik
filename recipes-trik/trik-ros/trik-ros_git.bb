@@ -11,7 +11,7 @@ SRCREV = "${AUTOREV}"
 PV .= "${SRCPV}"
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qtopia"
+EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qtopia -DTRIK=${STAGING_INCDIR}/trikRuntime"
 OECMAKE_CXX_FLAGS_prepend = "-std=c++11"
 inherit catkin
 
