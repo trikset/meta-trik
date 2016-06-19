@@ -8,17 +8,15 @@ BRANCH = "trik-master"
 SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;branch=${BRANCH} \
 	   file://mjpg-streamer-ov7670.sh"
-PR = "r1"
-DEPENDS = "jpeg"
+PR = "r2"
+DEPENDS = "jpeg "
 RRECOMMENDS_${PN} = "jpeg-encoder-ov7670"
+
+inherit cmake
 
 S ="${WORKDIR}/git/mjpg-streamer-experimental"
 
-do_compile() {
-        oe_runmake all
-}
-do_install() {
-        oe_runmake DESTDIR="${D}/" install
+do_install_append() {
 	install -d ${D}/${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/mjpg-streamer-ov7670.sh ${D}/${sysconfdir}/init.d/
 }
