@@ -13,7 +13,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-utils \
 		packagegroup-multimedia \
 		packagegroup-core-tools-debug \
-        packagegroup-core-tools-profile\
+        	packagegroup-core-tools-profile\
 		udev-extraconf \
 		mspbsl \
 		rc-local\
@@ -26,8 +26,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		eglibc-utils \
 		packagegroup-triksensors \
 		distro-feed-configs \
-		roslaunch \
-		trik-ros \
 		formfactor \
 		live555 \
 		libav \

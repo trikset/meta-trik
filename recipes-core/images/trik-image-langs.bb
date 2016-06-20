@@ -6,5 +6,5 @@ IMAGE_INSTALL += "\
 		python-pip \
 		python-numpy \
 "
-
+# trik-ros roslaunch"
 
