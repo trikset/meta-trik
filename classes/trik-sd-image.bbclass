@@ -19,7 +19,7 @@ IMAGE_DEPENDS_img = 	"\
 			mtools-native \
 			"
 
-IMAGE_FSTYPES_append = "img.xz img"
+IMAGE_FSTYPES_append = " img.xz img "
 
 #IMAGE_TYPES_MASKED = "img"
 
