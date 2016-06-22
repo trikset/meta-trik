@@ -13,6 +13,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-utils \
 		packagegroup-multimedia \
 		packagegroup-core-tools-debug \
+        	packagegroup-core-tools-profile\
 		udev-extraconf \
 		mspbsl \
 		rc-local\
@@ -25,8 +26,9 @@ IMAGE_INSTALL = "packagegroup-base \
 		eglibc-utils \
 		packagegroup-triksensors \
 		distro-feed-configs \
-		roslaunch \
 		formfactor \
+		live555 \
+		libav \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
@@ -35,7 +37,7 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE = "1048576"
+IMAGE_ROOTFS_SIZE = "1280000"
 
 # remove not needed ipkg informations
 #ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
