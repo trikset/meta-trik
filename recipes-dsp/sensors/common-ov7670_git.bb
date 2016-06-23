@@ -1,7 +1,7 @@
 require video-sensor-ov7670-common.inc
 SUMMARY		 = "Init script  for ov7670 camera "
 PR="1"
-SRC_URI = "file://media-sensor file://init-ov7670-320x240.sh"
+SRC_URI = "file://media-sensor file://init-ov7670-320x240.sh file://media-sensor-dummy"
 
 do_install() {
 	install -d -m 0755 ${D}/etc/trik/
