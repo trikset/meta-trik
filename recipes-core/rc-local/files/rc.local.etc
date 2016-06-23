@@ -12,4 +12,6 @@
 # By default this script does nothing.
 
 echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > /etc/trik/current-media-sensor
+chmod +x /etc/trik/current-media-sensor
+
 exit 0
