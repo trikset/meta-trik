@@ -1,4 +1,4 @@
-PR="r6"
+PR="r7"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
 IMAGE_INSTALL = "packagegroup-base \
@@ -32,7 +32,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-ros \
 		formfactor \
 		live555 \
-		libav \
+		ffmpeg \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"

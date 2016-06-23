@@ -12,7 +12,7 @@ PV .= "${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qtopia -DTRIK=${STAGING_INCDIR}/trikRuntime"
-OECMAKE_CXX_FLAGS_prepend = "-std=c++11"
+OECMAKE_CXX_FLAGS_prepend = "-std=c++11 "
 inherit catkin
 
 FILES_${PN} = "${ros_datadir}/* ${ros_libdir}/*"

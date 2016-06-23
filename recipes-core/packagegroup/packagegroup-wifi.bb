@@ -1,7 +1,7 @@
 SUMMARY = "Wifi tools"
 DESCRIPTION = "The minimal set of packages required to manupulate wifi"
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,7 +16,7 @@ RDEPENDS_${PN} = "\
   avahi \
   wpa-supplicant \
   wireless-tools \
-  hostap-daemon \
+  hostapd \
   ifplugd \
   lighttpd \
   tcpdump \
