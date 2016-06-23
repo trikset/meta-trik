@@ -9,24 +9,27 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-qte-trik \
 		packagegroup-core-ssh-dropbear \
 		localedef \
-        procps \
+		procps \
 		packagegroup-firmware \
 		packagegroup-utils \
 		packagegroup-multimedia \
 		packagegroup-core-tools-debug \
-        packagegroup-core-tools-profile\
+	        packagegroup-core-tools-profile \
 		udev-extraconf \
 		mspbsl \
 		rc-local\
 		trik-runtime \
 		trik-examples \
 		dsp-modules \
-    	softap-udhcpd-config \
+		softap-udhcpd-config \
 		trik-network \
 		fuse \
 		eglibc-utils \
 		packagegroup-triksensors \
 		distro-feed-configs \
+		packagegroup-ros-comm \
+		roslaunch \
+		trik-ros \
 		formfactor \
 		live555 \
 		libav \
