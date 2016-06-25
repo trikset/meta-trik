@@ -17,7 +17,6 @@ RDEPENDS_${PN} = "\
   wpa-supplicant \
   wireless-tools \
   hostapd \
-  ifplugd \
   lighttpd \
   tcpdump \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
