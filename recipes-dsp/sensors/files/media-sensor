@@ -42,7 +42,7 @@ check_dsp_busy() {
   if [ -e $MEDIA_SENSOR_PID ] ; then
     pid=`cat $MEDIA_SENSOR_PID`
     if debug kill -s 0 $pid ; then
-      log "DSP was busy ($pid), restarted" 0
+      log "DSP was busy ($pid), restarted" 2
       kill $pid
     else
       rm $MEDIA_SENSOR_PID
