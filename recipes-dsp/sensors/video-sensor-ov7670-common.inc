@@ -4,12 +4,15 @@ LIC_FILES_CHKSUM ="file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=
 RDEPENDS_${PN}   = "common-ov7670"
 SENSOR_RELEASE_DATE = "160324"
 
-PR="r1"
+PR="r2"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
 SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
 SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
+
+# ORLY????
+RDEPENDS_${PN}_append = " libv4l " 
 
 S_DSP ="${WORKDIR}/dsp"
 S_ARM ="${WORKDIR}/arm"
