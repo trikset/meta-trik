@@ -42,9 +42,8 @@ check_dsp_busy() {
   if [ -e $MEDIA_SENSOR_PID ] ; then
     pid=`cat $MEDIA_SENSOR_PID`
     if debug kill -s 0 $pid ; then
-      log "process $pid was interrupted" 1
+      log "DSP was busy ($pid), restarted" 2
       kill $pid
-      #exit 1
     else
       rm $MEDIA_SENSOR_PID
       log "process was dead $MEDIA_SENSOR_PID: $pid" 2
@@ -135,19 +134,19 @@ do_reload() {
   $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME $DEFAULT_OPS >$MEDIA_SENSOR_LOG 2>&1 & echo $! > $MEDIA_SENSOR_PID
   sleep 1    # wait for exposure stabilized
   fix_camera # fix exposure
-  #check if actualy started
-  sleep 2
-  debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed!" 0 ; do_stop; exit 1 ; }
   wait
 }
 
 do_start() {
-  echo -e "#!/bin/sh\n $0 reload" > $CURRENT_MEDIA_SENSOR_PATH
+  echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME
+  $SHELL -c 'timeout --foreground 2s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }'
+  sleep 3
+  debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed!" 0 ; do_stop; exit 1 ; }
 }
 
 do_stop() {
-  rm $MEDIA_SENSOR_PID
+  if [ -e $MEDIA_SENSOR_PID ] ; then rm $MEDIA_SENSOR_PID ; fi
   echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME
 }
@@ -221,6 +220,7 @@ fix_webcam() {
 
 . /etc/init.d/functions
 
+VARS=$*
 include_defaults
 parse_flags $@
 check_if_debug
