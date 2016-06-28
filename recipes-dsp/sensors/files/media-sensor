@@ -42,7 +42,7 @@ check_dsp_busy() {
   if [ -e $MEDIA_SENSOR_PID ] ; then
     pid=`cat $MEDIA_SENSOR_PID`
     if debug kill -s 0 $pid ; then
-      log "DSP was busy ($pid), restarted" 0
+      log "DSP was busy ($pid), restarted" 2
       kill $pid
     else
       rm $MEDIA_SENSOR_PID
@@ -146,7 +146,7 @@ do_start() {
 }
 
 do_stop() {
-  if [ -e $MEDIA_SENSOR_PID ] ; then rm $MEDIA_SENSOR_PID ; fi
+  [ -z "$MEDIA_SENSOR_PID" ] || rm -f $MEDIA_SENSOR_PID
   echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME
 }
