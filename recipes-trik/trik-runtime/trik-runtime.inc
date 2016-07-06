@@ -8,7 +8,7 @@ inherit qt4e
 
 TAG = "${PV}"
 
-SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG} \
+SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh"
