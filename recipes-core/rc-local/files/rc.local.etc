@@ -14,4 +14,7 @@
 echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > /etc/trik/current-media-sensor
 chmod +x /etc/trik/current-media-sensor
 
+echo -e "#!/bin/sh\n /etc/init.d/mjpg-streamer-ov7670 reload" > /etc/trik/current-mjpg-streamer
+chmod +x /etc/trik/current-mjpg-streamer
+
 exit 0
