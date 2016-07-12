@@ -1,4 +1,4 @@
-PR="r6"
+eR="r6"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
 IMAGE_INSTALL = "packagegroup-base \
@@ -14,7 +14,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-utils \
 		packagegroup-multimedia \
 		packagegroup-core-tools-debug \
-	        packagegroup-core-tools-profile \
+		packagegroup-core-tools-profile \
 		udev-extraconf \
 		mspbsl \
 		rc-local\
@@ -29,6 +29,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		distro-feed-configs \
 		packagegroup-ros-comm \
 		roslaunch \
+		python-rosinstall \
 		trik-ros \
 		formfactor \
 		live555 \
