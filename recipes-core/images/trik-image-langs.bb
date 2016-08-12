@@ -5,6 +5,7 @@ IMAGE_INSTALL += "\
 		fsharp \
 		python-pip \
 		python-numpy \
+		python-pyqt \
 "
 # trik-ros roslaunch"
 
