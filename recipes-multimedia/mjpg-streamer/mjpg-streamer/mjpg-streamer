@@ -100,6 +100,7 @@ parse_flags() {
         ;;
       start|stop|restart|reload|status)
         MJPG_STREAMER_CMD=$key
+        shift
         ;;
       *)
         log "unknown option: $key" 0
