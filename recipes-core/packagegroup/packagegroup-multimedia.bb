@@ -16,6 +16,7 @@ RDEPENDS_${PN} = "\
   gst-meta-audio \
   gst-meta-video \
   gst-ffmpeg \
+  gst-rtsp \
   sox \
   flac \
   mjpg-streamer \
