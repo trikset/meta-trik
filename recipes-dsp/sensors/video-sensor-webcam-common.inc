@@ -1,27 +1,37 @@
 HOMEPAGE 	 = "http://trikset.com"
 LICENSE		 = "Apache-2.0"
 LIC_FILES_CHKSUM ="file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+RDEPENDS_${PN}   = "common-sensors"
+SENSOR_RELEASE_DATE = "1607230"
 
-SENSOR_RELEASE_DATE = "1410030"
+PR="r1"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${PN}_${SENSOR_RELEASE_DATE}"
-SRC_URI	="git://github.com/dmitry42nd/sensors-webcam.git;branch=${PN};tag=${TAG}"
+SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
 
-S ="${WORKDIR}/git"
+# ORLY????
+RDEPENDS_${PN}_append = " libv4l "
+
+S_DSP ="${WORKDIR}/dsp"
+S_ARM ="${WORKDIR}/arm"
 do_compile() {
-	:
+        :
 }
+
+
 do_install() {
-	install -d -m 0755 ${D}/etc/trik/sensors/${PN}/
-	cp ${S}/dsp_server.xe674 ${D}/etc/trik/sensors/${PN}/
-	install -m 0755 ${S}/${PN} ${D}/etc/trik/sensors/${PN}/
-	
-	install -d -m 0755 ${D}/etc/init.d/
-	install -m 0755 ${S}/${PN}.sh ${D}/etc/init.d/
-	
-	install -d -m 0755 ${D}/etc/default/
-	install -m 0755 ${S}/${PN}.default ${D}/etc/default/
+    PN_MY=$(echo ${PN} | sed "s#-webcam##g")
+        install -d -m 0755 ${D}/etc/trik/sensors/${PN}/
+        cp ${S_DSP}/release/webcam/${PN_MY}.xe674 ${D}/etc/trik/sensors/${PN}/dsp_server.xe674
+        install -m 0755 ${S_ARM}/release/webcam/${PN} ${D}/etc/trik/sensors/${PN}/
+
+        install -d -m 0755 ${D}/etc/init.d/
+        ln -sf media-sensor ${D}/etc/init.d/${PN}
+
+        install -d -m 0755 ${D}/etc/default/
+        install -m 0755 ${S_ARM}/release/webcam/${PN}.default ${D}/etc/default/
 }
 
 
