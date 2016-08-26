@@ -15,10 +15,9 @@ RDEPENDS_${PN} = "\
 	line-sensor-ov7670 \
 	line-sensor-webcam \
 	mxn-sensor-ov7670 \
-	mxn-sensor-webcam \
 	object-sensor-ov7670 \
 	object-sensor-webcam \
-    jpeg-encoder-ov7670\
+	jpeg-encoder-ov7670\
 	motion-sensor-ov7670 \
 	${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
 	"
