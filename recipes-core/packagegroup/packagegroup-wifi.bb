@@ -13,6 +13,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 
 RDEPENDS_${PN} = "\
+  netcat-openbsd \
   avahi \
   wpa-supplicant \
   wireless-tools \
