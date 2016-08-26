@@ -7,7 +7,7 @@ SENSOR_RELEASE_DATE = "1607230"
 PR="r1"
 
 PV = "git${SENSOR_RELEASE_DATE}"
-TAG="${PN}_${SENSOR_RELEASE_DATE}"
+TAG="${SENSOR_RELEASE_DATE}"
 SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
 SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
 
@@ -23,15 +23,15 @@ do_compile() {
 
 do_install() {
     PN_MY=$(echo ${PN} | sed "s#-webcam##g")
-        install -d -m 0755 ${D}/etc/trik/sensors/${PN}/
-        cp ${S_DSP}/release/webcam/${PN_MY}.xe674 ${D}/etc/trik/sensors/${PN}/dsp_server.xe674
-        install -m 0755 ${S_ARM}/release/webcam/${PN} ${D}/etc/trik/sensors/${PN}/
+      install -d -m 0755 ${D}/etc/trik/sensors/${PN}/
+      cp ${S_DSP}/release/webcam/${PN_MY}.xe674 ${D}/etc/trik/sensors/${PN}/dsp_server.xe674
+      install -m 0755 ${S_ARM}/release/webcam/${PN} ${D}/etc/trik/sensors/${PN}/
 
-        install -d -m 0755 ${D}/etc/init.d/
-        ln -sf media-sensor ${D}/etc/init.d/${PN}
+      install -d -m 0755 ${D}/etc/init.d/
+      ln -sf media-sensor ${D}/etc/init.d/${PN}
 
-        install -d -m 0755 ${D}/etc/default/
-        install -m 0755 ${S_ARM}/release/webcam/${PN}.default ${D}/etc/default/
+      install -d -m 0755 ${D}/etc/default/
+      install -m 0755 ${S_ARM}/release/webcam/${PN}.default ${D}/etc/default/
 }
 
 
