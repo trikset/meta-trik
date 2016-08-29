@@ -11,7 +11,8 @@ TAG = "${PV}"
 SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
           file://trikGui.sh \
           file://qws_display.sh \
-          file://trik_runtime_path.sh"
+          file://trik_runtime_path.sh \
+          file://gamepad-service"
 
 
 S = "${WORKDIR}/git"
@@ -27,6 +28,8 @@ do_install() {
 
         install -d ${D}/${sysconfdir}/trik/
         install -m 0755 ${WORKDIR}/trikGui.sh ${D}/${sysconfdir}/trik/
+
+        install -m 0755 ${WORKDIR}/gamepad-service ${D}/${sysconfdir}/init.d/
 
         install -d ${D}/${sysconfdir}/profile.d/
         install -m 0755 ${WORKDIR}/qws_display.sh ${D}/${sysconfdir}/profile.d/
