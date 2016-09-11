@@ -29,6 +29,7 @@ do_install() {
         install -d ${D}/${sysconfdir}/trik/
         install -m 0755 ${WORKDIR}/trikGui.sh ${D}/${sysconfdir}/trik/
 
+        install -d ${D}/${sysconfdir}/init.d/
         install -m 0755 ${WORKDIR}/gamepad-service ${D}/${sysconfdir}/init.d/
 
         install -d ${D}/${sysconfdir}/profile.d/
