@@ -19,5 +19,6 @@ RDEPENDS_${PN} = " \
         qt4-embedded-plugin-imageformat-tiff \
         qt4-embedded-plugin-sqldriver-sqlite \
 	qt4-embedded-plugin-gfxdriver-gfxtransformed \
+	sip\
 "
 
