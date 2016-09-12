@@ -1,5 +1,5 @@
 SUMMARY = "Qt for Embedded TRIK Linux (Qt without X11)"
-PR = "r4"
+PR = "r5"
 LICENSE = "MIT"
 
 inherit packagegroup
@@ -17,11 +17,7 @@ RDEPENDS_${PN} = " \
 	    qt4-embedded-fonts-ttf-dejavu \
         qt4-embedded-plugin-imageformat-jpeg \
         qt4-embedded-plugin-imageformat-tiff \
-        qt4-embedded-plugin-mousedriver-tslib \
         qt4-embedded-plugin-sqldriver-sqlite \
 	qt4-embedded-plugin-gfxdriver-gfxtransformed \
-	tslib \
-	tslib-calibrate \
-	tslib-tests \
 "
 
