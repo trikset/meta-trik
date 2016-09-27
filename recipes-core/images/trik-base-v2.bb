@@ -6,9 +6,10 @@ IMAGE_INSTALL = "packagegroup-base \
 		${ROOTFS_PKGMANAGE_BOOTSTRAP} \
 		${CORE_IMAGE_EXTRA_INSTALL} \
 		packagegroup-wifi \
-		packagegroup-qte-trik \
 		packagegroup-core-ssh-dropbear \
 		localedef \
+		qt4-x11-free \
+		sip \
 		procps \
 		packagegroup-firmware \
 		packagegroup-utils \
@@ -34,6 +35,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		formfactor \
 		live555 \
 		libav \
+		mini-x-session\
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"

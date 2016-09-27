@@ -18,4 +18,5 @@ RDEPENDS_${PN} += "\
     hidapi-dev \
     roslaunch-dev \
     libusb1-dev \
-    "
+    sip-dev\
+"
