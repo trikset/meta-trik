@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://package.xml;;beginline=16;endline=16;md5=87c9cb252374
 DEPENDS = "roscpp catkin rospy std-msgs nodelet trik-runtime freenect-camera"
 RDEPENDS_${PN} = "roscpp rospy std-msgs nodelet trik-runtime"
 
-SRC_URI = "git://github.com/auduchinok/trik-ros;branch=master"
+SRC_URI = "git://github.com/trikset/trik-ros;branch=master"
 SRCREV = "${AUTOREV}"
 PV .= "${SRCPV}"
 S = "${WORKDIR}/git"
