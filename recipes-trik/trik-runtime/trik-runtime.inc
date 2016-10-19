@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};no
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
+          file://python_path.sh \
           file://gamepad-service"
 
 
@@ -35,6 +36,7 @@ do_install() {
         install -d ${D}/${sysconfdir}/profile.d/
         install -m 0755 ${WORKDIR}/qws_display.sh ${D}/${sysconfdir}/profile.d/
         install -m 0755 ${WORKDIR}/trik_runtime_path.sh ${D}/${sysconfdir}/profile.d/
+        install -m 0755 ${WORKDIR}/python_path.sh ${D}/${sysconfdir}/profile.d/
 
         LIBS="trikCommunicator \
               trikControl \
