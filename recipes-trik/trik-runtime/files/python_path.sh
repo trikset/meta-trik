@@ -1,1 +1,1 @@
-export PYTHONPATH=/home/root/trik/:
+export PYTHONPATH=/home/root/trik/:$PYTHONPATH
