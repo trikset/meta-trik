@@ -1,4 +1,4 @@
-eR="r6"
+PR="r7"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
 IMAGE_INSTALL = "packagegroup-base \
