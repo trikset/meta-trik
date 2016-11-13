@@ -17,7 +17,7 @@ RDEPENDS_${PN} = "\
   avahi \
   wpa-supplicant \
   wireless-tools \
-  hostap-daemon \
+  hostapd \
   ifplugd \
   lighttpd \
   tcpdump \

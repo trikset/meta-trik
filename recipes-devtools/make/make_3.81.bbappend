@@ -1,3 +1,2 @@
-PRINC := "${@int(PRINC) + 1}"
-
-BBCLASSEXTEND += "nativesdk"
+#PRINC := "${@int(PRINC) + 1}"
+#BBCLASSEXTEND += "nativesdk"
