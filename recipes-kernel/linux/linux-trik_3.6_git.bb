@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
 KERNEL_VERSION ="3.6.7"
 
-PR = "r13"
+PR = "r14"
 
 inherit kernel
 
@@ -13,7 +13,7 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV = "${AUTOREV}"
-BRANCH = "trik-linux-3.6.7-release-2016-05-13"
+BRANCH = "trik-linux-3.6.7-release-2016-06-20"
 SRC_URI = "git://github.com/trikset/trik-linux.git;branch=${BRANCH} \
 	   file://defconfig"
 
@@ -21,3 +21,4 @@ S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10dfc69bd78fd072e"
 
+TARGET_CFLAGS += "-Wno-maybe-uninitialized -Wno-error"
