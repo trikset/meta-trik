@@ -14,11 +14,9 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 RDEPENDS_${PN} = "\
   netcat \
-  avahi \
   wpa-supplicant \
   wireless-tools \
-  hostap-daemon \
-  ifplugd \
+  hostapd \
   lighttpd \
   tcpdump \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \

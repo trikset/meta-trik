@@ -2,7 +2,7 @@ DECRIPTION = "Runtime for TRIK controller"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 RDEPENDS_${PN} = "locale-default espeak alsa-utils"
-RRECOMMENDS_${PN} = "vlc"
+#RRECOMMENDS_${PN} = "vlc"
 
 inherit qt4x11
 
@@ -17,6 +17,9 @@ SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};no
 
 
 S = "${WORKDIR}/git"
+
+QMAKE_PROFILES = "${S}/trikRuntime.pro"
+EXTRA_QMAKE_VARS_PRE = "-config nosanitizers -config no-sanitizers -config release"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"
@@ -62,12 +65,12 @@ do_install() {
 }
 
 
-FILES_${PN} = "/home/root/trik/"
-FILES_${PN} += "${sysconfdir}"
-FILES_${PN}-dev += "${includedir}/trikRuntime/*"
-FILES_${PN}-dev += "${libdir}"
+FILES_${PN} += "/home/root/trik/"
+#FILES_${PN}-conf += "${sysconfdir}"
+#FILES_${PN}-dev += "${includedir}/trikRuntime/*"
+#FILES_${PN} += "${libdir}"
 FILES_${PN}-dev += "/home/root/trik/*.so"
-FILES_${PN}-dbg += "/home/root/trik/.debug"
+#FILES_${PN}-dbg += "/home/root/trik/.debug"
 
 pkg_postinst_${PN} () {
         killall trikGui || true

@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 
 UBOOT_MACHINE = "trikboard_config"
 
-EXTRA_OEMAKE = 'HOSTCC="${CC}" HOSTSTRIP="true"'
+EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} HOSTCC="${CC}" V=1 HOSTSTRIP=true'
 
 inherit uboot-config
 

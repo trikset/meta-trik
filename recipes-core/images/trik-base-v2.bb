@@ -34,7 +34,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-ros \
 		formfactor \
 		live555 \
-		libav \
+		ffmpeg \
 		mini-x-session\
 "
 

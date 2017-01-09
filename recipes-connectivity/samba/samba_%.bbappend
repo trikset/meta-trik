@@ -1,5 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-RRECOMMENDS_winbind += "libnss-winbind"
+#RRECOMMENDS_winbind += "libnss-winbind"
 
 inherit user-partion
 

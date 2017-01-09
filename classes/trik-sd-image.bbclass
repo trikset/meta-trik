@@ -19,7 +19,7 @@ IMAGE_DEPENDS_img = 	"\
 			mtools-native \
 			"
 
-IMAGE_FSTYPES_append = "img.xz img"
+IMAGE_FSTYPES = "img.xz img"
 
 #IMAGE_TYPES_MASKED = "img"
 
@@ -31,8 +31,8 @@ TRIKIMG_USER_PARTION = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.user-part.vfat"
 TRIKIMG_USER_PARTION_LABEL ?= "user-part"
 TRIKIMG_USER_PARTION_SIZE ?= "512000" 
 
-TRIKIMG_ROOTFS =  "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.img"
+TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
+TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.img"
 
 IMAGE_CMD_img () {
 	create_user_partion

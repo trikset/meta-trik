@@ -12,12 +12,13 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 RDEPENDS_${PN} = "\
-  linux-firmware-trik-wl1271 \
+  linux-firmware-wl12xx \
   linux-firmware-ath9k \
   linux-firmware-ralink \
   linux-firmware-msp \
   kernel-module-systec-can \
   linux-firmware-systec-can \
+  packagegroup-ti-drivers \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 

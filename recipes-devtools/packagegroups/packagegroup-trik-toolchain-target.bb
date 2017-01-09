@@ -9,8 +9,6 @@ RDEPENDS_${PN} += "\
     linux-libc-headers-dev \
     kernel-dev \
     alsa-dev \
-    sphinxbase-dev \
-    pocketsphinx-dev \
     libnl-dev \
     v4l-utils-dev \
     libv4l-dev \
