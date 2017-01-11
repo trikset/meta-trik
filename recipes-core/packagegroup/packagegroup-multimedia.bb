@@ -8,7 +8,6 @@ inherit packagegroup
 RDEPENDS_${PN} = "\
   alsa-utils \
   espeak \
-  flite-alsa \
   v4l-utils \
   gst-meta-base \
   gst-meta-audio \

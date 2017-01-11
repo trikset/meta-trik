@@ -28,10 +28,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		eglibc-utils \
 		packagegroup-triksensors \
 		distro-feed-configs \
-		packagegroup-ros-comm \
-		roslaunch \
-		python-rosinstall \
-		trik-ros \
 		formfactor \
 		live555 \
 		ffmpeg \
