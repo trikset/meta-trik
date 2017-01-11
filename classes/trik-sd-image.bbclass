@@ -2,8 +2,8 @@
 IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
 XZ_DICTIONARY_SIZE = "128"
-
-XZ_COMPRESSION_LEVEL ?= " --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}M,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024 "
+XZ_THREADS = "-T 2"
+XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
 EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
@@ -29,7 +29,7 @@ inherit image-prelink
 
 TRIKIMG_USER_PARTION = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.user-part.vfat"
 TRIKIMG_USER_PARTION_LABEL ?= "user-part"
-TRIKIMG_USER_PARTION_SIZE ?= "512000" 
+TRIKIMG_USER_PARTION_SIZE ?= "307200"
 
 TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
 TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.img"
@@ -39,7 +39,7 @@ IMAGE_CMD_img () {
         create_trik_sd_image
 
 }
-# temporary add timestamp into conffs 
+# temporary add timestamp into conffs
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 create_user_partion () {
@@ -56,12 +56,12 @@ create_user_partion () {
 
 create_trik_sd_image (){
 	ROOTFS_SIZE=`du --dereference --apparent-size --block-size=1K --summarize ${TRIKIMG_ROOTFS} | cut -f 1`
-	# TODO : check size of images 
+	# TODO : check size of images
 	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1 )
 	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_ALIGMENT} - ${IMAGE_ROOTFS_ALIGNMENT} % ${IMAGE_ROOTFS_ALIGNMENT})
 	TRIKIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${TRIKIMG_USER_PARTION_ALIGMENT} + ${ROOTFS_SIZE})
 
-	truncate "-s >${TRIKIMG_SIZE}K" ${TRIKIMG_FILE}  
+	truncate "-s >${TRIKIMG_SIZE}K" ${TRIKIMG_FILE}
 	parted -s ${TRIKIMG_FILE} -- \
            unit KiB \
            mklabel msdos \
