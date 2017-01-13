@@ -1,7 +1,7 @@
 SUMMARY = "Wifi tools"
 DESCRIPTION = "The minimal set of packages required to manupulate wifi"
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "\
   wireless-tools \
   hostapd \
   lighttpd \
+  linux-firmware-trik-wl1271 \
   tcpdump \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
