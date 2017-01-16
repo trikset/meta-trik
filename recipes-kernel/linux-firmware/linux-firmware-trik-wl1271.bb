@@ -6,7 +6,6 @@ LICENSE = "Proprietary"
 
 LIC_FILES_CHKSUM = "file://LICENCE.ti-connectivity;md5=186e7a43cf6c274283ad81272ca218ea"
 RPROVIDES_${PN}="linux-firmware-wl12xx"
-PREFERRED_PROVIDER_linux-firmware-wl12xx="linux-firmware-trik-wl1271"
 SRCREV = "${AUTOREV}"
 
 SRC_URI = "git://github.com/trikset/trik-firmware.git"
