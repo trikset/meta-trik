@@ -1,0 +1,2 @@
+# This rule is used for pre-3.7 kernels to load TI WiFi firmware
+SUBSYSTEM=="firmware", ACTION=="add", RUN+="/etc/udev/scripts/trik_fw_helper"

@@ -1,0 +1,14 @@
+#!/bin/sh
+# DO NOT RUN!!!
+#This is companion script for corresponding udev rule
+#udev does not pass PATH to script, set it manually
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+handle=/sys/$DEVPATH
+fw=/lib/firmware/$FIRMWARE
+test -f $fw && \
+   echo 1 > $handle/loading && \
+   cat $fw > $handle/data && \
+   echo 0 > $handle/loading \
+ || echo -1 > $handle/loading \
+ || exit 10
+
