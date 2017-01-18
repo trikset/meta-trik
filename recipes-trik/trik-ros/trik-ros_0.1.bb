@@ -6,9 +6,7 @@ LIC_FILES_CHKSUM = "file://package.xml;;beginline=16;endline=16;md5=87c9cb252374
 DEPENDS = "roscpp rospy std-msgs nodelet trik-runtime freenect-camera"
 RDEPENDS_${PN} = "roscpp rospy std-msgs nodelet trik-runtime"
 
-SRC_URI = "git://github.com/trikset/trik-ros;branch=master"
-SRCREV = "${AUTOREV}"
-#PV .= "${SRCPV}"
+SRC_URI = "git://github.com/trikset/{BPN};branch=master;tag=${PV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qtopia -DTRIK=${STAGING_INCDIR}/trikRuntime"

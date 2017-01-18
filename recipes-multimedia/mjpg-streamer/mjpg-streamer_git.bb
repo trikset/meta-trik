@@ -9,7 +9,11 @@ SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;branch=${BRANCH} \
 	   file://mjpg-streamer"
 PR = "r2"
-DEPENDS = "jpeg "
+DEPENDS = "jpeg libv4l"
+
+# Seems like build config problem. Actually, we do not need it.
+DEPENDS += "libsdl"
+
 RRECOMMENDS_${PN} = "jpeg-encoder-ov7670"
 
 inherit cmake

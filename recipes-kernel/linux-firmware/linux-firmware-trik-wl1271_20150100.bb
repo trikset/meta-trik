@@ -1,4 +1,4 @@
-DESCRIPTION = "Firmware files for use with Trik Linux kernel"
+DESCRIPTION = "Firmware files for use with TRIK Linux kernel"
 SECTION = "kernel"
 
 COMPATIBLE_MACHINES = "trikboard"
@@ -6,9 +6,9 @@ LICENSE = "Proprietary"
 
 LIC_FILES_CHKSUM = "file://LICENCE.ti-connectivity;md5=186e7a43cf6c274283ad81272ca218ea"
 RPROVIDES_${PN}="linux-firmware-wl12xx"
-SRCREV = "${AUTOREV}"
+RCONFLICTS_${PN}="linux-firmware-wl12xx"
 
-SRC_URI = "git://github.com/trikset/trik-firmware.git"
+SRC_URI = "git://github.com/trikset/trik-firmware.git;tag=${PV}"
 
 S = "${WORKDIR}/git"
 

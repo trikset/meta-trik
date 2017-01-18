@@ -8,8 +8,8 @@ SENSOR_RELEASE_DATE = "160823"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
-SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm "
-SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp"
+SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;branch=master;tag=${TAG};destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;branch=master;tag=${TAG};destsuffix=dsp"
 
 # ORLY????
 RDEPENDS_${PN}_append = " libv4l "
@@ -35,8 +35,8 @@ do_install() {
 }
 
 
-FILES_${PN} = "/etc/*"
-INHIBIT_PACKAGE_STRIP = "1"
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+#FILES_${PN} = "/etc/*"
+#INHIBIT_PACKAGE_STRIP = "1"
+#INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INSANE_SKIP_${PN} = "ldflags arch"
+INSANE_SKIP_${PN}_trikboard = "ldflags arch"
