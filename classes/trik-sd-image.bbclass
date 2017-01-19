@@ -28,33 +28,30 @@ EXCLUDE_FROM_WORLD = "1"
 inherit image-prelink
 
 TRIKIMG_USER_PARTION = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.user-part.vfat"
-TRIKIMG_USER_PARTION_LABEL ?= "user-part"
-TRIKIMG_USER_PARTION_SIZE ?= "307200"
+TRIKIMG_USER_PARTION_LABEL ?= "TRIKUSER"
+TRIKIMG_USER_PARTION_SIZE ?= "1024"
 
 TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
 TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.img"
 
 IMAGE_CMD_img () {
-	create_user_partion
-        create_trik_sd_image
+ do_sdimg
 
 }
-# temporary add timestamp into conffs
-IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
-create_user_partion () {
-	echo "We are create_trik_conf_image"
+#IMAGE_CMD_img[depends] += "${PN}:do_sdimg"
+
+# temporary add timestamp into conffs
+#IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
+
+do_user_partition_img() {
 	rm -rf ${TRIKIMG_USER_PARTION}
 	truncate "-s >${TRIKIMG_USER_PARTION_SIZE}K" ${TRIKIMG_USER_PARTION}
-	mkdosfs -F 32 -n ${TRIKIMG_USER_PARTION_LABEL} ${TRIKIMG_USER_PARTION}
-
-	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
-
-	mcopy -i ${TRIKIMG_USER_PARTION} -v ${WORKDIR}/image-version-info ::/
-	mcopy -i ${TRIKIMG_USER_PARTION} -s ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/* ::/
+	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/image-version-info
+	mkdosfs -F 32 -n ${TRIKIMG_USER_PARTION_LABEL} -d ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR} ${TRIKIMG_USER_PARTION}
 }
 
-create_trik_sd_image (){
+do_sdimg(){
 	ROOTFS_SIZE=`du --dereference --apparent-size --block-size=1K --summarize ${TRIKIMG_ROOTFS} | cut -f 1`
 	# TODO : check size of images
 	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1 )
@@ -66,29 +63,23 @@ create_trik_sd_image (){
            unit KiB \
            mklabel msdos \
            mkpart primary ext4 $(expr ${TRIKIMG_USER_PARTION_ALIGMENT} \+ ${IMAGE_ROOTFS_ALIGNMENT}) -1s \
-           mkpart primary fat32 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${TRIKIMG_USER_PARTION_ALIGMENT} \+ ${IMAGE_ROOTFS_ALIGNMENT})  \
            print
 
-    dd if=${TRIKIMG_USER_PARTION} \
-		of=${TRIKIMG_FILE} conv=fsync bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) seek=1
     dd if=${TRIKIMG_ROOTFS} \
 	of=${TRIKIMG_FILE} conv=fsync bs=$(expr 1024 \* ${TRIKIMG_USER_PARTION_ALIGMENT} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) seek=1
 
 }
 
-
-python do_sdimg() {
-		bb.build.exec_func('create_trik_sd_image', d)
-}
-
 do_sdimg[depends] += "parted-native:do_populate_sysroot ${PN}:do_rootfs"
 
-#addtask sdimg after do_rootfs
-do_user_rootfs[depens] = "${PN}:do_rootfs"
+#instead of addtask sdimg after do_rootfs
+#do_user_rootfs[depends] = "${PN}:do_rootfs"
+#do_user_partition_img[depends] = "${PN}:do_user_rootfs"
 
-ROOTFS_POSTPROCESS_COMMAND_append = "do_user_rootfs"
-
-TRIK_USER_PARTION_CREATION_DIR ?="/EXT_FAT"
+#ROOTFS_POSTPROCESS_COMMAND_append = "do_user_rootfs"
+#addtask do_sdimg before do_root after do_rootfs
+#do_image_img[depends]="${PN}:do_sdimg"
+#TRIK_USER_PARTION_CREATION_DIR ?="/EXT_FAT"
 
 do_user_rootfs () {
 	rm -rf ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}
