@@ -42,7 +42,7 @@ IMAGE_CMD_img () {
 #IMAGE_CMD_img[depends] += "${PN}:do_sdimg"
 
 # temporary add timestamp into conffs
-#IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
+IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 do_user_partition_img() {
 	rm -rf ${TRIKIMG_USER_PARTION}
