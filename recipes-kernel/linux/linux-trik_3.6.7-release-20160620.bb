@@ -2,17 +2,17 @@ SECTION = "Kernel"
 DESCRIPTION = "Linux Kernel for DaVinci TRIK linux"
 LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
-KERNEL_VERSION ="3.6.11"
+KERNEL_VERSION ="3.6.7"
 
 PR = "r17"
-PE = "-1"
+
 inherit kernel
 
 KERNEL_MODULE_AUTOLOAD += "jex_epwm"
 KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
-SRC_URI = "git://github.com/trikset/trik-linux.git;branch=trik-linux-3.6.y-release;tag=${BPN}-${PV} \
+SRC_URI = "git://github.com/trikset/trik-linux.git;branch=trik-linux-3.6.7-release-2016-06-20;tag=${BPN}-${PV} \
 	   file://defconfig"
 
 S = "${WORKDIR}/git"
