@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
 KERNEL_VERSION ="3.6.7"
 
-PR = "r17"
+PR = "r18"
 
 inherit kernel
 
