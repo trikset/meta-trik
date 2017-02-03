@@ -31,8 +31,4 @@ if [ x$trik_wifi_mode = x ]
 		echo "trik_wifi_mode=$trik_wifi_mode" >>$trikrc
 fi
 
-if [ $trik_wifi_mode = ap ]
-	then
-		/etc/trik/set_wifi_mode.sh ap
-fi
-
+/etc/trik/set_wifi_mode.sh $trik_wifi_mode

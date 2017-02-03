@@ -19,10 +19,10 @@ FILES_{PN}="${sysconfdir}/init.d/trik-network ${sysconfdir}/trik/set_wifi_mode.s
 S = "${WORKDIR}"
 
 do_configure() {
-	bbwarn "Empty"
+   :
 }
 do_compile() {
-	bbwarn "Empty" 
+	:
 }
 do_install() {
 	install -d -m 755 ${D}${sysconfdir}/init.d
@@ -30,4 +30,12 @@ do_install() {
 	install -d -m 755 ${D}${sysconfdir}/trik/
 	install -m 755 ${S}/set_wifi_mode.sh ${D}${sysconfdir}/trik/
 	install -m 755 ${S}/init_wifi.sh ${D}${sysconfdir}/trik/
+
+    install -d ${D}/etc/modules-load.d/
+    echo wl12xx > ${D}/etc/modules-load.d/wl12xx.conf
+
+     install -d ${D}/etc/modprobe.d/
+     echo "blacklist wl12xx" >> ${D}/etc/modprobe.d/blacklist.conf
+     echo "blacklist ipv6"   >> ${D}/etc/modprobe.d/blacklist.conf
+
 }

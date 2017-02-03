@@ -48,6 +48,7 @@ RDEPENDS_${PN} = "\
   fbgrab \
   fim \
   psmisc \
+  lshw \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 

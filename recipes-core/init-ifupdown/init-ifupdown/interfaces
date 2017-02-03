@@ -4,4 +4,5 @@
 auto lo
 iface lo inet loopback
 
-source /etc/network/interfaces.d/*.cfg
+allow-hotplug wlan0 eth0
+source /etc/network/interfaces.d/trik-wlan0.cfg

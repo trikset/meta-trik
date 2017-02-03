@@ -1,6 +1,18 @@
-#!/bin/sh
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          trik-network
+# Required-Start:    module-init-tools
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: TRIK network support
+### END INIT INFO
 
 TRIK_NETWORK=/etc/trik/init_wifi.sh
+
+
+# dirty workaround until we have 3.7 kernel
+modprobe wl12xx
 
 case $1 in
 	start)
