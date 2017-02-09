@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};no
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKE_VARS_PRE = "-config nosanitizers -config no-sanitizers -config release"
+EXTRA_QMAKEVARS_PRE = "CONFIG+=nosanitizers"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"
