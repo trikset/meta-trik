@@ -1,4 +1,5 @@
 DESCRIPTION = "Task for extra drivers for Texas Instruments SoCs"
+LICENSE="MIT"
 
 inherit packagegroup
 
