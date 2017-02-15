@@ -6,7 +6,9 @@ RDEPENDS_${PN} = "locale-default espeak alsa-utils"
 
 inherit qmake5
 DEPENDS += "qtmultimedia qtscript"
-
+#RREPLACES_${PN} += "trik-runtime"
+RCONFLICTS_${PN} += "trik-runtime-qt4"
+RPROVIDES_${PN} += "trik-runtime"
 TAG = "${PV}"
 
 SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
