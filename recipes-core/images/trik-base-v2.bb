@@ -8,13 +8,9 @@ IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-wifi \
 		packagegroup-core-ssh-dropbear \
 		localedef \
-		qt4-x11-free \
-		sip \
 		procps \
 		packagegroup-firmware \
 		packagegroup-utils \
-		packagegroup-multimedia \
-		packagegroup-core-tools-debug \
 		udev-extraconf \
 		mspbsl \
 		rc-local\
@@ -26,10 +22,9 @@ IMAGE_INSTALL = "packagegroup-base \
 		fuse \
 		eglibc-utils \
 		packagegroup-triksensors \
+		mjpg-streamer \
 		distro-feed-configs \
 		formfactor \
-		live555 \
-		ffmpeg \
 		mini-x-session\
 "
 

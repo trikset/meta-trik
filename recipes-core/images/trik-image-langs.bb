@@ -1,4 +1,4 @@
-require trik-base-v2.bb
+require trik-image.bb
 
 IMAGE_INSTALL += "\
 		mono \

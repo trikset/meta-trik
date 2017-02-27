@@ -1,7 +1,7 @@
 SUMMARY = "Multimedia libraries package"
 DESCRIPTION = "Multimedia libraries and utilities"
 LICENSE = "LGPLv2"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -17,8 +17,12 @@ RDEPENDS_${PN} = "\
   flac \
   mjpg-streamer \
   pocketsphinx \
+  ffmpeg \
+  live555 \
+  lsdldoom \
+  bigbuckbunny-480p \
  "
-
+#vlc
 RRECOMMENDS_${PN} = "\
  "
 
