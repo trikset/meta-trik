@@ -15,6 +15,7 @@ RDEPENDS_${PN} += "\
 	boost-dev \
 	hidapi-dev \
 	libusb1-dev \
-	sip-dev\
-	roslaunch-dev \
 "
+
+#	sip-dev
+#	roslaunch-dev 

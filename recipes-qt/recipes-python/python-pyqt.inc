@@ -1,3 +1,4 @@
+PE_${PN} = "-1"
 SUMMARY = "Python Qt5 Bindings"
 AUTHOR = "Phil Thomson @ riverbank.co.uk"
 HOMEPAGE = "http://riverbankcomputing.co.uk"
@@ -13,24 +14,18 @@ LIC_FILES_CHKSUM = "\
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pyqt/PyQt5_gpl-${PV}.tar.gz \
 "
-# PyQt 5.8
-#SRC_URI[md5sum] = "ac04c0bfc1f05f5a1c2a1edd2640235c"
-#SRC_URI[sha256sum] = "9edf2816105a4111a447452df2bef7ce47d7efb307c75c3e74c27b8d31d7f66e"
-
-#PyQt 5.6.
-SRC_URI[md5sum] = "dbfc885c0548e024ba5260c4f44e0481"
-SRC_URI[sha256sum] = "2e481a6c4c41b96ed3b33449e5f9599987c63a5c8db93313bd57a6acbf20f0e1"
 
 S = "${WORKDIR}/PyQt5_gpl-${PV}"
 
 PARALLEL_MAKE = ""
 
 inherit qmake5 pythonnative python-dir distro_features_check
-DEPENDS += "sip sip-native python"
+DEPENDS += "sip sip-native"
 REQUIRED_DISTRO_FEATURES = "x11"
-
+#do_configure[depends] += "sip-native:do_populate_sysroot"
+#EXTRANATIVEPATH_append =  " sip-native "
 DISABLED_FEATURES = "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_SessionManager"
-
+BBCLASSEXTEND = "nativesdk native"
 DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
 
 PYQT_MODULES = "QtCore QtGui QtDeclarative QtNetwork QtSvg"
@@ -53,10 +48,15 @@ do_configure() {
     echo "qt_shared = True" >> pyqt.cfg
     echo "[Qt ${PV}]" >> pyqt.cfg
     echo "pyqt_sip_dirt_modules = ${PYQT_MODULES}" >> pyqt.cfg
+}
+do_configure_append_class-native() {
+    echo yes | python ${S}/configure.py --verbose --qmake  ${OE_QMAKE_QMAKE} --configuration pyqt.cfg --sysroot ${STAGING_DIR_NATIVE}
+}
+do_configure_append_class-nativesdk() {
     echo yes | python ${S}/configure.py --verbose --qmake  ${OE_QMAKE_QMAKE} --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
 }
-do_install() {
-     oe_runmake install
+do_configure_append_class-target() {
+    echo yes | python ${S}/configure.py --verbose --qmake  ${OE_QMAKE_QMAKE} --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
 }
 
 RDEPENDS_${PN} = "python-core python-sip"
