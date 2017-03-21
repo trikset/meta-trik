@@ -9,7 +9,7 @@ DEPENDS += "qtmultimedia qtscript"
 #RREPLACES_${PN} += "trik-runtime"
 RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
-TAG = "${PV}"
+TAG = "${PV}${TRIK_RUNTIME_UPDATE}"
 
 SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
           file://trikGui.sh \

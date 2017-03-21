@@ -8,7 +8,7 @@ RPROVIDES_${PN} += "trik-runtime"
 
 inherit qt4x11
 
-TAG = "${PV}"
+TAG = "${PV}${TRIK_RUNTIME_UPDATE}"
 
 SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
           file://trikGui.sh \
