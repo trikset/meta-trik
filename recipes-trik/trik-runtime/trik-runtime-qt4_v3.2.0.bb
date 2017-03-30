@@ -1,4 +1,4 @@
-PR="r3"
-TRIK_RUNTIME_UPDATE="-14"
+PR="r4"
+TRIK_RUNTIME_UPDATE="-16"
 require trik-runtime-qt4.inc
 
