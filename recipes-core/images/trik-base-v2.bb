@@ -25,6 +25,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		mjpg-streamer \
 		distro-feed-configs \
 		formfactor \
+		coreutils \
 		mini-x-session\
 "
 
