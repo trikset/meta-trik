@@ -27,7 +27,6 @@ RDEPENDS_${PN} = "\
   tzdata \
   rsync \
   fbgrab \
-  fbshot \
   u-boot-trik-fw-utils \
   curl \
   psplash \
