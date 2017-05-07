@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://package.xml;;beginline=16;endline=16;md5=87c9cb252374
 
 DEPENDS = "roscpp rospy std-msgs nodelet trik-runtime-qt5 freenect-camera"
 RDEPENDS_${PN} = "roscpp rospy std-msgs nodelet trik-runtime"
-inherit qmake2
+inherit qmake5
 SRC_URI = "git://github.com/trikset/${BPN};branch=master;tag=${PV}"
 S = "${WORKDIR}/git"
 
