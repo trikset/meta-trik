@@ -6,8 +6,7 @@ IMAGE_INSTALL += "\
 		python-pip \
 		python-numpy \
 		protobuf \
-"
-
-
-# trik-ros roslaunch"
+		trik-ros \
+		roslaunch \
+		"
 
