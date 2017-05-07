@@ -1,7 +1,7 @@
 SUMMARY = "Provides extra target libs for TRIK toolchain"
 LICENSE = "MIT"
 
-PR = "r2"
+PR = "r3"
 
 inherit packagegroup
 
@@ -16,7 +16,5 @@ RDEPENDS_${PN} += "\
 	hidapi-dev \
 	libusb1-dev \
 	protobuf-dev  \
+	roslaunch-dev \
 "
-
-#	sip-dev
-#	roslaunch-dev 
