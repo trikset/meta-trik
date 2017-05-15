@@ -1,0 +1,2 @@
+# qtmultimedia fontconfig
+PACKAGECONFIG = ""
