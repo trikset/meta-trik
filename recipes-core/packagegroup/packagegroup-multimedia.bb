@@ -16,7 +16,6 @@ RDEPENDS_${PN} = "\
   sox \
   flac \
   mjpg-streamer \
-  pocketsphinx \
   ffmpeg \
   live555 \
   lsdldoom \
@@ -25,4 +24,5 @@ RDEPENDS_${PN} = "\
 #vlc
 RRECOMMENDS_${PN} = "\
  "
+#pocketsphinx 
 

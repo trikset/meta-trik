@@ -17,4 +17,5 @@ RDEPENDS_${PN} += "\
 	libusb1-dev \
 	protobuf-dev  \
 	roslaunch-dev \
+	trik-runtime-qt5-dev \
 "
