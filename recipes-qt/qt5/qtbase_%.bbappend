@@ -1,4 +1,5 @@
-PACKAGECONFIG_FONTS = "fontconfig"
+PACKAGECONFIG_FONTS = "fontconfig freetype"
 PACKAGECONFIG_GL = ""
 PACKAGECONFIG_FB = "directfb linuxfb"
-PACKAGECONFIG_DISTRO = "icu no-opengl"
+PACKAGECONFIG_MULTIMEDIA = "alsa"
+PACKAGECONFIG_DISTRO = "icu"
