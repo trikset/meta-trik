@@ -1,16 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 #RRECOMMENDS_winbind += "libnss-winbind"
+SRC_URI += "file://trik-smb.conf"
+#inherit user-partion
+install_append () {
+	install -m 0644 -D ${S}/trik-smb.conf ${D}${sysconfdir}/samba/smb.conf
 
-inherit user-partion
-
-do_install_append() {
-	echo -e "\n[user-part]" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\tpath = ${TRIK_USER_PARTION_CREATION_DIR}" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\tpublic = yes" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\twritable = yes" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\tcomment = trik user partion" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\tprintable = no" >> ${D}${sysconfdir}/samba/smb.conf
-	echo -e "\tguest ok = yes" >> ${D}${sysconfdir}/samba/smb.conf
 }
 
 pkg_postinst_libnss-winbind () {
