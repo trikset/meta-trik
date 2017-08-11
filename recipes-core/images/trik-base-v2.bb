@@ -26,6 +26,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		distro-feed-configs \
 		formfactor \
 		coreutils \
+		u-boot-trik-data \
 		mini-x-session\
 "
 

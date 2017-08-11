@@ -1,11 +1,6 @@
 #!/bin/sh
-### BEGIN INIT INFO
-# Provides:          hostname
-# Required-Start:
-# Required-Stop:
-# Default-Start:     S
-# Default-Stop:
-# Short-Description: Generate hostname
+#Set/reset hostname from MAC
+
 
 TRIK_USER_PARTION=_path
 
