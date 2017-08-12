@@ -9,7 +9,7 @@ inherit user-partion update-rc.d
 INITSCRIPT_NAME = "init-trik"
 INITSCRIPT_PARAMS="start 38 S ."
 
-SRC_URI += "file://init-trik file://trik-hostname.sh file://update_uboot.sh"
+SRC_URI += "file://init-trik file://trik-hostname.sh"
 
 
 do_install_append () {
@@ -19,7 +19,7 @@ do_install_append () {
 	sed -ie 's,_path,${TRIK_USER_PARTION_CREATION_DIR},g' ${S}/trik-hostname.sh
 
         install -m 0755 -D -t ${D}${sysconfdir}/init.d ${S}/init-trik
-        install -m 0755 -D -t ${D}${datadir}/trik/init.d/ ${S}/trik-hostname.sh ${S}/update_uboot.sh
+        install -m 0755 -D -t ${D}${datadir}/trik/init.d/ ${S}/trik-hostname.sh
 
 }
 #generate_fstab() {

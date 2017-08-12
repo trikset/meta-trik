@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 LOG=/tmp/uboot-update.log
 exec 5>&1 
 exec 1>>$LOG
@@ -11,7 +11,7 @@ reset_fw() {
 
 
 echo "*** STARTED at $(date -u)"
-case $(md5sum /dev/mtd0 | cut -f 1 -d " ") in
+case `md5sum /dev/mtd0 | cut -f 1 -d " "` in
 09a1d434dbd7197e7c3af8a7c28ca38b)  
    echo SPI flash is in erased state \(0xFF\). This is a new fresh board, isn\'t it?
    echo Flashing current version of U-Boot...
