@@ -25,6 +25,7 @@ case `md5sum /dev/mtd0 | cut -f 1 -d " "` in
 59cd1c28bd93134edeb90b0f4249c414)
    echo This is current version, no update required.
 ;;
+#???dac3a861e1bf99ad72d4268ffab6be07 #
 *)
        echo "#######WARNING##########"
        echo "#UNKNOWN U-BOOT VERSION#"
