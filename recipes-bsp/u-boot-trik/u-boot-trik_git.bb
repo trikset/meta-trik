@@ -36,7 +36,7 @@ do_configure_prepend () {
 
 
 do_compile_append () {
-     ./tools/mkimage -s -n /dev/null -T aisimage -e 0x80000000 -d spl/u-boot-spl.bin spl/u-boot-spl.ais
+     ${B}/tools/mkimage -s -n /dev/null -T aisimage -e 0x80000000 -d ${B}/spl/u-boot-spl.bin ${B}/spl/u-boot-spl.ais
 }
 
 do_install_append () {
@@ -44,4 +44,7 @@ do_install_append () {
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh
 }
 
+do_deploy_append() {
+  install -p -D -m 0644 -t ${DEPLOYDIR} ${B}/u-boot-gzip.ais ${B}/spl/u-boot-spl.ais
+}
 
