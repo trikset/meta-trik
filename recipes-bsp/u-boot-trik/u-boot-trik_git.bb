@@ -16,7 +16,7 @@ SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH} \
 
 
 SPL_BINARY="spl/u-boot-spl.ais"
-UBOOT_MAKE_TARGET="u-boot-gzip.ais"
+UBOOT_MAKE_TARGET="${B}/u-boot-gzip.ais"
 PARALLEL_MAKE=""
 LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=306;md5=1707d6db1d42237583f50183a5651ecb"
 
@@ -38,7 +38,7 @@ do_compile_append () {
 }
 
 do_install_append () {
-  install -p -D -t ${D}${P} ${S}/u-boot-gzip.ais ${S}/spl/u-boot-spl.ais ${WORKDIR}/reset_uboot.sh
+  install -p -D -t ${D}${P} ${B}/u-boot-gzip.ais ${B}/spl/u-boot-spl.ais ${WORKDIR}/reset_uboot.sh
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh
 }
 
