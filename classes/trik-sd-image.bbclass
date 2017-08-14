@@ -83,8 +83,8 @@ dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=n
 
 
 do_bootable_sdimg(){
-	local UBOOT_AIS="${IMGDEPLOYDIR}/u-boot-gzip.ais"
-	local UBOOT_SPL_AIS="${IMGDEPLOYDIR}/u-boot-spl.ais"
+	local UBOOT_AIS="${DEPLOY_DIR_IMAGE}/u-boot-gzip.ais"
+	local UBOOT_SPL_AIS="${DEPLOY_DIR_IMAGE}/u-boot-spl.ais"
         local IMAGE="${TRIKIMG_FILE}"
 	rm -f ${IMAGE}
 	truncate -s ${MBR_SIZE} ${IMAGE}
