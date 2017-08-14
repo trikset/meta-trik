@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 
 # flex with provide /usr/include/FlexLexer.h
 DEPENDS = "flex-native bison-native flex libexif"
+RDEPENDS_${PN} += "bash"
 
 SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz\
       file://cross_cc.patch"
@@ -34,8 +35,6 @@ EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
     --disable-dia \
     --disable-sdl \
     --disable-aa \
-    --enable-read-dirs \
-    --enable-recursive-dirs \
     --enable-custom-status-bar \
 "
 
