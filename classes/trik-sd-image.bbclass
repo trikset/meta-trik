@@ -8,6 +8,7 @@ EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
 
+DEPENDS_${PN} += "u-boot-trik"
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
 IMAGE_TYPEDEP_img = "ext4"
 IMAGE_TYPEDEP_img.xz = "img"
@@ -27,66 +28,82 @@ EXCLUDE_FROM_WORLD = "1"
 
 inherit image-prelink
 
-TRIKIMG_USER_PARTION = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.user-part.vfat"
+IMGDEPLOYDIR ??= "${DEPLOY_DIR_IMAGE}"
+TRIKIMG_USER_PARTION = "${IMGDEPLOYDIR}/${IMAGE_NAME}.user-part.vfat"
 TRIKIMG_USER_PARTION_LABEL ?= "TRIKUSER"
 TRIKIMG_USER_PARTION_SIZE ?= "1024"
 
-# after Krogoth must be smth like
-#TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
-#TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.img"
-
-TRIKIMG_ROOTFS =  "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-TRIKIMG_FILE ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.img"
+TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
+TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.img"
 
 IMAGE_CMD_img () {
- do_sdimg
-
+ do_bootable_sdimg
 }
-
-#IMAGE_CMD_img[depends] += "${PN}:do_sdimg"
 
 # temporary add timestamp into conffs
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
-do_user_partition_img() {
-	rm -rf ${TRIKIMG_USER_PARTION}
-	truncate "-s >${TRIKIMG_USER_PARTION_SIZE}K" ${TRIKIMG_USER_PARTION}
-	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/image-version-info
-	mkdosfs -F 32 -n ${TRIKIMG_USER_PARTION_LABEL} -d ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR} ${TRIKIMG_USER_PARTION}
+#do_user_partition_img() {
+#	rm -rf ${TRIKIMG_USER_PARTION}
+#	truncate "-s >${TRIKIMG_USER_PARTION_SIZE}K" ${TRIKIMG_USER_PARTION}
+#	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/image-version-info
+#	mkdosfs -F 32 -n ${TRIKIMG_USER_PARTION_LABEL} -d ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR} ${TRIKIMG_USER_PARTION}
+#}
+
+MBR_SIZE ?= "4K"
+BLOCK_SIZE ?= "1024"
+ALIGNMENT ?= "1M"
+
+
+file_size() {
+ du --summarize  --dereference-args  --apparent-size --block-size=${BLOCK_SIZE} "$1" | cut -f 1
 }
 
-do_sdimg(){
-	ROOTFS_SIZE=`du --dereference --apparent-size --block-size=1K --summarize ${TRIKIMG_ROOTFS} | cut -f 1`
-	# TODO : check size of images
-	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1 )
-	TRIKIMG_USER_PARTION_ALIGMENT=$(expr ${TRIKIMG_USER_PARTION_ALIGMENT} - ${IMAGE_ROOTFS_ALIGNMENT} % ${IMAGE_ROOTFS_ALIGNMENT})
-	TRIKIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${TRIKIMG_USER_PARTION_ALIGMENT} + ${ROOTFS_SIZE})
+align() {
+ truncate -s %${ALIGNMENT} "$1"
+}
 
-	truncate "-s >${TRIKIMG_SIZE}K" ${TRIKIMG_FILE}
-	parted -s ${TRIKIMG_FILE} -- \
-           unit KiB \
-           mklabel msdos \
-           mkpart primary ext4 $(expr ${TRIKIMG_USER_PARTION_ALIGMENT} \+ ${IMAGE_ROOTFS_ALIGNMENT}) -1s \
-           print
+reserve() {
+truncate -s "+$1K" ${TRIKIMG_FILE}
+align ${TRIKIMG_FILE}
+file_size ${TRIKIMG_FILE}
+}
 
-    dd if=${TRIKIMG_ROOTFS} \
-	of=${TRIKIMG_FILE} conv=fsync bs=$(expr 1024 \* ${TRIKIMG_USER_PARTION_ALIGMENT} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) seek=1
+reserve_for() {
+   local size
+   size=$(file_size "$1")
+   reserve $size
+}
+
+insert_at() {
+bbnote "Inserting $2 at $1" 
+dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=none
+}
+
+
+
+do_bootable_sdimg(){
+	local UBOOT_AIS="${IMGDEPLOYDIR}/u-boot-gzip.ais"
+	local UBOOT_SPL_AIS="${IMGDEPLOYDIR}/u-boot-spl.ais"
+        local IMAGE="${TRIKIMG_FILE}"
+	rm -f ${IMAGE}
+	truncate -s ${MBR_SIZE} ${IMAGE}
+	SPL_AIS_OFFSET=$(file_size ${IMAGE})
+	AIS_OFFSET=$(reserve_for ${UBOOT_SPL_AIS})
+	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
+	insert_at ${SPL_AIS_OFFSET} ${UBOOT_SPL_AIS}
+	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
+	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
+
+	sfdisk  ${IMAGE} << EOD
+unit: sectors
+label: dos
+$((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
+EOD
 
 }
 
-do_sdimg[depends] += "parted-native:do_populate_sysroot ${PN}:do_rootfs"
-
-#instead of addtask sdimg after do_rootfs
-#do_user_rootfs[depends] = "${PN}:do_rootfs"
-#do_user_partition_img[depends] = "${PN}:do_user_rootfs"
-
-#ROOTFS_POSTPROCESS_COMMAND_append = "do_user_rootfs"
-#addtask do_sdimg before do_root after do_rootfs
-#do_image_img[depends]="${PN}:do_sdimg"
-#TRIK_USER_PARTION_CREATION_DIR ?="/EXT_FAT"
-
-do_user_rootfs () {
-	rm -rf ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}
-	mkdir -p ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/
-	mv ${IMAGE_ROOTFS}/${TRIK_USER_PARTION_CREATION_DIR}/* ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/
-}
+do_bootable_sdimg[depends] += "util-linux-native:do_populate_sysroot \
+                               coreutils-native:do_populate_sysroot \
+                               u-boot-trik:do_deploy \
+                               ${PN}:do_image_ext4"
