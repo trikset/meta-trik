@@ -22,7 +22,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		fuse \
 		eglibc-utils \
 		packagegroup-triksensors \
-		mjpg-streamer \
 		distro-feed-configs \
 		formfactor \
 		coreutils \
