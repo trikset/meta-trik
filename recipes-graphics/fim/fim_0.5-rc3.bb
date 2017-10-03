@@ -16,8 +16,8 @@ RDEPENDS_${PN} += "bash"
 SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz\
       file://cross_cc.patch"
 
-SRC_URI[md5sum] = "03d4dd36c894c1d319b5d5ca7a82dfb3"
-SRC_URI[sha256sum] = "7c90171adb36f1ec51ea035a71aff41136fed4b8c5ac4ca3390a7c3439a31ebb"
+SRC_URI[md5sum] = "f31d4917a23606df03406a017e7ee509"
+SRC_URI[sha256sum] = "82816225ae89b246c37a93a95c9c45f88163d56d7d74f681743f19020b525389"
 
 PARALLEL_MAKE = ""
 
