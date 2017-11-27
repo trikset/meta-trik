@@ -16,9 +16,12 @@ S = "${WORKDIR}"
 
 do_compile[noexec] = "1"
 
+FILES_${PN} += "${datadir}"
+
 do_install(){
 	install -m 0644 -D -t ${D}/etc/trik/msp430/ ${S}/msp-firmware-${PV}.hex 
 	install -m 0755 -D -t ${D}/etc/trik/msp430/ ${S}/msp_reset.sh ${S}/update_msp_fw.sh
+	mkdir -p ${D}/${datadir}/trik/init.d/ 
 	ln -s -t ${D}/${datadir}/trik/init.d/ /etc/trik/msp430/update_msp_fw.sh
 }
 
