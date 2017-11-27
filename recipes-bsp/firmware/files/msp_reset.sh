@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 echo Resetting MSP ...
 echo 0 > /sys/class/gpio/gpio93/value
 usleep 10000
