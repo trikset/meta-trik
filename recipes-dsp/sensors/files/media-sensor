@@ -141,7 +141,7 @@ do_reload() {
 do_start() {
   echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME
-  $SHELL -c 'timeout --foreground 2s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }'
+  $SHELL -c 'timeout --foreground 8s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }'
   sleep 3
   debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed!" 0 ; do_stop; exit 1 ; }
 }
