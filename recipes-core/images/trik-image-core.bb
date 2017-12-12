@@ -6,7 +6,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		${ROOTFS_PKGMANAGE_BOOTSTRAP} \
 		${CORE_IMAGE_EXTRA_INSTALL} \
 		packagegroup-wifi \
-		packagegroup-core-ssh-dropbear \
+		packagegroup-core-ssh-openssh \
 		localedef \
 		procps \
 		packagegroup-firmware \

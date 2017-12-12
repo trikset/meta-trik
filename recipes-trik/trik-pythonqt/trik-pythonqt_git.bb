@@ -12,6 +12,8 @@ SRC_URI = "git://github.com/trikset/trik-pythonqt.git;protocol=https;branch=mast
 S = "${WORKDIR}/git"
 EXTRA_QMAKEVARS_PRE += "ARCHITECTURE=arm"
 EXTRA_OEMAKE += "-C src"
+PYTHONQTALL_CONFIG = "PythonQtCore PythonQtGui PythonQtMultimedia"
+export PYTHONQTALL_CONFIG
 do_install() {
 	oe_libinstall -so -C lib libPythonQt ${D}${libdir}
 	install -m 0644 -D -t ${D}${includedir}/pythonqt ${S}/src/*.h
