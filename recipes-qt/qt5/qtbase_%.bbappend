@@ -1,5 +1,6 @@
 PACKAGECONFIG_FONTS = "fontconfig freetype"
-PACKAGECONFIG_GL = ""
+#PACKAGECONFIG[dyngl] = "-opengl dynamic,,,"
+PACKAGECONFIG_GL = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', 'no-opengl', d)}"
 PACKAGECONFIG_FB = "directfb linuxfb"
 PACKAGECONFIG_MULTIMEDIA = "alsa"
 PACKAGECONFIG_DISTRO = "icu"
