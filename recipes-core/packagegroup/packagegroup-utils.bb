@@ -48,6 +48,8 @@ RDEPENDS_${PN} = "\
   fim \
   psmisc \
   lshw \
+  ltrace \
+  ldd \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 
