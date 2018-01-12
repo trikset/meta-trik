@@ -1,9 +1,9 @@
 #!/bin/sh -e
-FWNAME=`/bin/ls /etc/trik/msp430/msp-firmware-*.hex | /usr/bin/head -n 1`
+FWNAME=`/bin/ls /etc/trik/msp430/msp-firmware-*.txt | /usr/bin/head -n 1`
 getNewMspFwVer() {
     local ver
     ver=${FWNAME#*/msp-firmware-}
-    ver=${ver%.hex}
+    ver=${ver%.txt}
     echo $ver
 }
 
