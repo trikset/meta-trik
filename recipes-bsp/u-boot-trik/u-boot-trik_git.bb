@@ -32,10 +32,7 @@ UBOOT_MACHINE = "trikboard_config"
 P="${datadir}/${PN}"
 PACKAGES += "${PN}-data"
 FILES_${PN}-data = "${datadir}"
-#do_configure_prepend () {
-# git -C ${S} rev-parse HEAD > ${S}/.scmversion
-#}
-
+RDEPENDS_${PN} += "${PN}-data"
 
 do_install_append () {
 #  install -p -D -t ${D}${P} ${WORKDIR}/reset_uboot.sh ${UBOOT_MAKE_TARGET}
