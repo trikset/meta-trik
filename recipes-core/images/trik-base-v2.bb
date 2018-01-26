@@ -26,7 +26,8 @@ IMAGE_INSTALL = "packagegroup-base \
 		formfactor \
 		coreutils \
 		u-boot-trik-data \
-		mini-x-session\
+		mini-x-session \
+		linux-trik-data \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
