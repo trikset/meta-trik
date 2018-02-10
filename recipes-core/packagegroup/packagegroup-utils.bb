@@ -15,6 +15,7 @@ RDEPENDS_${PN} = "\
   iptables \
   mtd-utils \
   evtest \
+  devmem2 \
   i2c-tools \
   usbutils \
   e2fsprogs \
