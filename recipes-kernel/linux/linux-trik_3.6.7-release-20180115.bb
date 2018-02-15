@@ -24,9 +24,9 @@ KCONFIG_CONFIG_COMMAND = "nconfig"
 LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10dfc69bd78fd072e"
 
 PACKAGES += "${PN}-data"
-FILES_${PN}-data = "${datadir}"
+FILES_${PN}-data = "${datadir} ${sysconfdir}"
 RDEPENDS_${PN} += "${PN}-data"
 
 do_install_append(){
-    install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/display_settings.sh
+    install -p -D -m 0755 -t ${D}${sysconfdir}/trik/ ${WORKDIR}/display_settings.sh
 }
