@@ -8,3 +8,4 @@ which xset >/dev/null && ( xset s off ; xset s noblank ; xset -dpms ) || echo "M
 /etc/trik/display_settings.sh 1
 cd /home/root/trik && exec nice -n -5 ./trikGui 2>&1 1> /dev/null
 /etc/trik/display_settings.sh 0
+which xsetroot >/dev/null &&  xsetroot -solid red || echo "Missing xsetroot!"
