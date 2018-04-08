@@ -1,7 +1,8 @@
 DECRIPTION = "Runtime for TRIK controller"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-RDEPENDS_${PN} = "locale-default espeak alsa-utils liberation-fonts mjpg-streamer"
+RDEPENDS_${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mjpg-streamer"
+
 #RRECOMMENDS_${PN} = "vlc"
 
 inherit qmake5

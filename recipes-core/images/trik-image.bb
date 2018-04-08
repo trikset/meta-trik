@@ -1,4 +1,4 @@
-require trik-base-v2.bb
+require trik-image-core.bb
 
 IMAGE_INSTALL += "\
 packagegroup-multimedia \
