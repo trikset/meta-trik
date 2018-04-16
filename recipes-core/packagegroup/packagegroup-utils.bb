@@ -1,7 +1,7 @@
 SUMMARY = "Utils"
 DESCRIPTION = "The minimal set of packages required to manupulate usb, i2c,input devices,ext2FS"
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,9 +51,10 @@ RDEPENDS_${PN} = "\
   lshw \
   ltrace \
   ldd \
+  fb-test \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
- "
-
+  dbus-dev \
+"
 RRECOMMENDS_${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
