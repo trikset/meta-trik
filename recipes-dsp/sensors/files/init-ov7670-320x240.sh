@@ -28,31 +28,59 @@ cam () {
   i2cset -y $BUS 0x21 $1 $2 || exit $?
 }
 
+
+# Resets all registers to default values
 cam 0x12 0x80
 #sleep 1
 cam 0x12 0x00
+
+#CCIR656 enable
 cam 0x04 0x40
+
+# Output range: [01] to [FE]
 cam 0x40 0x80
 
-cam 0x17 0x13
-cam 0x18 0x01
-cam 0x32 0x80
-cam 0x19 0x02
-cam 0x1a 0x7a
-cam 0x03 0x0a
-
-cam 0x0c 0x04
+# set QVGA according to
+# Table 2-2. (but without input clock divider
+# and without SCALING_PCLK_DELAY)
+# OV7670/OV7171 CMOS VGA (640x480) CameraChip��™
+# Implementation Guide
+cam 0x12 0
+cam 0xc  4
 cam 0x3e 0x19
+cam 0x70 0x3A
+cam 0x71 0x35
 cam 0x72 0x11
 cam 0x73 0xf1
+# this was set to 2 in the guide, but it makes
+# image width less that 320. Setting this to 0
+# helps but may spoil left/right boundary of
+# the video
+cam 0xa2 0x00
+
+# make the original window (before downsampling)
+# 6 pixels wider in order to reach 320 pixel width
+# at the output. Use reg 0x32 for that
+cam 0x3a 0x8
+#cam 0x17 0x11
+#cam 0x18 0x61
+cam 0x32  0xb0  # 0xb0 = 0x80 + (6 << 3)
+
+
+#cam 0x14 0x0a # max gain is 2x
 
 cam 0xb0 0x84 #change green/purple stuff on true colors
-cam 0x3a 0x09
+# Output sequence 01: Y V Y U,
+# Sensor automatically sets output window when
+# resolution changes.
+#cam 0x3a 0x09
 
+# output drive 4x
 cam 0x09 0x03
 
 #not so bright
-cam 0x14 0x1a 
+# Automatic Gain Ceiling 4x
+cam 0x14 0x1a
 
 #turn on all stuff (awb/agc/aec)
 cam 0x13 0x87
