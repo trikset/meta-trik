@@ -1,4 +1,8 @@
 #!/bin/sh
+
+IS_OLD_CONTROLLER=1
+if [ `cat /sys/class/graphics/fb0/id` == 00858552 ]; then IS_OLD_CONTROLLER=''; fi
+
 VIDEO0=/dev/video0
 VIDEO1=/dev/video1
 
@@ -39,6 +43,14 @@ cam 0x04 0x40
 
 # Output range: [01] to [FE]
 cam 0x40 0x80
+
+if [ -z "$IS_OLD_CONTROLLER" ]; then 
+  cam 0x15 0x10 
+  v4l2-ctl -d $VIDEO_PATH -c invert_pixel_clock=1
+else
+  cam 0x15 0x00 
+  v4l2-ctl -d $VIDEO_PATH -c invert_pixel_clock=0
+fi 
 
 # set QVGA according to
 # Table 2-2. (but without input clock divider
@@ -121,4 +133,5 @@ cam 0x54 0x40
 #cam 0x20 0x0f //darker sharper
 
 v4l2-ctl -d $VIDEO_PATH -s pal 1 > /dev/null
-echo "ov7670 successfully initialised"
+echo "ov7670 successfully initialised" 
+echo 
