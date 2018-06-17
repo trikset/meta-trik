@@ -8,9 +8,6 @@ case ${MCU_VERSION} in
      *) echo ERROR in version detection; exit 1 ;;
 esac
 
-#IS_OLD_CONTROLLER=1
-#if [ `cat /sys/class/graphics/fb0/id` == 00858552 ]; then IS_OLD_CONTROLLER=''; fi
-
 VIDEO0=/dev/video0
 VIDEO1=/dev/video1
 
