@@ -1,7 +1,15 @@
 #!/bin/sh
 
-IS_OLD_CONTROLLER=1
-if [ `cat /sys/class/graphics/fb0/id` == 00858552 ]; then IS_OLD_CONTROLLER=''; fi
+MCU_VERSION=`i2cget -y 2  0x48 0xee w`
+
+case ${MCU_VERSION} in
+     0x10* ) IS_OLD_CONTROLLER=1 ;;
+     0x28* ) IS_OLD_CONTROLLER='' ;;
+     *) echo ERROR in version detection; exit 1 ;;
+esac
+
+#IS_OLD_CONTROLLER=1
+#if [ `cat /sys/class/graphics/fb0/id` == 00858552 ]; then IS_OLD_CONTROLLER=''; fi
 
 VIDEO0=/dev/video0
 VIDEO1=/dev/video1
@@ -134,4 +142,4 @@ cam 0x54 0x40
 
 v4l2-ctl -d $VIDEO_PATH -s pal 1 > /dev/null
 echo "ov7670 successfully initialised" 
-echo 
+echo
