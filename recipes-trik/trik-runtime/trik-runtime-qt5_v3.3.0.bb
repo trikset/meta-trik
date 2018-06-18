@@ -1,5 +1,5 @@
-PR="r4"
-TRIK_RUNTIME_UPDATE = "4"
+PR="r5"
+TRIK_RUNTIME_UPDATE = "5"
 require trik-runtime-qt5.inc
 #DEPENDS += "trik-pythonqt"
 #RDEPENDS_${PN} += "trik-pythonqt"
