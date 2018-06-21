@@ -126,12 +126,13 @@ do_cmd() {
   esac
 }
 
+
 do_reload() {
   check_dsp_busy
   cd $MEDIA_SENSOR_PATH
   clean_caches_plug
   init_camera
-  eval "DEFAULT_OPS=$DEFAULT_OPS"
+  eval "DEFAULT_OPS=\"$DEFAULT_OPS\""
   $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME $DEFAULT_OPS >$MEDIA_SENSOR_LOG 2>&1 & echo $! > $MEDIA_SENSOR_PID
   sleep 1    # wait for exposure stabilized
   fix_camera # fix exposure
