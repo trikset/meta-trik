@@ -18,4 +18,5 @@ RDEPENDS_${PN} += "\
 	protobuf-dev  \
 	roslaunch-dev \
 	trik-runtime-qt5-dev \
+	trik-libcodecengine-client-staticdev \
 "
