@@ -1,0 +1,17 @@
+#!/bin/sh
+set -euo pipefail
+TEXT="$*"
+VAR=/tmp/trik-say/
+mkdir -p "${VAR}" # TODO: avoid this line. No reason to call mkdir each time
+case ${LANG:-${LC_ALL:-en}}  in
+  ru*) V=russian_test ;;
+    *) V=english ;;
+esac
+CMD="espeak -v $V -z -s 100"
+ID="$CMD $TEXT"
+CACHE="${VAR}${ID}"
+aplay "$CACHE" \
+  || { $CMD -w "$CACHE" "$TEXT" \
+    && echo Generated cache for \"$TEXT\" \
+    && exec aplay "$CACHE" ; }
+
