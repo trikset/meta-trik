@@ -9,6 +9,7 @@
 # Default-Stop:      0 1 6
 # Short-Description: start trik media sensor
 ### END INIT INFO
+set -euo pipefail
 
 CURRENT_MEDIA_SENSOR_NAME=current-media-sensor
 CURRENT_MEDIA_SENSOR_PATH=/etc/trik/$CURRENT_MEDIA_SENSOR_NAME
@@ -31,7 +32,7 @@ log() {
 }
 
 check_if_debug() {
-  [ $VERBOSE_LVL -eq 3 ] && DEBUG=
+  [ $VERBOSE_LVL -eq 3 ] && DEBUG= || true
 }
 
 debug() {
@@ -55,6 +56,8 @@ include_defaults() {
   [ -f /etc/default/$MEDIA_SENSOR_NAME.default ] && . /etc/default/$MEDIA_SENSOR_NAME.default
 }
 
+other_options=""
+
 parse_flags() {
   while [[ $# > 0 ]]
   do
@@ -63,25 +66,31 @@ parse_flags() {
       -n|--name)
         MEDIA_SENSOR_NAME=$2
         MEDIA_SENSOR_PATH=/etc/trik/sensors/$MEDIA_SENSOR_NAME
+        VARS="$VARS $1 $2"
         shift
         ;;
       -p|--port)
         VIDEO_PORT=$2
         VIDEO_PATH=/dev/video$VIDEO_PORT
+        VARS="$VARS $1 $2"
         shift
         ;;
       -v|--verbose)
         VERBOSE_LVL=$2
+        VARS="$VARS $1 $2"
         shift
         ;;
       start|stop|restart|reload|status)
         MEDIA_SENSOR_CMD=$key
-        shift
+        ;;
+      -h| --help)
+        log "usage:\n\t-n, --name\t- sensor name\n\t-p, --port\t- video port {0,1,2}\n\t-v, --verbose\t- verbose level {0,1,2}" 0
+        log "other options are passed to an executable"
+        exit 0
         ;;
       *)
-        log "unknown option: $key" 0
-        log "usage:\n\t-n, --name\t- sensor name\n\t-p, --port\t- video port {0,1,2}\n\t-v, --verbose\t- verbose level {0,1,2}" 0
-        exit 1
+        log "Unknown option: $key" 2
+        other_options="$other_options $key"
         ;;
     esac
     shift
@@ -132,15 +141,14 @@ do_reload() {
   cd $MEDIA_SENSOR_PATH
   clean_caches_plug
   init_camera
-  eval "DEFAULT_OPS=\"$DEFAULT_OPS\""
-  $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME $DEFAULT_OPS >$MEDIA_SENSOR_LOG 2>&1 & echo $! > $MEDIA_SENSOR_PID
+  $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1 & echo $! > $MEDIA_SENSOR_PID
   sleep 1    # wait for exposure stabilized
   fix_camera # fix exposure
   wait
 }
 
 do_start() {
-  echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS reload" > $CURRENT_MEDIA_SENSOR_PATH
+  echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS $other_options reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME
   $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }'
   sleep 3
@@ -222,7 +230,7 @@ fix_webcam() {
 
 . /etc/init.d/functions
 
-VARS=$*
+VARS=
 include_defaults
 parse_flags $@
 check_if_debug
