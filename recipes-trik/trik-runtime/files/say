@@ -3,10 +3,18 @@ set -euo pipefail
 TEXT="$*"
 VAR=/tmp/trik-say/
 mkdir -p "${VAR}" # TODO: avoid this line. No reason to call mkdir each time
-case ${LANG:-${LC_ALL:-en}}  in
-  ru*) V=russian_test ;;
-    *) V=english ;;
-esac
+
+#TRIK UI does not respect LANG env var,
+#thus there is no need to respect it here
+# Uncomment after TRIK UI is fixed
+
+#case ${LANG:-${LC_ALL:-en}}  in
+#  ru*) V=russian_test ;;
+#    *) V=english ;;
+#esac
+
+V=russian_test #force Russian dictionary. It is mixed thus english words are pronounced too
+
 CMD="espeak -v $V -z -s 100"
 ID="$CMD $TEXT"
 CACHE="${VAR}${ID}"
