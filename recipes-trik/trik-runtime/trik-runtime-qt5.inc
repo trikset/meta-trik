@@ -5,7 +5,7 @@ RDEPENDS_${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mj
 
 #RRECOMMENDS_${PN} = "vlc"
 
-inherit qmake5
+inherit qmake5 pkgconfig
 DEPENDS += "qtmultimedia qtscript"
 #RREPLACES_${PN} += "trik-runtime"
 RCONFLICTS_${PN} += "trik-runtime-qt4"
