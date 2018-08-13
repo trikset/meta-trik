@@ -12,7 +12,7 @@ RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
 TAG = "${PV}-${TRIK_RUNTIME_UPDATE}"
 
-SRC_URI = "git://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
+SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
