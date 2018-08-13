@@ -44,9 +44,9 @@ check_dsp_busy() {
     pid=`cat $MEDIA_SENSOR_PID`
     if debug kill -s 0 $pid ; then
       log "DSP was busy ($pid), restarted" 2
-      kill $pid
+      kill $pid || true
     else
-      rm $MEDIA_SENSOR_PID
+      rm -f $MEDIA_SENSOR_PID
       log "process was dead $MEDIA_SENSOR_PID: $pid" 2
     fi
   fi
@@ -149,8 +149,8 @@ do_reload() {
 
 do_start() {
   echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS $other_options reload" > $CURRENT_MEDIA_SENSOR_PATH
-  killall -g $CURRENT_MEDIA_SENSOR_NAME
-  $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }'
+  killall -g $CURRENT_MEDIA_SENSOR_NAME || true
+  $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }' || true
   sleep 3
   debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed!" 0 ; do_stop; exit 1 ; }
 }
@@ -158,7 +158,7 @@ do_start() {
 do_stop() {
   [ -z "$MEDIA_SENSOR_PID" ] || rm -f $MEDIA_SENSOR_PID
   echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > $CURRENT_MEDIA_SENSOR_PATH
-  killall -g $CURRENT_MEDIA_SENSOR_NAME
+  killall -g $CURRENT_MEDIA_SENSOR_NAME || true
 }
 
 clean_caches_plug() {
