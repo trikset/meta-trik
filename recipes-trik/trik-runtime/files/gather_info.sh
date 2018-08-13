@@ -96,7 +96,7 @@ gather_utils() {
 
 compress() {
 	echo "*** COMPRESSION"
-	tar -cvf "${tmp_dir_path}.tar" -C "$archive_path" "$tmp_dir_name" 
+	tar -cvf - -C "$archive_path" "$tmp_dir_name" | gzip > "${tmp_dir_path}.tar.gz"   
 	rm -r ${tmp_dir_path}
 }
 
@@ -117,7 +117,7 @@ main() {
 	gather_utils
 	compress
 	clean_up
-	echo "Info was saved in ${tmp_dir_path}.tar"
+	echo "Info was saved in ${tmp_dir_path}.tar.gz"
 }
 
 main
