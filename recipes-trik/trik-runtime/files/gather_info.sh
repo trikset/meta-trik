@@ -7,26 +7,23 @@ export LC_ALL=C
 export LANG=en_US.UTF-8
 
 
-archive_path="/home/root/trik/log_info"
+archive_path="/var/log/trik"
 remaining_size_limit_k=100
 
 
-dirs_list=(
-	"scripts"
-	)
+trikboard_workdir="/home/root/trik"
+trikboard_core_file="${trikboard_workdir}/core"
+trikboard_log_file="${trikboard_workdir}/trik.log"
+trikboard_scripts_dir="${trikboard_workdir}/scripts/"
 
-files_list=( 
-	"/home/root/trik/core"
-	"/home/root/trik/trik.log"
-	)
 
 utils_list=(
 	"cat /etc/version"
 	"dmesg"
 	"ifconfig"
 	"lsmod"
-	"sudo i2cdetect -y 1"
-	"sudo i2cdetect -y 2"
+	"i2cdetect -y 1"
+	"i2cdetect -y 2"
 	"uname -a"
 	)
 
@@ -37,7 +34,7 @@ utils_dir_name="utils"
 
 
 replace_slashes() {
-	echo "${1////\\}"
+	echo "${1////_}"
 }
 
 
@@ -65,18 +62,14 @@ prepare_tmp_dir() {
 
 
 gather_dirs() {
-	echo "*** DIRS"
-	for dir in "${dirs_list[@]}"; do
-		cp -rv "$dir" "${tmp_dir_path}/${dirs_dir_name}" || true
-	done
+	echo "DIRS"
+	cp -rv -t "${tmp_dir_path}/${dirs_dir_name}/" "$trikboard_scripts_dir" 
 }
 
 
 gather_files() {
 	echo "*** FILES"
-	for file in "${files_list[@]}"; do
-		cp -v "$file" "${tmp_dir_path}/${files_dir_name}" || true
-	done
+	cp -v -t "${tmp_dir_path}/${files_dir_name}" "$trikboard_core_file" "$trikboard_log_file" || true
 }
 
 
@@ -89,21 +82,22 @@ gather_utils() {
 	echo "*** UTILS"
 	for util in "${utils_list[@]}"; do
 		redirect_command "$util"
-		echo "$(replace_slashes "$util")"
+		echo "$util"
 	done
 }
 
 
 compress() {
 	echo "*** COMPRESSION"
+	# Tar from BusyBox has a limited set of options, therefore this pipeline is needed
 	tar -cvf - -C "$archive_path" "$tmp_dir_name" | gzip > "${tmp_dir_path}.tar.gz"   
 	rm -r ${tmp_dir_path}
 }
 
 
 clean_up() {
-	rm -f "/home/root/trik/core"
-	rm -f "/home/root/trik/trik.log"
+	rm -f "$trikboard_core_file"	
+	rm -f "$trikboard_log_file"
 }
 
 
