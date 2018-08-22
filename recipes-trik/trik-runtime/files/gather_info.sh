@@ -7,7 +7,7 @@ export LC_ALL=C
 export LANG=en_US.UTF-8
 
 
-archive_path="/var/log/trik"
+archive_path="/var/trik/log"
 remaining_size_limit_k=100
 
 
@@ -48,13 +48,12 @@ generate_unique_name() {
 }
 
 
-get_creation_time() {
-	echo "$(date +%Y%m%d_%H%M%S)"
-}
-
-
 prepare_tmp_dir() {
-	tmp_dir_name="$(generate_unique_name)-$(get_creation_time)"
+	local name=$(generate_unique_name)
+	local version=$(cat "/etc/version")
+	local next_log_number=$(find "${archive_path}" -maxdepth 1 -name "${name}-${version}-*" | wc -l)
+ 
+	tmp_dir_name="${name}-${version}-$(printf "%04d" ${next_log_number})"
 	tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p ${tmp_dir_path}/{${dirs_dir_name},${files_dir_name},${utils_dir_name}}
