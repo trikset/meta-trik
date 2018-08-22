@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -euo pipefail
 ### BEGIN INIT INFO
 # Provides:          app
 # Required-Start:    
@@ -10,6 +10,7 @@
 # Short-Description: start App MJPG_STREAMER
 ### END INIT INFO
 
+. /etc/init.d/functions
 
 DEFAULT_STREAMER_NAME=mjpg-streamer-ov7670
 
@@ -17,14 +18,14 @@ CURRENT_MJPG_STREAMER_NAME=current-mjpg-streamer
 CURRENT_MJPG_STREAMER_PATH=/etc/trik/$CURRENT_MJPG_STREAMER_NAME
 
 MJPG_STREAMER_NAME=$(basename $0)
-[ $MJPG_STREAMER_NAME==*.sh ] && MJPG_STREAMER_NAME=${MJPG_STREAMER_NAME%.*}
+[ $MJPG_STREAMER_NAME==*.sh ] && MJPG_STREAMER_NAME=${MJPG_STREAMER_NAME%.*} || true
 
 MJPG_STREAMER_PATH=/usr/bin
 UTILITY_NAME=mjpg_streamer
 MJPG_STREAMER_PRIORITY=-1
 
 MJPG_STREAMER_PIDDIR=/var/run/
-MJPG_STREAMER_PID=$PIDDIR/$UTILITY_NAME.pid
+MJPG_STREAMER_PID=$MJPG_STREAMER_PIDDIR/$UTILITY_NAME.pid
 
 MJPG_STREAMER_CMD=status
 
@@ -41,7 +42,7 @@ log() {
 
 
 check_if_debug() {
-  [ $VERBOSE_LVL -eq 3 ] && DEBUG=
+  [ $VERBOSE_LVL -eq 3 ] && DEBUG= || true
 }
 
 
@@ -51,7 +52,7 @@ debug() {
 
 
 enviroment () {
-    export LD_LIBRARY_PATH=$MJPG_STREAMER_PATH:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$MJPG_STREAMER_PATH:${LD_LIBRARY_PATH:-}
     cd $MJPG_STREAMER_PATH
 }
 
@@ -63,7 +64,8 @@ do_reload() {
         mjpg_streamer -i "input_fifo.so" -o "output_http.so -w $WWW_FILES_PATH" > /dev/null 2>&1 &
         ;;
     *-webcam)
-        mjpg_streamer -i "input_uvc.so -d /dev/video2 -r 432x240 -f 30" -o "output_http.so -w $WWW_FILES_PATH" > /dev/null 2>&1 &
+        mjpg_streamer -i "input_uvc.so -d /dev/video2 -r 432x240 -f 30" \
+                     -o "output_http.so -w $WWW_FILES_PATH" > /dev/null 2>&1 &
         ;;
     *)
         log "unknown mjpg streamer command" 0 # unknown option
@@ -76,16 +78,20 @@ do_reload() {
 }
 
 
+do_kill() {
+    killall -g $CURRENT_MJPG_STREAMER_NAME || kill -HUP 1 || true
+}
+
 do_start() {
     enviroment
     echo -e "#!/bin/sh\n /etc/init.d/$MJPG_STREAMER_NAME $VARS reload" > $CURRENT_MJPG_STREAMER_PATH
-    killall -g $CURRENT_MJPG_STREAMER_NAME
+    do_kill
 }
 
 
 do_stop() {
     echo -e "#!/bin/sh\n /etc/init.d/$DEFAULT_STREAMER_NAME $VARS reload" > $CURRENT_MJPG_STREAMER_PATH
-    killall -g $CURRENT_MJPG_STREAMER_NAME
+    do_kill
 }
 
 
@@ -100,7 +106,6 @@ parse_flags() {
         ;;
       start|stop|restart|reload|status)
         MJPG_STREAMER_CMD=$key
-        shift
         ;;
       *)
         log "unknown option: $key" 0
@@ -143,7 +148,6 @@ do_cmd() {
 }
 
 
-. /etc/init.d/functions
 
 test -x $MJPG_STREAMER_PATH/$UTILITY_NAME || exit 0
 
