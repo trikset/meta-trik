@@ -7,7 +7,7 @@ export LC_ALL=C
 export LANG=en_US.UTF-8
 
 
-archive_path="/var/log/trik"
+archive_path="/var/trik/log"
 remaining_size_limit_k=100
 
 
