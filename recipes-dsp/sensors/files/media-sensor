@@ -141,24 +141,25 @@ do_reload() {
   cd $MEDIA_SENSOR_PATH
   clean_caches_plug
   init_camera
-  $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1 & echo $! > $MEDIA_SENSOR_PID
   sleep 1    # wait for exposure stabilized
   fix_camera # fix exposure
+  eval $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1 &
+  echo $! > $MEDIA_SENSOR_PID
   wait
 }
 
 do_start() {
   echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS $other_options reload" > $CURRENT_MEDIA_SENSOR_PATH
-  killall -g $CURRENT_MEDIA_SENSOR_NAME || true
-  $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }' || true
-  sleep 3
-  debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed!" 0 ; do_stop; exit 1 ; }
+  $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }' &
+  killall -g $CURRENT_MEDIA_SENSOR_NAME || kill -HUP 1 || true
+  wait
+  debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed! See $MEDIA_SENSOR_LOG for details" 0 ; failure 3 ; do_stop; exit 1 ; }
 }
 
 do_stop() {
   [ -z "$MEDIA_SENSOR_PID" ] || rm -f $MEDIA_SENSOR_PID
   echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > $CURRENT_MEDIA_SENSOR_PATH
-  killall -g $CURRENT_MEDIA_SENSOR_NAME || true
+  killall -g $CURRENT_MEDIA_SENSOR_NAME || kill -HUP 1 || true
 }
 
 clean_caches_plug() {
