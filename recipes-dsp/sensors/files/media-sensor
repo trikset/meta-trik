@@ -96,6 +96,7 @@ parse_flags() {
     shift
   done
   log "flags parsed" 2
+  log "\"$other_options\" to be passed to executable" 2
 }
 
 check_sensor() {
@@ -143,7 +144,8 @@ do_reload() {
   init_camera
   sleep 1    # wait for exposure stabilized
   fix_camera # fix exposure
-  eval $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1 &
+  eval echo -E "Starting:" "$MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME" ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1
+  eval "$MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME" ${DEFAULT_OPS:-} $other_options >$MEDIA_SENSOR_LOG 2>&1 &
   echo $! > $MEDIA_SENSOR_PID
   wait
 }
