@@ -10,6 +10,8 @@
 # Short-Description: trik gamepad service
 ### END INIT INFO
 
+set -euo pipefail
+
 DEFAULT_SERVICE_NAME=gamepad-service
 
 CURRENT_SERVICE_NAME=current-gamepad-service
@@ -42,7 +44,7 @@ log() {
 
 start() {
   echo -e "#!/bin/sh\n $SERVICE_PATH do_start" >$CURRENT_SERVICE_PATH
-  killall -g $CURRENT_SERVICE_NAME
+  killall -g $CURRENT_SERVICE_NAME || kill -HUP 1
 }
 
 
@@ -55,7 +57,7 @@ do_start() {
 
 stop() {
   echo -e "#!/bin/sh\n $SERVICE_PATH do_stop" > $CURRENT_SERVICE_PATH
-  killall -g $CURRENT_SERVICE_NAME
+  killall -g $CURRENT_SERVICE_NAME || kill -HUP 1
 }
 
 
@@ -82,7 +84,6 @@ parse_params() {
         ;;
       start|stop|restart|do_stop|do_start|status)
         SERVICE_CMD=$key
-        shift
         ;;
       *)
         log "unknown option: $key" 0
