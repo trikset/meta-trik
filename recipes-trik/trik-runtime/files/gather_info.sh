@@ -80,8 +80,8 @@ redirect_command() {
 gather_utils() {
 	echo "*** UTILS"
 	for util in "${utils_list[@]}"; do
-		redirect_command "$util"
 		echo "$util"
+		redirect_command "$util" || echo " FAILED"
 	done
 }
 
