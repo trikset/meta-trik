@@ -14,10 +14,12 @@ remaining_size_limit_k=100
 utils_list=(
 	"cat /etc/version"
 	"dmesg"
-	"ifconfig"
-	"lsmod"
 	"i2cdetect -y 1"
 	"i2cdetect -y 2"
+	"ifconfig"
+	"lsmod"
+	"lsof"
+	"ps ax"
 	"uname -a"
 	)
 
