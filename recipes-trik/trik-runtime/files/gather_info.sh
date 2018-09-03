@@ -16,7 +16,7 @@ utils_list=(
 	"dmesg"
 	"i2cdetect -y 1"
 	"i2cdetect -y 2"
-	"ifconfig"
+	"ifconfig -a"
 	"lsmod"
 	"lsof"
 	"ps ax"
