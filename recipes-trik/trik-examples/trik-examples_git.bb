@@ -5,7 +5,7 @@ RDEPENDS_${PN} = "trik-runtime v4l-utils gawk"
 BRANCH  = "master"
 SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/trikset/trik-models.git;branch=${BRANCH}"
-
+PV="0-git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit user-partion
@@ -15,7 +15,7 @@ do_compile(){
 }
 do_install(){
 	install -d ${D}${TRIK_USER_PARTION_CREATION_DIR}/trik-examples/
-	cp -rf ${S}/* ${D}${TRIK_USER_PARTION_CREATION_DIR}/trik-examples/
+	cp -rvf ${S}/* ${D}${TRIK_USER_PARTION_CREATION_DIR}/trik-examples/
 }
 FILES_${PN} = "${TRIK_USER_PARTION_CREATION_DIR}"
 INHIBIT_PACKAGE_STRIP = "1"

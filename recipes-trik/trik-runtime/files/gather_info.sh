@@ -109,7 +109,7 @@ main() {
 	gather_utils
 	compress
 	clean_up
-	echo "Info was saved in ${tmp_dir_path}.tar.gz"
+	echo -e "Info was saved into:\n${tmp_dir_path}.tar.gz"
 }
 
 main
