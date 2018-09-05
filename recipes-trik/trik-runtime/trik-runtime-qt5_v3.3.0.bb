@@ -1,4 +1,4 @@
-TRIK_RUNTIME_UPDATE = "15"
+TRIK_RUNTIME_UPDATE = "17"
 PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 DEPENDS += "nanomsg"
