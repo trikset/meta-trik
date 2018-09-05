@@ -96,7 +96,7 @@ parse_flags() {
     shift
   done
   log "flags parsed" 2
-  log "\"$other_options\" to be passed to executable" 2
+  [ -z "$other_options" ] || log "\"$other_options\" to be passed to executable" 2
 }
 
 check_sensor() {
@@ -194,7 +194,8 @@ init_ov7670() {
 init_webcam() {
   debug v4l2-ctl -d $VIDEO_PATH --set-ctrl power_line_frequency=1
   debug v4l2-ctl -d $VIDEO_PATH --set-ctrl white_balance_temperature_auto=0
-  debug v4l2-ctl -d $VIDEO_PATH --set-ctrl white_balance_temperature=4000
+  debug v4l2-ctl -d $VIDEO_PATH --set-ctrl white_balance_temperature=${V4L2CTL_white_balance_temperature:-4000}
+  debug v4l2-ctl -d $VIDEO_PATH --set-ctrl gain=${V4L2CTL_gain:-0}
 }
 
 fix_camera () {
