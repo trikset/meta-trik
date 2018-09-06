@@ -6,6 +6,7 @@ which xset >/dev/null && ( xset s off ; xset s noblank ; xset -dpms ) || echo "M
 . /etc/profile.d/trik_runtime_path.sh
 . /etc/profile.d/python_path.sh
 /etc/trik/display_settings.sh 1
-cd /home/root/trik && exec nice -n -5 ./trikGui 2>&1 1>/var/log/trikGui.log
+core_dump=$(/etc/trik/gather_info.sh --create)
+cd /home/root/trik && nice -n -5 ./trikGui -d ${core_dump} 2>&1 1>/var/log/trikGui.log || /etc/trik/gather_info.sh --collect ${core_dump}
 /etc/trik/display_settings.sh 0
 which xsetroot >/dev/null &&  xsetroot -solid red || echo "Missing xsetroot!"
