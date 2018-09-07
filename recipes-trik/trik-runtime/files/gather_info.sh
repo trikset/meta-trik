@@ -110,6 +110,13 @@ main() {
 	elif [ "$1" = "--gc" ]; then
 		compress
 		sync
+	elif [ "$1" = "--all" ]; then
+		local tmp_dir=$(prepare_tmp_dir)
+		gather_tree "$tmp_dir"
+		gather_utils "$tmp_dir"
+		clean_up
+		compress
+		sync
 	else 
 		echo "No such command"
 	fi
