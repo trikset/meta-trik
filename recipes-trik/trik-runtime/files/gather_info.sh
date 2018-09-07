@@ -47,6 +47,9 @@ generate_unique_name() {
 	echo "trik$(cat /sys/class/net/wlan0/address | tail -c 9 | sed 's/://g')"
 }
 
+count_without_duplicates() {
+	echo "$(find ${archive_path} -maxdepth 1 -name "${1}-*" | xargs -r -n 1 | cut -d . -f 1 | sort -u | wc -l)"
+}
 
 prepare_tmp_dir() {
 	mkdir -p ${archive_path}/
@@ -55,9 +58,10 @@ prepare_tmp_dir() {
 
 	local name=$(generate_unique_name)
 	local version=$(cat "/etc/version")
-	local next_log_number=$(find "${archive_path}" -maxdepth 1 -name "${name}-${version}-*" | wc -l)
+	local prefix="${name}-${version}"
+	local next_log_number=$(count_without_duplicates "$prefix")
  
-	local tmp_dir_name="${name}-${version}-$(printf "%04d" ${next_log_number})"
+	local tmp_dir_name="${prefix}-$(printf "%02d" ${next_log_number})"
 	local tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p "$tmp_dir_path"
@@ -93,7 +97,18 @@ clean_up() {
 }
 
 
+collect() {
+	mkdir -p $1/{${tree_dir_name},${utils_dir_name}}
+	gather_tree "$1"
+	gather_utils "$1"
+	clean_up
+	sync
+}
+
+
 compress() {
+	# Remove empty files so they will not be engaged into compression
+	rmdir ${archive_path}/* || true
 	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -n 1 -I {} sh -c 'tar czvf {}.tar.gz {} -C ${archive_path} . && rm -r {};'
 }
 
@@ -102,19 +117,13 @@ main() {
 	if [ "$1" = "--create" ]; then 
 		prepare_tmp_dir
 	elif [ "$1" = "--collect" ]; then
-			mkdir -p $2/{${tree_dir_name},${utils_dir_name}}
-			gather_tree "$2"
-			gather_utils "$2"
-			clean_up
-			sync
+		collect "$2"
 	elif [ "$1" = "--gc" ]; then
 		compress
 		sync
 	elif [ "$1" = "--all" ]; then
 		local tmp_dir=$(prepare_tmp_dir)
-		gather_tree "$tmp_dir"
-		gather_utils "$tmp_dir"
-		clean_up
+		collect "$tmp_dir"
 		compress
 		sync
 	else 
