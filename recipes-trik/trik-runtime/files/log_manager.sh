@@ -103,7 +103,7 @@ clean_up() {
 # $1 -- path to directory where they should be saved
 collect() {
 	if [ "$(estimate_remaining_size)" -gt "${remaining_size_limit_k}" ]; then 	
-		mkdir -p "$1/{${tree_dir_name},${utils_dir_name}}"
+		mkdir -p $1/{${tree_dir_name},${utils_dir_name}}
 		collect_tree "$1"
 		collect_utils "$1"
 		clean_up
@@ -116,7 +116,7 @@ collect() {
 compress() {
 	# Remove empty files so they will not be engaged into compression
 	rmdir ${archive_path}/* || true
-	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -r -n 1 -I {} sh -c 'tar czvf {}.tar.gz {} -C ${archive_path} . && rm -r {};'
+	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -r -n 1 -I {} sh -c 'tar czvf {}.tar.gz -C {} . && rm -r {}'
 }
 
 
