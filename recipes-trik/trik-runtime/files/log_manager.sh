@@ -55,9 +55,12 @@ count_without_duplicates() {
 }
 
 # Prepare directory where current core and snapshot of the system (logs and utilities outputs will be saved)
+# $1: "true" -- if script was called by trikGui, "false" -- was called from outside (--all option)
 prepare_tmp_dir() {
 	mkdir -p "${archive_path}/"
-	rmdir "${archive_path}/*" || true
+	if [ "$1" = "true" ]; then
+		rmdir "${archive_path}/*" || true
+	fi
 
 	local name=$(generate_unique_name)
 	local version=$(cat "/etc/version")
@@ -115,20 +118,19 @@ collect() {
 # Compress files in logs directory 
 compress() {
 	# Remove empty files so they will not be engaged into compression
-	rmdir ${archive_path}/* || true
-	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -r -n 1 -I {} sh -c 'tar czvf {}.tar.gz -C {} . && rm -r {}'
+	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -r -n 1 -I {} sh -c 'if [ ! -z "$(ls -A {})" ]; then tar czvf {}.tar.gz -C {} .; rm -r {}; fi'
 }
 
 
 main() {
 	if [ "$1" = "--create" ]; then 
-		prepare_tmp_dir
+		prepare_tmp_dir "true"
 	elif [ "$1" = "--collect" ]; then
 		collect "$2"
 	elif [ "$1" = "--gc" ]; then
 		compress
 	elif [ "$1" = "--all" ]; then
-		local tmp_dir=$(prepare_tmp_dir)
+		local tmp_dir=$(prepare_tmp_dir "false")
 		collect "$tmp_dir"
 		compress
 	else 
