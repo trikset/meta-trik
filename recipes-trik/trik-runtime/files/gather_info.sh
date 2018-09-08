@@ -38,22 +38,24 @@ replace_slashes() {
 }
 
 
+# Estimate remaining size on the current partition
 estimate_remaining_size() {
 	echo "$(df . | awk '$4 ~ /[0-9]+/ { print $4 }')"
 }
 
-
+# Generate unique name for current controller, based on MAC address
 generate_unique_name() {
 	echo "trik$(cat /sys/class/net/wlan0/address | tail -c 9 | sed 's/://g')"
 }
 
+# Count files in log folder without duplicates, because at the moment of compression there are two files with one mask: "name" and "name.tar.gz"
 count_without_duplicates() {
 	echo "$(find ${archive_path} -maxdepth 1 -name "${1}-*" | xargs -r -n 1 | cut -d . -f 1 | sort -u | wc -l)"
 }
 
+# Prepare directory where current core and snapshot of the system (logs and utilities outputs will be saved)
 prepare_tmp_dir() {
 	mkdir -p ${archive_path}/
-	# Remove empty dir that was created in last session
 	rmdir ${archive_path}/* || true
 
 	local name=$(generate_unique_name)
@@ -69,8 +71,7 @@ prepare_tmp_dir() {
 }
 
 
-gather_tree() {
-	echo "*** FS TREE"
+collect_tree() {
 	for tree_element in "${tree_elements_list[@]}"; do
 		echo "$tree_element"
 		cp -rvL "$tree_element" "${1}/${tree_dir_name}/$(replace_slashes "$tree_element")" || true
@@ -83,8 +84,7 @@ redirect_command() {
 } > "$2/${utils_dir_name}/$(replace_slashes "$1")"
 
 
-gather_utils() {
-	echo "*** UTILS"
+collect_utils() {
 	for util in "${utils_list[@]}"; do
 		echo "$util"
 		redirect_command "$util" "$1" || echo " FAILED"
@@ -92,20 +92,24 @@ gather_utils() {
 }
 
 
-clean_up() {	
+clean_up() {
 	rm -f "/home/root/trik/trik.log"
+	rm -f "/home/root/trik/scripts/core"
 }
 
 
+# Collect info about current system state (logs and utilities output)
+# $1 -- path to directory where they should be saved
 collect() {
 	mkdir -p $1/{${tree_dir_name},${utils_dir_name}}
-	gather_tree "$1"
-	gather_utils "$1"
+	collect_tree "$1"
+	collect_utils "$1"
 	clean_up
 	sync
 }
 
 
+# Compress files in logs directory 
 compress() {
 	# Remove empty files so they will not be engaged into compression
 	rmdir ${archive_path}/* || true
