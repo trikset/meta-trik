@@ -33,6 +33,8 @@ do_compile(){
         oe_runmake
 }
 
+FILES_${PN} += "${datadir}"
+
 do_install() {
         install -d ${D}/home/root/trik
         cp -rf ${S}/bin/arm-release/* ${D}/home/root/trik
@@ -72,8 +74,7 @@ do_install() {
             ln -sf ${libdir}/${lib} ${D}/home/root/trik/${lib}
         done
 
-        install -d ${D}/${datadir}/trik/init.d/
-        install -m 0755 ${WORKDIR}/compress_logs.sh ${D}/${datadir}/trik/init.d/
+        install -m 0755 -D -t ${D}/${datadir}/trik/init.d/ ${WORKDIR}/compress_logs.sh
 }
 
 
