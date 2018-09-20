@@ -3,6 +3,7 @@ SUMMARY += "(TRIK edition)"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 RDEPENDS_${PN} += " \
+        lighttpd-module-alias \
         lighttpd-module-cgi \
         lighttpd-module-rewrite \
         lighttpd-module-redirect \
