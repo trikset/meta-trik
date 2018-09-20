@@ -59,7 +59,7 @@ count_without_duplicates() {
 prepare_tmp_dir() {
 	mkdir -p "${archive_path}/"
 	if [ "$1" = "true" ]; then
-		rmdir "${archive_path}/*" || true
+		rmdir ${archive_path}/* || true
 	fi
 
 	local name=$(generate_unique_name)
