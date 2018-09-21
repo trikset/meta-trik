@@ -59,7 +59,7 @@ count_without_duplicates() {
 prepare_tmp_dir() {
 	mkdir -p "${archive_path}/"
 	if [ "$1" = "true" ]; then
-		rmdir --ignore-fail-on-non-empty ${archive_path}/* 2>/dev/null
+		rmdir --ignore-fail-on-non-empty ${archive_path}/* || true
 	fi
 
 	local name=$(generate_unique_name)
