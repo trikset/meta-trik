@@ -6,6 +6,16 @@ set -euo pipefail
 export LC_ALL=C 
 export LANG=en_US.UTF-8
 
+# log_file -- file where all outputs from this script execution are kept
+log_file="/var/log/system_report.log"
+
+# Output from script execution is redirected to log_file.
+# If you want to print something to stdout use "special_echo" function.
+exec 3>&1
+special_echo() {
+	echo "$1" >&3
+}
+exec &>> $log_file
 
 archive_path="/var/trik/log"
 remaining_size_limit_k=100
@@ -71,7 +81,7 @@ prepare_tmp_dir() {
 	local tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p "$tmp_dir_path"
-	echo "${tmp_dir_path}"	
+	special_echo "${tmp_dir_path}"
 }
 
 
