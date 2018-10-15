@@ -1,0 +1,239 @@
+﻿<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+
+<style>
+:root {
+  /* generic */
+  --colorPrimary1: #009933;
+  --colorPrimary2: #001A42;  
+  --colorPrimary3: #99CC00;
+  --fontFamily: "Montserrat", sans-serif;
+  
+  --transitionDuration: 300ms;
+  --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --transitionClick: 100ms;
+  
+  --inputTransitionDuration: var(--transitionDuration);
+  --inputTransitionTF: var(--transitionTF);
+}
+
+@font-face {
+  	font-family: Montserrat; 
+   	src: url('../fonts/montserrat.ttf'); 
+}
+
+.Header {
+   	font-family: Montserrat;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.Table {
+	display: table;
+	margin: auto;
+	width: 50%;
+	background-color: var(--colorPrimary1);
+	border-radius: 10px;
+}
+
+.Table .TableRow {
+	display: table-row;
+}
+
+/*четные строки*/
+.Table .TableRow:nth-child(2n) {
+	background: var(--colorPrimary3);
+}
+
+/*первая строка первая ячейка*/
+.Table .TableRow:first-child .TableHeadCell:first-child{
+	border-radius: 10px 0 0 0;
+	background-color: var(--colorPrimary1);
+	border: 0px solid #FFF;
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+	
+}
+/*первая строка последняя ячейка*/
+.Table .TableRow:first-child .TableHeadCell:last-child{
+	border-radius: 0 10px 0 0px;
+	background-color: var(--colorPrimary1);
+	border: 0px solid #FFF;
+	border-left: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+}
+
+/*средние строки первая ячейка*/
+.Table .TableRow .TableCell:first-child{
+	border: 0px solid #FFF;
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+}
+
+/*средние строки последняя ячейка*/
+.Table .TableRow .TableCell:last-child{
+	border: 0px solid #FFF;
+	border-left: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+}
+/*средние строки последняя ячейка*/
+.Table .TableRow:last-child .TableCell:first-child{
+	border-radius: 0 0 0 10px;
+	border: 0px solid #FFF;
+	border-right: 1px solid #FFF;
+} 
+
+/*средние строки последняя ячейка*/
+.Table .TableRow:last-child .TableCell:last-child{
+	border-radius: 0 0 10px 0;
+	border: 0px solid #FFF;
+	border-left: 1px solid #FFF;
+	
+} 
+/*ячейка заголовка таблицы*/
+.Table .TableHeadCell {
+	display: table-header-group;
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid #FFF;
+	font-weight: bold;
+	text-align: center;	
+	color: #FFF;
+}
+
+.Table .TableCell{
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid #FFF;		
+}
+
+body {
+	font-family: Montserrat;
+	font-size: medium;
+}
+
+button {
+	border-radius: 5px;
+	border: 1px solid var(--colorPrimary3);
+	background-color:var(--colorPrimary3);
+	color: var(--colorPrimary2);	
+	padding: 8px 16px;
+	font-size: 20px;
+	display: inline-block;
+	text-align: center;
+	width: 200px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+}
+/*
+.ButtonAdd:hover {
+	border: 1px solid var(--colorPrimary2);
+	background-color: var(--colorPrimary2);
+	color: var(--colorPrimary3);
+	transition: 0.4s;
+	-webkit-transition-duration: 0.4s;
+}
+*/
+.ButtonAdd:active {
+  transform: translateY(0.8px);
+  -webkit-transition-duration: var(--transitionClick);
+}
+
+.ButtonAdd span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: var(--transitionDuration);
+
+}
+
+.ButtonAdd span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -14px;
+  transition: var(--transitionDuration);
+
+}
+
+.ButtonAdd:hover span {
+    padding-right: 14px;
+}
+
+.ButtonAdd:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.InputField {
+	color: var(--colorPrimary2);
+	border-radius: 5px;
+	border: 1px solid var(--colorPrimary1);
+	padding: 8px;
+	font-size: 20px;	
+	transition: box-shadow var(--transitionDuration);
+}
+
+.InputField::placeholder {
+  color: #B0BEC5;
+  font-size: 18px;
+}
+
+.InputField:focus {
+  outline: none;
+  box-shadow: 1px 2px 2px #c0c0c0;
+}
+
+.NewVar {
+	text-align:center;
+	padding: 20px 5px;
+}
+</style>
+
+<script src="/web.js"></script>
+
+<body>
+<table width="100%" height="70" border="0" align="center" bgcolor="#001A42">
+  <tr>
+    <td width="50%" align="right" valign="middle"><img src="images/logo.png" width="100" height="29"></td>
+    <td width="50%" align="left" valign="middle">&nbsp;<font color="#FFFFFF" class="Header">Теплица</font></td>
+  </tr>
+</table>
+
+<div class="NewVar">
+	<input class="InputField" type="text" name="enter" placeholder="Введите переменную" value="" id="varNameInput"/>	
+	<button class="ButtonAdd" type="button" onClick="addNewVarView(document.getElementById('varNameInput').value)"><span>Отслеживать</span></button>
+</div>
+
+<div class="Table" id="allVars">
+
+	<div class="TableRow">
+		<div class="TableHeadCell">Переменная</div>
+		<div class="TableHeadCell">Значение</div>
+	</div>
+	<div class="TableRow" id="var_a">
+		<div class="TableCell" id="varName_a">a</div>
+		<div class="TableCell" id="varValue_a">1000</div>
+	</div>
+	<div class="TableRow" id="var_s">
+		<div class="TableCell" id="varName_s">s</div>
+		<div class="TableCell" id="varValue_s">10012</div>
+	</div>
+	<div class="TableRow" id="var_f">
+		<div class="TableCell" id="varName_s">f</div>
+		<div class="TableCell" id="varValue_s">32110012</div>
+	</div>
+	<div class="TableRow" id="var_g">
+		<div class="TableCell" id="varName_s">g</div>
+		<div class="TableCell" id="varValue_s">100212</div>
+	</div>
+</div>
+
+</body>
+</html>

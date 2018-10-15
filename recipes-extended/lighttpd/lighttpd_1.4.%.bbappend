@@ -21,12 +21,14 @@ SRC_URI_append = "file://wpa-configurator.sh \
         file://admin.html \
         file://admin.css \
         file://handler.js \
+        file://web.html \
 "
 do_install_append() {
     install -d ${D}/www/pages/network
     install -d ${D}/www/pages/images
     install -d ${D}/www/pages/styles
     install -d ${D}/www/pages/js
+    install -d ${D}/www/pages/fonts
     install -m 0755 ${WORKDIR}/wpa-configurator.sh ${D}/www/pages/network/
     install -m 0755 ${WORKDIR}/wpa-writer.sh ${D}/www/pages/network/
     install -m 0755 ${WORKDIR}/wlan-scanner.sh ${D}/www/pages/network/
@@ -38,4 +40,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/wifi-configurator.css ${D}/www/pages/styles/
     install -m 0644 ${WORKDIR}/admin.css ${D}/www/pages/styles/
     install -m 0644 ${WORKDIR}/handler.js ${D}/www/pages/js/
+    install -m 0644 ${WORKDIR}/web.html ${D}/www/pages/
+    install -m 0644 ${WORKDIR}/logo.png ${D}/www/pages/images/
+    install -m 0644 ${WORKDIR}/montserrat.ttf ${D}/www/pages/fonts/
 }
