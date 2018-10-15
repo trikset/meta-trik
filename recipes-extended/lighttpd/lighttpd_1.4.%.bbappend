@@ -22,6 +22,9 @@ SRC_URI_append = "file://wpa-configurator.sh \
         file://admin.css \
         file://handler.js \
         file://web.html \
+        file://web.js \
+        file://logo.png \
+        file://montserrat.ttf \
 "
 do_install_append() {
     install -d ${D}/www/pages/network
@@ -43,4 +46,5 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/web.html ${D}/www/pages/
     install -m 0644 ${WORKDIR}/logo.png ${D}/www/pages/images/
     install -m 0644 ${WORKDIR}/montserrat.ttf ${D}/www/pages/fonts/
+    install -m 0644 ${WORKDIR}/web.js ${D}/www/pages/js/
 }
