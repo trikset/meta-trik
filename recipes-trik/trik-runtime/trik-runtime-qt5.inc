@@ -38,6 +38,7 @@ FILES_${PN} += "${datadir}"
 do_install() {
         install -d ${D}/home/root/trik
         cp -rf ${S}/bin/arm-release/* ${D}/home/root/trik
+        install -d ${D}/home/root/trik/scripts
 
         install -d ${D}/${sysconfdir}/trik/
         install -m 0755 ${WORKDIR}/trikGui.sh ${D}/${sysconfdir}/trik/
