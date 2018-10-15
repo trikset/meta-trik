@@ -18,6 +18,7 @@ do_install_append () {
 	
 	sed -ie 's,_path,${TRIK_USER_PARTION_CREATION_DIR},g' ${S}/trik-hostname.sh
 
+        install -m 0640 -D ${D}${sysconfdir}/fstab ${S}/fstab.trik
         install -m 0755 -D -t ${D}${sysconfdir}/init.d ${S}/init-trik
         install -m 0755 -D -t ${D}${datadir}/trik/init.d/ ${S}/trik-hostname.sh
 
