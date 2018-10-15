@@ -6,6 +6,9 @@ RDEPENDS_${PN} += "nanomsg"
 
 #OE_QMAKE_CXXFLAGS_append += " -fno-lto"
 
+#We need to switch precompiled headers off until this issue is fixed in trik-runtime sources
+EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch "
+
 # For script gathering logs information
 RDEPENDS_${PN} += "bash xz"
 # Commented out, because trik-pythonqt is compiled into trik-runtime as git submodule
