@@ -30,7 +30,7 @@ tryUpdate() {
      *) echo ERROR in version detection ;;
     esac
 
-    FWNAME=`/bin/ls /etc/trik/msp430/msp-firmware-$MCU*.txt | head -n 1`
+    FWNAME=`/bin/ls /etc/trik/msp430/msp-firmware-$MCU*.txt | sort | tail -n 1`
     new=`getNewMspFwVer $FWNAME`
     if [ -z "$new" ] ; then
       echo Missing new firmware!
