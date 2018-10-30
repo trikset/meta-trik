@@ -1,5 +1,5 @@
 SUMMARY = "TRIK MSP430 firmware"
-PR 	= "r7"
+PR 	= "r1"
 LICENSE = "CLOSED"
 
 COMPATIBLE_MACHINE = "trikboard"
