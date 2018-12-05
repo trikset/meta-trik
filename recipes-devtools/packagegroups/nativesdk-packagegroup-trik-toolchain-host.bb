@@ -8,5 +8,6 @@ inherit packagegroup
 RDEPENDS_${PN} += "\
 	nativesdk-cmake \
 	nativesdk-make \
-	nativesdk-protobuf\
+	nativesdk-protobuf \
+	nativesdk-catkin \
 "
