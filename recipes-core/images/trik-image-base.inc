@@ -28,6 +28,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		u-boot-trik-data \
 		mini-x-session \
 		linux-trik-data \
+		trik-uart-ppp \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
