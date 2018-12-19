@@ -10,5 +10,5 @@ SRC_URI="file://init_tty.sh \
 do_install() {
 	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/init_tty.sh ${WORKDIR}/autologin
 	
-	install -m 0644 -D -t ${D}/${sysconfdir}/trik/ppp ${WORKDIR}/winclient.chat
+	install -m 0644 -D -t ${D}/${sysconfdir}/ppp ${WORKDIR}/winclient.chat
 }
