@@ -16,7 +16,7 @@ RDEPENDS_${PN} += "\
 	hidapi-dev \
 	libusb1-dev \
 	protobuf-dev  \
-	roslaunch-dev \
+	trik-ros-dev \
 	trik-runtime-qt5-dev \
 	trik-libcodecengine-client-staticdev \
 "
