@@ -49,20 +49,12 @@ cam 0x04 0x40
 # Output range: [01] to [FE]
 cam 0x40 0x80
 
-if [ -z "$IS_OLD_CONTROLLER" ]; then 
-  cam 0x15 0x10 
-  v4l2-ctl -d $VIDEO_PATH -c invert_pixel_clock=1
-else
-  cam 0x15 0x00 
-  v4l2-ctl -d $VIDEO_PATH -c invert_pixel_clock=0
-fi 
-
 # set QVGA according to
 # Table 2-2. (but without input clock divider
 # and without SCALING_PCLK_DELAY)
 # OV7670/OV7171 CMOS VGA (640x480) CameraChip��™
 # Implementation Guide
-cam 0x12 0
+cam 0x12 0 # YUV
 cam 0xc  4
 cam 0x3e 0x19
 cam 0x70 0x3A
@@ -92,8 +84,8 @@ cam 0xb0 0x84 #change green/purple stuff on true colors
 # resolution changes.
 #cam 0x3a 0x09
 
-# output drive 4x
-cam 0x09 0x03
+# output drive 1x  // 4x
+cam 0x09 0x0 
 
 #not so bright
 # Automatic Gain Ceiling 4x
