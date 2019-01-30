@@ -8,5 +8,6 @@ IMAGE_INSTALL += "\
 		protobuf \
 		trik-ros \
 		roslaunch \
+		nodelet \
 		"
 
