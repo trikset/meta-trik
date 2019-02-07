@@ -18,7 +18,6 @@ RDEPENDS_${PN} = "\
   wireless-tools \
   hostapd \
   lighttpd \
-  linux-firmware-trik-wl1271 \
   tcpdump \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
