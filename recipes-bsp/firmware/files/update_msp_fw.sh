@@ -38,8 +38,7 @@ tryUpdate() {
     elif test `hex2dec $new` -ne `hex2dec $old` ; then
         echo "Updating MSP firmware from $old to $new"
         /etc/trik/msp430/msp_reset.sh
-        /usr/sbin/msp-flasher -o $FWNAME || echo Problem ONE
-        /usr/sbin/msp-flasher -o $FWNAME || echo Problem TWO
+        /usr/sbin/msp-flasher -o $FWNAME || echo Problem
         return 1;
     else
         echo "MSP firmware ver. $new is up to date."
@@ -47,7 +46,8 @@ tryUpdate() {
     fi
 }
 
-tryUpdate || tryUpdate
-
-
-
+tryUpdate
+# If MCU is fresh, there is no i2c responder and firmware variant is forced to 0x10*.
+# Now, i2c is available and we can tell proper MCU variant.
+# Thus, perform a second attempt to update firmware. It does not hurt anyway.
+tryUpdate
