@@ -1,10 +1,8 @@
 SECTION = "Kernel"
-DESCRIPTION = "Linux Kernel for DaVinci TRIK linux"
+KERNEL_VERSION ="4.14"
+DESCRIPTION = "Linux Kernel ${KERNEL_VERSION} for TRIK"
 LICENSE = "GPLv2"
 KERNEL_IMAGETYPE = "uImage"
-KERNEL_VERSION ="4.14"
-
-PR = "r4"
 
 inherit kernel
 
@@ -19,8 +17,6 @@ SRC_URI = "git://github.com/trikset/ti-linux-kernel;protocol=https;branch=trikse
            "
 
 S = "${WORKDIR}/git"
-#lxdialog-based menuconfig fails to build with new curses5  in kernel 3.6
-KCONFIG_CONFIG_COMMAND = "nconfig"
 LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10dfc69bd78fd072e"
 
 PACKAGES += "${PN}-data"
