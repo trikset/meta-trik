@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 SECTION = "bootloader"
 DEPENDS = "mtd-utils"
 
-BRANCH = "trik-u-boot-2013.01.y"
+BRANCH = "trik-u-boot-2018.05"
 SRCREV = "${AUTOREV}"
 FWENV = "file://fw_env.config"
 SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH} \
@@ -13,13 +13,14 @@ S = "${WORKDIR}/git"
 
 UBOOT_MACHINE = "trikboard_config"
 
-EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} HOSTCC="${CC}" V=1 HOSTSTRIP=true'
+EXTRA_OEMAKE_class-target = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${CC} ${CFLAGS} ${LDFLAGS}" V=1'
+INSANE_SKIP_${PN} = "already-stripped"
 
 inherit uboot-config
 
 do_compile () {
   oe_runmake ${UBOOT_MACHINE}
-  oe_runmake env
+  oe_runmake envtools
 }
 
 do_install () {
