@@ -11,9 +11,9 @@ SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH} \
 			${FWENV}"
 S = "${WORKDIR}/git"
 
-UBOOT_MACHINE = "trikboard_config"
-
-EXTRA_OEMAKE_class-target = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${CC} ${CFLAGS} ${LDFLAGS}" V=1'
+UBOOT_MACHINE = "trikboard_defconfig"
+EXTRA_OEMAKE_class-target = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${CC} ${CFLAGS} ${LDFLAGS}" HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}" V=1'
+EXTRA_OEMAKE_class-cross = 'HOSTCC="${CC} ${CFLAGS} ${LDFLAGS}" V=1'
 INSANE_SKIP_${PN} = "already-stripped"
 
 inherit uboot-config
