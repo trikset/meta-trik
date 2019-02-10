@@ -1,7 +1,7 @@
 TRIK_RUNTIME_UPDATE = "6"
 PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
-DEPENDS += "nanomsg python3"
+DEPENDS += "nanomsg python3 rsync-native"
 RDEPENDS_${PN} += "nanomsg"
 
 #OE_QMAKE_CXXFLAGS_append += " -fno-lto"

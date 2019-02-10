@@ -14,11 +14,11 @@ IMAGE_TYPES += "ext4 ext4.xz img img.xz"
 IMAGE_TYPEDEP_img = "ext4"
 IMAGE_TYPEDEP_img.xz = "img"
 
-IMAGE_DEPENDS_img = 	"\
-			parted-native \
-			e2fsprogs-native \
-			dosfstools-native \
-			mtools-native \
+du_image_img[depends] += 	"\
+			parted-native:do_populate_sysroot \
+			e2fsprogs-native:do_populate_sysroot  \
+			dosfstools-native:do_populate_sysroot  \
+			mtools-native:do_populate_sysroot  \
 			"
 
 IMAGE_FSTYPES = "img.xz img"

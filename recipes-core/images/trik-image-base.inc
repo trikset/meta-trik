@@ -3,7 +3,6 @@ DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
 IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-core-boot \
-		${ROOTFS_PKGMANAGE_BOOTSTRAP} \
 		${CORE_IMAGE_EXTRA_INSTALL} \
 		packagegroup-wifi \
 		packagegroup-core-ssh-openssh \
