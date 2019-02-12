@@ -6,8 +6,8 @@ IMAGE_INSTALL += "\
 		python-pip \
 		python-numpy \
 		protobuf \
-		trik-ros \
 		roslaunch \
 		nodelet \
 		"
-
+# packagegroup-ros2-demos
+# trik-ros

@@ -15,16 +15,15 @@ RDEPENDS_${PN} = "\
   gstreamer1.0-plugins-base \
   gstreamer1.0-meta-audio \
   gstreamer1.0-rtsp-server \
-  sox \
   flac \
   mjpg-streamer \
   ffmpeg \
   live555 \
-  lsdldoom \
-  bigbuckbunny-480p \
  "
 #vlc
 RRECOMMENDS_${PN} = "\
  "
 #pocketsphinx 
+#  sox 
+#  bigbuckbunny-480p
 
