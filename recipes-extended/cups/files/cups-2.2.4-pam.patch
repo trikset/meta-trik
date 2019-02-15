@@ -1,0 +1,15 @@
+diff -urN cups-2.2.4.old/config-scripts/cups-pam.m4 cups-2.2.4/config-scripts/cups-pam.m4
+--- cups-2.2.4.old/config-scripts/cups-pam.m4	2017-06-30 18:44:38.000000000 +0300
++++ cups-2.2.4/config-scripts/cups-pam.m4	2019-02-15 15:43:07.973175154 +0300
+@@ -48,6 +48,11 @@
+ 				break;
+ 			fi
+ 		done
++
++		# Force PAMDIR to some sane value for cross-compiling
++		if test x$PAMDIR = x; then
++			PAMDIR=/etc/pam.d
++		fi
+ 	fi
+ 
+ 	LIBS="$SAVELIBS"
