@@ -1,6 +1,6 @@
 SUMMARY = "Firmware package"
 DESCRIPTION = "Firmware for usb-wifi(ath9k,rt73),wl12xx,bluetooth"
-LICENSE = "LGPL"
+LICENSE = "LGPLv2"
 PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

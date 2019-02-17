@@ -1,6 +1,6 @@
 SUMMARY = "Utils"
 DESCRIPTION = "The minimal set of packages required to manupulate usb, i2c,input devices,ext2FS"
-LICENSE = "LGPL"
+LICENSE = "LGPLv2"
 PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
