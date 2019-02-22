@@ -1,6 +1,7 @@
-TRIK_RUNTIME_UPDATE = "6"
+TRIK_RUNTIME_UPDATE = "7"
 PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
+require trik-runtime-install-new.inc
 DEPENDS += "nanomsg python3"
 RDEPENDS_${PN} += "nanomsg"
 
