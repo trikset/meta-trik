@@ -48,13 +48,14 @@ RDEPENDS_${PN} = "\
   fbgrab \
   fim \
   psmisc \
-  lshw \
   ltrace \
   ldd \
   fb-test \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
   dbus-dev \
 "
+#  lshw
+
 RRECOMMENDS_${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
