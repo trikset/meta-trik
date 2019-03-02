@@ -1,4 +1,4 @@
-TRIK_RUNTIME_UPDATE = "7"
+TRIK_RUNTIME_UPDATE = "8"
 PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 require trik-runtime-install-new.inc
