@@ -26,7 +26,7 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=no-sanitizers"
+EXTRA_QMAKEVARS_PRE = "-r CONFIG+=no-sanitizers CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"
