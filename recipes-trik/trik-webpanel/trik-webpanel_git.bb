@@ -20,7 +20,6 @@ do_install(){
 	install -d ${D}/www/pages/js
 	install -d ${D}/www/pages/styles
 	
-	#cp -rvf ${S}/www/cgi-bin/* ${D}/www/pages/cgi-bin/
 	install -m 0644 ${S}/www/configurator.html ${D}/www/pages/
 	install -m 0755 ${S}/www/cgi-bin/* ${D}/www/pages/cgi-bin/
 	install -m 0644 ${S}/www/js/* ${D}/www/pages/js/
@@ -31,5 +30,4 @@ do_install(){
 
 
 FILES_${PN} += "/www/pages"
-#INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
