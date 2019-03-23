@@ -24,7 +24,7 @@ update_fw() {
   ;;
   *) 
      local CURRENT
-     CURRENT=/usr/share/u-boot-trik/u-boot-gzip.ais
+     CURRENT=/usr/share/u-boot-trik/u-boot.ais
      local SIZE
      SIZE=`du -s --bytes $CURRENT | cut -f 1`
      if [ `head -c $SIZE $CURRENT | md5sum | cut -f 1 -d " "` \
