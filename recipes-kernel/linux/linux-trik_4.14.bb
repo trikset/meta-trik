@@ -23,7 +23,7 @@ PACKAGES += "${PN}-data"
 FILES_${PN}-data = "${datadir} ${sysconfdir}"
 RDEPENDS_${PN} += "${PN}-data"
 
-RDEPENDS_kernel-base += "kernel-devicetree"
+RDEPENDS_${KERNEL_PACKAGE_NAME} += "kernel-devicetree"
 
 do_install_append(){
     install -p -D -m 0755 -t ${D}${sysconfdir}/trik/ ${WORKDIR}/display_settings.sh
