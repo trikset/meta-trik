@@ -23,7 +23,7 @@ exec_login() {
 }
 
 exec_start_pppd() {
-  mknod /dev/ppp c 108 0
+  modprobe ppp_generic
   exec pppd $device $baudrate 10.0.5.2:10.0.5.1 \
     connect 'chat -v -f /etc/ppp/winclient.chat' \
     nodetach noauth local debug dump defaultroute nocrtscts persist maxfail 0 holdoff 10 \
