@@ -24,6 +24,7 @@ remaining_size_limit_k=100
 tree_elements_list=(
 	"/home/root/trik/scripts/"
 	"/home/root/trik/trik.log"
+	"/var/trik/syslog"
 	"/var/log/"
 	)
 utils_list=(

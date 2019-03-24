@@ -1,8 +1,10 @@
-TRIK_RUNTIME_UPDATE = "6"
+TRIK_RUNTIME_UPDATE = "10"
 PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
-DEPENDS += "nanomsg python3 rsync-native"
-RDEPENDS_${PN} += "nanomsg"
+DEPENDS += "python3 rsync-native"
+RDEPENDS_${PN} += "bash xz"
+
+require trik-runtime-install-new.inc
 
 #OE_QMAKE_CXXFLAGS_append += " -fno-lto"
 
@@ -10,7 +12,6 @@ RDEPENDS_${PN} += "nanomsg"
 EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch "
 
 # For script gathering logs information
-RDEPENDS_${PN} += "bash xz"
 # Commented out, because trik-pythonqt is compiled into trik-runtime as git submodule
 #RRECOMMENDS_${PN} += "trik-pythonqt"
 #INHIBIT_PACKAGE_DEBUG_SPLIT = "1"

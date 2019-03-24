@@ -23,11 +23,11 @@ generate_ap_passphrase() {
 	trik_wifi_ap_passphrase=""
 	for i in 1 2 3 4 5 6 7 8
 		do
-			random=`hexdump -n1 -e\"%u\"  /dev/urandom`
-			let "digit = $random % 10"
+			digit=`expr $RANDOM % 10`
 			trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase$digit
 		done
 	echo "trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase" >>$trikrc
+	#we need to check length of $trik_wifi_ap_passphrase and regenerate if it is shorter than 8
 }
 
 generate_hostapd_conf() {

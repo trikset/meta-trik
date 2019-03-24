@@ -51,6 +51,7 @@ RDEPENDS_${PN} = "\
   ltrace \
   ldd \
   fb-test \
+  nano \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
   dbus-dev \
 "
