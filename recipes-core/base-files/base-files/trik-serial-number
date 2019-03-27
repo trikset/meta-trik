@@ -1,0 +1,3 @@
+#!/bin/sh
+set -ueo pipefail
+tr -d ':' < /sys/class/net/wlan0/address | tr 'a-f' 'A-F'
