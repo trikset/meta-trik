@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-IMAGE_ON_SD=/usr/share/u-boot-trik/u-boot.ais
-IMAGE_ON_SD_SIZE=`stat -c '%s' $IMAGE_ON_SD`
+IMAGE_ON_SD=/boot/u-boot.ais
+IMAGE_ON_SD_SIZE=`stat -L -c '%s' $IMAGE_ON_SD`
 
 # Copy expected amount of bytes to RAM
 head -c $IMAGE_ON_SD_SIZE /dev/mtd0 > /tmp/u-boot.ais
