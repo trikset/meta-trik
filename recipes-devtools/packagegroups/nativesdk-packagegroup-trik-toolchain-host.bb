@@ -9,5 +9,5 @@ RDEPENDS_${PN} += "\
 	nativesdk-cmake \
 	nativesdk-make \
 	nativesdk-protobuf \
-	nativesdk-catkin \
 "
+#nativesdk-catkin
