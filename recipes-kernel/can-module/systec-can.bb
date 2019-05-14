@@ -3,9 +3,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.GPLv2;md5=751419260aa954499f7abaabaa882bbe"
 inherit module
 
-PR= "r1"
+PR= "r2"
 PV= "0.9.8"
-SRC_URI = "http://www.systec-electronic.com/uploads/dd/50/dd5093d635d94edc14dbde9d9c02616c/systec_can-V${PV}.tar.bz2 \
+SRC_URI = "https://www.systec-electronic.com/fileadmin/Redakteur/Unternehmen/Support/Downloadbereich/Treiber/systec_can-V${PV}.tar.bz2 \
    file://Makefile_fix.patch"
 
 SRC_URI[md5sum] = "7abadcee12b91077ff53937cfaba83e3"
