@@ -14,7 +14,8 @@ DEPENDS = "jpeg libv4l"
 # Seems like build config problem. Actually, we do not need it.
 DEPENDS += "libsdl"
 
-RRECOMMENDS_${PN} = "jpeg-encoder-ov7670"
+RRECOMMENDS_${PN} += "jpeg-encoder-ov7670"
+RDEPENDS_${PN} += "bash"
 
 inherit cmake
 
