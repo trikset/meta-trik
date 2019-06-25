@@ -1,0 +1,16 @@
+os: linux
+git:
+  depth: 1
+addons:
+  snaps:
+    - name: spellcheck
+      channel: edge
+    
+
+script:
+  - shellcheck --version
+#TODO: 
+# 1. add `-s sh`
+# 2. remove `-e 2154`
+# 3. chage to `-S style`
+  - find recipes-* | xargs file | grep shell | cut -f 1 -d : | xargs shellcheck -o all -S warning -W 20 -f gcc  -C auto -e 2154
