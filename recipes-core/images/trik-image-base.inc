@@ -29,6 +29,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		mini-x-session \
 		linux-trik-data \
 		trik-uart-ppp \
+		haveged \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
