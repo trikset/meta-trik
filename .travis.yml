@@ -8,11 +8,11 @@ addons:
       channel: edge
 script:
   - shellcheck --version
-  - shellcheck --help
+  - shellcheck --help || true
 #TODO: 
 # 1. add `-s sh`
 # 2. remove `-e 2154`
 # 3. add `-o all`
 # 4. change to `-S style`
 
-  - 'find recipes-* | xargs file | grep shell | cut -f 1 -d : | xargs shellcheck -S warning -W 20 -f gcc  -C always -e 2154'
+  - 'find recipes-* | xargs file | grep shell | cut -f 1 -d : | xargs shellcheck -S warning -W 20 -f gcc  --color=always -e 2154'
