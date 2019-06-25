@@ -4,16 +4,15 @@ git:
   depth: 1
 addons:
   snaps:
-    - name: spellcheck
+    - name: shellcheck
       channel: edge
-    
-
 script:
   - shellcheck --version
-
+  - shellcheck --help
 #TODO: 
 # 1. add `-s sh`
 # 2. remove `-e 2154`
-# 3. chage to `-S style`
+# 3. add `-o all`
+# 4. change to `-S style`
 
-  - 'find recipes-* | xargs file | grep shell | cut -f 1 -d : | xargs shellcheck -o all -S warning -W 20 -f gcc  -C auto -e 2154'
+  - 'find recipes-* | xargs file | grep shell | cut -f 1 -d : | xargs shellcheck -S warning -W 20 -f gcc  -C always -e 2154'
