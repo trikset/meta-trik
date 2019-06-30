@@ -9,6 +9,6 @@ test -f $fw && \
    echo 1 > $handle/loading && \
    cat $fw > $handle/data && \
    echo 0 > $handle/loading \
- || echo -1 > $handle/loading \
+ || /bin/echo -1 > $handle/loading \
  || exit 10
 

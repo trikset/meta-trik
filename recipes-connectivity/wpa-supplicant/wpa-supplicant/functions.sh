@@ -109,7 +109,7 @@ wpa_msg () {
 				fi
 				;;
 			*)
-				[ "$#" -gt 0 ] && echo "wpa_action: $@"
+				[ "$#" -gt 0 ] && echo "wpa_action: " "$@"
 				;;
 		esac
 		return
@@ -118,15 +118,15 @@ wpa_msg () {
 	case "$1" in 
 		"verbose")
 			shift
-			echo "$WPA_SUP_PNAME: $@" >$TO_NULL
+			echo "$WPA_SUP_PNAME: " "$@" >$TO_NULL
 			;;
 		"action")
 			shift
-			echo -n "$WPA_SUP_PNAME: $@ -- " >$TO_NULL
+			echo -n "$WPA_SUP_PNAME: " "$@" " -- " >$TO_NULL
 			;;
 		"stderr")
 			shift
-			echo "$WPA_SUP_PNAME: $@" >/dev/stderr
+			echo "$WPA_SUP_PNAME: " "$@" >/dev/stderr
 			;;
 		*)
 			;;

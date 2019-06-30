@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ### BEGIN INIT INFO
 # Provides:          app
@@ -16,7 +16,7 @@ CURRENT_MEDIA_SENSOR_PATH=/etc/trik/$CURRENT_MEDIA_SENSOR_NAME
 
 MEDIA_SENSOR_NAME=$(basename $0)
 #back compatibility name parsing
-[ $MEDIA_SENSOR_NAME==*.sh ] && MEDIA_SENSOR_NAME=${MEDIA_SENSOR_NAME%.*}
+[[ "$MEDIA_SENSOR_NAME" == *.sh ]] && MEDIA_SENSOR_NAME=${MEDIA_SENSOR_NAME%.*}
 MEDIA_SENSOR_PATH=/etc/trik/sensors/$MEDIA_SENSOR_NAME
 
 MEDIA_SENSOR_PID=/var/run/dsp.pid
@@ -36,7 +36,7 @@ check_if_debug() {
 }
 
 debug() {
-  eval $@ $DEBUG
+  eval "$@" $DEBUG
 }
 
 check_dsp_busy() {
@@ -59,7 +59,7 @@ include_defaults() {
 other_options=""
 
 parse_flags() {
-  while [[ $# > 0 ]]
+  while [[ $# -gt 0 ]]
   do
     key="$1"
     case $key in
@@ -236,7 +236,7 @@ fix_webcam() {
 
 VARS=
 include_defaults
-parse_flags $@
+parse_flags "$@"
 check_if_debug
 check_sensor
 do_cmd

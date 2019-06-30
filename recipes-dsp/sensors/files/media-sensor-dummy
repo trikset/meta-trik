@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ### BEGIN INIT INFO
 # Provides:          app
@@ -27,7 +27,7 @@ log() {
 }
 
 parse_flags() {
-  while [[ $# > 0 ]]
+  while [[ $# -gt 0 ]]
   do
     key="$1"
     case $key in
@@ -82,5 +82,5 @@ do_stop() {
 
 . /etc/init.d/functions
 
-parse_flags $@
+parse_flags "$@"
 do_cmd

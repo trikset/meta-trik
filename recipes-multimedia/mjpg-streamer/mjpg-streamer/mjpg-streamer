@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -euo pipefail
 ### BEGIN INIT INFO
 # Provides:          app
@@ -18,7 +18,7 @@ CURRENT_MJPG_STREAMER_NAME=current-mjpg-streamer
 CURRENT_MJPG_STREAMER_PATH=/etc/trik/$CURRENT_MJPG_STREAMER_NAME
 
 MJPG_STREAMER_NAME=$(basename $0)
-[ $MJPG_STREAMER_NAME==*.sh ] && MJPG_STREAMER_NAME=${MJPG_STREAMER_NAME%.*} || true
+[[ "$MJPG_STREAMER_NAME" == "*.sh" ]] && MJPG_STREAMER_NAME=${MJPG_STREAMER_NAME%.*} || true
 
 MJPG_STREAMER_PATH=/usr/bin
 UTILITY_NAME=mjpg_streamer
@@ -47,7 +47,7 @@ check_if_debug() {
 
 
 debug() {
-  eval $@ $DEBUG
+  eval "$@" $DEBUG
 }
 
 
@@ -96,7 +96,7 @@ do_stop() {
 
 
 parse_flags() {
-  while [[ $# > 0 ]]
+  while [[ $# -gt 0 ]]
   do
     key="$1"
     case $key in
@@ -152,6 +152,6 @@ do_cmd() {
 test -x $MJPG_STREAMER_PATH/$UTILITY_NAME || exit 0
 
 VARS=$*
-parse_flags $@
+parse_flags "$@"
 check_if_debug
 do_cmd

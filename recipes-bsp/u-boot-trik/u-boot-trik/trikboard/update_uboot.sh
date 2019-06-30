@@ -23,12 +23,10 @@ update_fw() {
      reset_fw
   ;;
   *) 
-     local CURRENT
      CURRENT=/usr/share/u-boot-trik/u-boot-gzip.ais
-     local SIZE
-     SIZE=`du -s --bytes $CURRENT | cut -f 1`
-     if [ `head -c $SIZE $CURRENT | md5sum | cut -f 1 -d " "` \
-         = `head -c $SIZE /dev/mtd0 | md5sum | cut -f 1 -d " "` ]
+     SIZE=$(du -s --bytes "$CURRENT" | cut -f 1)
+     if [ "$(head -c $SIZE $CURRENT | md5sum | cut -f 1 -d ' ')" \
+	     = "$(head -c $SIZE /dev/mtd0 | md5sum | cut -f 1 -d ' ')" ]
      then
         echo "U-Boot is OK"
      else

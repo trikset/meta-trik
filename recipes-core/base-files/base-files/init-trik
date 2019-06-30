@@ -7,9 +7,8 @@
 # Default-Stop:
 # Short-Description: Init TRIK-specific features 
 run_init_scripts() {
- local dir
  dir=/usr/share/trik/init.d
-[ -d $dir ] && for file in `ls $dir`; do . $dir/$file ; done 
+[ -d $dir ] && for file in $dir/* ; do . $file ; done
 }
 
 run_init_scripts
