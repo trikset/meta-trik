@@ -26,6 +26,12 @@ tree_elements_list=(
 	"/home/root/trik/trik.log"
 	"/var/trik/syslog"
 	"/var/log/"
+	"/home/root/trik/model-config.xml"
+	"/home/root/trik/system-config.xml"
+	"/home/root/trik/model-config.xml"
+	"/tmp/error.log"
+	"/tmp/breakage.log"
+	"/tmp/access.log"
 	)
 utils_list=(
 	"cat /etc/version"
