@@ -28,9 +28,9 @@ tree_elements_list=(
 	"/var/log/"
 	"/home/root/trik/model-config.xml"
 	"/home/root/trik/system-config.xml"
-	"/tmp/error.log"
-	"/tmp/breakage.log"
-	"/tmp/access.log"
+	"/www/logs/lighttpd.error.log"
+	"/www/logs/lighttpd.breakage.log"
+	"/www/logs/lighttpd.access.log"
 	)
 utils_list=(
 	"cat /etc/version"
