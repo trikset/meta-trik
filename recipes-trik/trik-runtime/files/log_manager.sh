@@ -28,7 +28,6 @@ tree_elements_list=(
 	"/var/log/"
 	"/home/root/trik/model-config.xml"
 	"/home/root/trik/system-config.xml"
-	"/home/root/trik/model-config.xml"
 	"/tmp/error.log"
 	"/tmp/breakage.log"
 	"/tmp/access.log"
