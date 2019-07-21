@@ -91,6 +91,8 @@ prepare_tmp_dir() {
 	tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p "$tmp_dir_path"
+	
+	echo "${tmp_dir_path}"
 	special_echo "${tmp_dir_path}"
 }
 
