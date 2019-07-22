@@ -91,7 +91,8 @@ prepare_tmp_dir() {
 	tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p "$tmp_dir_path"
-	special_echo "${tmp_dir_path}"
+	
+	echo "${tmp_dir_path}"
 }
 
 
@@ -154,6 +155,7 @@ main() {
 		tmp_dir=$(prepare_tmp_dir "false")
 		collect "$tmp_dir"
 		compress
+		special_echo "${tmp_dir_path}"
 	else 
 		echo "No such command"
 	fi
