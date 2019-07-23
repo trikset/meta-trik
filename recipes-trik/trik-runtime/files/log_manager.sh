@@ -145,7 +145,8 @@ compress() {
 
 main() {
 	if [ "$1" = "--create" ]; then 
-		prepare_tmp_dir "true"
+		tmp_dir=$(prepare_tmp_dir "true")
+		special_echo "${tmp_dir}"
 	elif [ "$1" = "--collect" ]; then
 		collect "$2"
 	elif [ "$1" = "--gc" ]; then
@@ -155,7 +156,7 @@ main() {
 		tmp_dir=$(prepare_tmp_dir "false")
 		collect "$tmp_dir"
 		compress
-		special_echo "${tmp_dir_path}"
+		special_echo "${tmp_dir}"
 	else 
 		echo "No such command"
 	fi
