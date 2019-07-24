@@ -6,6 +6,6 @@ SRC_URI="file://init_mems.sh\
          file://mems_options.sh"
 
 do_install() {
-	install -m 0755 -D -t ${D}/usr/share/trik/init.d/ ${WORKDIR}/init_mems.sh	
+	install -m 0755 -D -t ${D}/${datadir}/trik/init.d/ ${WORKDIR}/init_mems.sh	
 	install -m 0755 -D -t ${D}/etc/default/trik/ ${WORKDIR}/mems_options.sh 
 }
