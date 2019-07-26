@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ueo pipefail
 [ -r /etc/default/trik/mems_options.sh ] && source /etc/default/trik/mems_options.sh || :
 
 ACCELEROMETER_PATH=/sys/class/misc/mma845x
