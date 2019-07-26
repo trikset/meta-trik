@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /etc/default/trik/smth.sh
+[ -r /etc/default/trik/mems_options.sh ] && source /etc/default/trik/mems_options.sh || :
 
 ACCELEROMETER_PATH=/sys/class/misc/mma845x
 GYROSCOPE_PATH=/sys/class/misc/l3g42xxd
