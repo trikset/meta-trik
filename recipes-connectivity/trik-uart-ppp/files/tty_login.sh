@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2018 - 2019 CyberTech Labs Co Ltd.
+# Copyright 2019 CyberTech Labs Co Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,10 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-device="/dev/ttyS1"
-baudrate=115200
-tty_script="./tty_ppp.sh"
-
-stty -F $device $baudrate raw
-exec <$device >$device 2>&1
-$tty_script $device $baudrate
+echo -en "Running console...\r\n"
+exec getty -L $1 $2 -n -l /etc/trik/autologin
