@@ -6,6 +6,7 @@ SRC_URI="file://init_tty.sh \
          file://winclient.chat \
          file://autologin"
 
+RDEPENDS_${PN} += "bash"
 do_install() {
 	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/init_tty.sh ${WORKDIR}/autologin
 	

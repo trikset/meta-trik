@@ -11,6 +11,7 @@ SRC_URI="file://trik-network.init \
          file://set_wifi_mode.sh \
          file://init_wifi.sh \
          "
+RDEPENDS_${PN} += "bash"
 
 INITSCRIPT_PARAMS = "start 94 2 3 4 5 . "
 
