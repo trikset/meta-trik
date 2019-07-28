@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
 hex2dec() {
-    local res
     res=`printf "%d" "$1" 2>/dev/null`
     # do not return correct substring of incorrect string
     # if previous printf was incorrect, make another attempt
@@ -12,7 +11,6 @@ hex2dec() {
 }
 
 getNewMspFwVer() {
-    local ver
     ver=${1#*/msp-firmware-}
     ver=${ver%.txt}
     echo $ver
@@ -21,7 +19,7 @@ getNewMspFwVer() {
 tryUpdate() {
     # If MSP does not respond we try to reset it and to re-flash
     # Assume i2c-tools are installed ...
-    old=`i2cget -y 2  0x48 0xee w || echo 0xffff`
+    old=$(i2cget -y 2  0x48 0xee w || echo 0xffff)
     
     MCU=10
     case ${old} in
@@ -30,15 +28,15 @@ tryUpdate() {
      *) echo ERROR in version detection ;;
     esac
 
-    FWNAME=`/bin/ls /etc/trik/msp430/msp-firmware-$MCU*.txt | sort | tail -n 1`
-    new=`getNewMspFwVer $FWNAME`
+    FWNAME=$(/bin/ls /etc/trik/msp430/msp-firmware-$MCU*.txt | sort | tail -n 1)
+    new=$(getNewMspFwVer $FWNAME)
     if [ -z "$new" ] ; then
       echo Missing new firmware!
       return 2
-    elif test `hex2dec $new` -ne `hex2dec $old` ; then
+elif test "$(hex2dec $new)" -ne "$(hex2dec $old)" ; then
         echo "Updating MSP firmware from $old to $new"
         /etc/trik/msp430/msp_reset.sh
-        /usr/sbin/msp-flasher -o $FWNAME || echo Problem
+        /usr/sbin/msp-flasher -o "$FWNAME" || echo Problem
         return 1;
     else
         echo "MSP firmware ver. $new is up to date."

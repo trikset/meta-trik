@@ -26,6 +26,9 @@ tree_elements_list=(
 	"/home/root/trik/trik.log"
 	"/var/trik/syslog"
 	"/var/log/"
+	"/home/root/trik/model-config.xml"
+	"/home/root/trik/system-config.xml"
+	"/www/logs/"
 	)
 utils_list=(
 	"cat /etc/version"
@@ -62,7 +65,7 @@ generate_unique_name() {
 
 # Count files in log folder without duplicates, because at the moment of compression there are two files with one mask: "name" and "name.tar.gz"
 count_without_duplicates() {
-	echo "$(find ${archive_path} -maxdepth 1 -name "${1}-*" | xargs -r -n 1 | cut -d . -f 1 | sort -u | wc -l)"
+	echo "$(find ${archive_path} -maxdepth 1 -name "${1}-*" -print0 | xargs -0 -r -n 1 | cut -d . -f 1 | sort -u | wc -l)"
 }
 
 # Prepare directory where current core and snapshot of the system (logs and utilities outputs will be saved)
@@ -73,16 +76,23 @@ prepare_tmp_dir() {
 		rmdir --ignore-fail-on-non-empty ${archive_path}/* || true
 	fi
 
-	local name=$(generate_unique_name)
-	local version=$(cat "/etc/version")
-	local prefix="${name}-${version}"
-	local next_log_number=$(count_without_duplicates "$prefix")
+	local name
+	name=$(generate_unique_name)
+	local version
+	version=$(cat "/etc/version")
+	local prefix
+	prefix="${name}-${version}"
+	local next_log_number
+	next_log_number=$(count_without_duplicates "$prefix")
  
-	local tmp_dir_name="${prefix}-$(printf "%02d" ${next_log_number})"
-	local tmp_dir_path="${archive_path}/${tmp_dir_name}"
+	local tmp_dir_name
+	tmp_dir_name="${prefix}-$(printf "%02d" ${next_log_number})"
+	local tmp_dir_path
+	tmp_dir_path="${archive_path}/${tmp_dir_name}"
 
 	mkdir -p "$tmp_dir_path"
-	special_echo "${tmp_dir_path}"
+	
+	echo "${tmp_dir_path}"
 }
 
 
@@ -129,21 +139,24 @@ collect() {
 # Compress files in logs directory 
 compress() {
 	# Remove empty files so they will not be engaged into compression
-	find ${archive_path} -mindepth 1 -maxdepth 1 -type d | xargs -r -n 1 -I {} sh -c 'if [ ! -z "$(ls -A {})" ]; then tar czvf {}.tar.gz -C {} .; rm -r {}; fi'
+	find ${archive_path} -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -r -n 1 -I {} sh -c 'if [ ! -z "$(ls -A {})" ]; then tar czvf {}.tar.gz -C {} .; rm -r {}; fi'
 }
 
 
 main() {
 	if [ "$1" = "--create" ]; then 
-		prepare_tmp_dir "true"
+		tmp_dir=$(prepare_tmp_dir "true")
+		special_echo "${tmp_dir}"
 	elif [ "$1" = "--collect" ]; then
 		collect "$2"
 	elif [ "$1" = "--gc" ]; then
 		compress
 	elif [ "$1" = "--all" ]; then
-		local tmp_dir=$(prepare_tmp_dir "false")
+		local tmp_dir
+		tmp_dir=$(prepare_tmp_dir "false")
 		collect "$tmp_dir"
 		compress
+		special_echo "${tmp_dir}"
 	else 
 		echo "No such command"
 	fi

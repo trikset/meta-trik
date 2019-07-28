@@ -22,7 +22,7 @@ if [ ! -f $trikrc ]
 		touch $trikrc
 fi
 
-source $trikrc
+. $trikrc
 
 if [ x$trik_wifi_mode = x ]
 	then

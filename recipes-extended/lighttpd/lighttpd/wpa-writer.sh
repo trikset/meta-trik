@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$REQUEST_METHOD" = "POST" ]; then
     read params
@@ -26,7 +26,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
             passphraseRes=$(echo -e "$passphraseRes" | grep -v ^$'\t\#') 
             networkStr="${passphraseRes::-2}"
             networkStr=$(printf "$networkStr\n\tpriority=%d\n}" $priority)
-            $(echo -e "$networkStr" >> /etc/wpa_supplicant.conf)
+            echo -e "$networkStr" >> /etc/wpa_supplicant.conf
             if [ "$?" = "0" ]; then
                 sync
                 echo "OK"
@@ -35,8 +35,8 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
             fi
         fi
     else
-        networkStr=$(printf "network={\n\tssid=\"%s\"\n\tkey_mgmt=NONE\n\tpriority=%d\n}" $essid $priority)
-        $(echo -e "$networkStr" >> /etc/wpa_supplicant.conf)
+        networkStr="network={\n\tssid=\"$essid\"\n\tkey_mgmt=NONE\n\tpriority=$priority\n}"
+        echo -e "$networkStr" >> /etc/wpa_supplicant.conf
         if [ "$?" = "0" ]; then
             sync
             echo "OK"

@@ -29,7 +29,7 @@ case "${2}" in
 		COMMAND=reconnect
 		;;
 	*)
-		echo "$0: unknown arguments: ${@}" >&2
+		echo "$0: unknown arguments: " "${@}" >&2
 		exit 1
 		;;
 esac

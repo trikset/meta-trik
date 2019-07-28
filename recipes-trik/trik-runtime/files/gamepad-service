@@ -19,7 +19,7 @@ CURRENT_SERVICE_PATH=/etc/trik/$CURRENT_SERVICE_NAME
 
 SERVICE_NAME=$(basename $0)
 #back compatibility name parsing
-[ $SERVICE_NAME==*.sh ] && SERVICE_NAME=${SERVICE_NAME%.*}
+[[ $SERVICE_NAME == "*.sh" ]] && SERVICE_NAME=${SERVICE_NAME%.*}
 SERVICE_PATH=/etc/init.d/$SERVICE_NAME
 
 SERVICE_PID=/var/run/$SERVICE_NAME.pid
@@ -74,7 +74,7 @@ restart() {
 
 
 parse_params() {
-  while [[ $# > 0 ]]
+  while [[ $# -gt 0 ]]
   do
     key="$1"
     case $key in
@@ -128,5 +128,5 @@ do_cmd() {
 
 
 #. /etc/init.d/functions
-parse_params $@
+parse_params "$@"
 do_cmd
