@@ -18,7 +18,6 @@ baudrate=115200
 	
 stty -F $device $baudrate raw
 exec <$device >$device 2>&1
-echo -en "Running pppd...\r\n"
 mknod /dev/ppp c 108 0
 exec pppd $device $baudrate 10.0.5.2:10.0.5.1 \
   connect 'chat -v -f /etc/ppp/winclient.chat' \

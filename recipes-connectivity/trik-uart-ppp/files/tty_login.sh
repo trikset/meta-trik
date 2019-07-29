@@ -18,5 +18,4 @@ baudrate=115200
 	
 stty -F $device $baudrate raw
 exec <$device >$device 2>&1
-echo -en "Running console...\r\n"
 exec getty -L $device $baudrate -n -l /etc/trik/autologin
