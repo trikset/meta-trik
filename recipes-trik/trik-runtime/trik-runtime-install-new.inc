@@ -3,6 +3,8 @@ do_install() {
         cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
         install -d ${D}/home/root/trik/scripts
 
+        install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
+
         install -d ${D}/${sysconfdir}/trik/
         install -m 0755 ${WORKDIR}/trikGui.sh ${D}/${sysconfdir}/trik/
 

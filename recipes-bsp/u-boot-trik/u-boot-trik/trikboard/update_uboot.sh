@@ -15,7 +15,7 @@ fi
 
 rm -f /tmp/u-boot.ais
 
-echo -n "### FLASHING U-BOOT... "
+echo "### FLASHING U-BOOT... "
 flashcp -v $IMAGE_ON_SD /dev/mtd0
 flash_erase /dev/mtd1 0 0
 echo DONE
