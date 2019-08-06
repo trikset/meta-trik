@@ -32,7 +32,7 @@ exec_start_pppd() {
 stty -F $device $baudrate raw
 exec <$device >$device 2>&1
 $echo_en "Type r to run console\r\n"
-read -t 5 -n 1 ch
+read -r -t 5 -n 1 ch
 if [ "$ch" == "r" ]; then
   $echo_en "Running console...\r\n"
   exec_login
