@@ -15,7 +15,7 @@
 
 device="/dev/ttyS1"
 baudrate=115200
-echo_en="echo -en"
+echo_en="/bin/echo -en"
 
 exec_login() {
 	exec getty -L $device $baudrate -n -l /etc/trik/autologin
