@@ -10,9 +10,9 @@ DEPENDS += "qtmultimedia qtscript"
 #RREPLACES_${PN} += "trik-runtime"
 RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
-TAG = "${PV}-${TRIK_RUNTIME_UPDATE}"
-
-SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};nobranch=1 \
+TAG ?= "${PV}-${TRIK_RUNTIME_UPDATE}"
+GIT_REVISION ?= "tag=${TAG};nobranch=1"
+SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
@@ -21,7 +21,6 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;tag=${TAG};
           file://compress_logs.sh \
           file://say \
           file://gamepad-service"
-
 
 S = "${WORKDIR}/git"
 

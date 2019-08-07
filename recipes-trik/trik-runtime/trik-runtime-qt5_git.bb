@@ -1,5 +1,8 @@
-TRIK_RUNTIME_UPDATE = "7"
-PR="r${TRIK_RUNTIME_UPDATE}"
+SRCREV="${AUTOREV}"
+TRIK_RUNTIME_UPDATE = "${SRCREV}"
+GIT_REVISION = "branch=master"
+PV = "git${SRCREV}"
+#PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 require trik-runtime-install-new.inc
 DEPENDS += "nanomsg python3"
@@ -12,8 +15,6 @@ EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch "
 
 # For script gathering logs information
 RDEPENDS_${PN} += "bash xz"
-# Commented out, because trik-pythonqt is compiled into trik-runtime as git submodule
-#RRECOMMENDS_${PN} += "trik-pythonqt"
 #INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 #INHIBIT_PACKAGE_STRIP = "1"
 #DEBUG_BUILD = "1"
