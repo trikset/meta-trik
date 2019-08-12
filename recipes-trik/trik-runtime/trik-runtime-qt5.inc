@@ -19,6 +19,7 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVIS
           file://python_path.sh \
           file://log_manager.sh \
           file://compress_logs.sh \
+          file://wifi-strength.sh \
           file://say \
           file://gamepad-service"
 

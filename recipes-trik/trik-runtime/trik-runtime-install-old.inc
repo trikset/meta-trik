@@ -39,6 +39,7 @@ do_install() {
         done
 
         install -m 0755 -D -t ${D}/${datadir}/trik/init.d/ ${WORKDIR}/compress_logs.sh
+        install -m 0755 -D -t ${D}/${datadir}/trik/ ${WORKDIR}/wifi_strength.sh
 }
 
 
