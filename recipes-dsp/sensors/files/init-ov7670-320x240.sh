@@ -12,14 +12,14 @@ VIDEO0=/dev/video0
 VIDEO1=/dev/video1
 
 case $1 in  
-  0|$VIDEO0)
+  0|"$VIDEO0")
     BUS=0x1
     VIDEO_PATH=$VIDEO0
     echo 0 > /sys/class/gpio/gpio109/value
     usleep 10000
     echo 1 > /sys/class/gpio/gpio109/value
     ;;
-  1|$VIDEO1)
+  1|"$VIDEO1")
     BUS=0x2
     VIDEO_PATH=$VIDEO1
     echo 0 > /sys/class/gpio/gpio33/value
