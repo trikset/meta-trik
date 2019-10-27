@@ -70,7 +70,7 @@ case "$1" in
 	"ap")
 		source $trikrc
 
-		if [ "x$trik_wifi_ap_passphrase" = "x" ]; then
+		if [ "${#trik_wifi_ap_passphrase}" -ne "8" ]; then
 			generate_ap_passphrase
 		fi
 
