@@ -21,12 +21,9 @@ interface=wlan0
 generate_ap_passphrase() {
 	sed --in-place '/^trik_wifi_ap_passphrase=/d' $trikrc
 	trik_wifi_ap_passphrase=""
-	while [ "${#trik_wifi_ap_passphrase}" -ne "8" ]; do
-		for i in 1 2 3 4 5 6 7 8
-			do
-				digit=$(( $RANDOM % 10 ))
-				trik_wifi_ap_passphrase="${trik_wifi_ap_passphrase}${digit}"
-			done
+	for i in 1 2 3 4 5 6 7 8; do
+		digit=$(( $RANDOM % 10 ))
+		trik_wifi_ap_passphrase="${trik_wifi_ap_passphrase}${digit}"
 	done
 	echo "trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase" >> $trikrc
 }
