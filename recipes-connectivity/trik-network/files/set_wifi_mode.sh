@@ -21,13 +21,11 @@ interface=wlan0
 generate_ap_passphrase() {
 	sed --in-place '/^trik_wifi_ap_passphrase=/d' $trikrc
 	trik_wifi_ap_passphrase=""
-	for i in 1 2 3 4 5 6 7 8
-		do
-			digit=`expr $RANDOM % 10`
-			trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase$digit
-		done
-	echo "trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase" >>$trikrc
-	#we need to check length of $trik_wifi_ap_passphrase and regenerate if it is shorter than 8
+	for i in 1 2 3 4 5 6 7 8; do
+		digit=$(( $RANDOM % 10 ))
+		trik_wifi_ap_passphrase="${trik_wifi_ap_passphrase}${digit}"
+	done
+	echo "trik_wifi_ap_passphrase=$trik_wifi_ap_passphrase" >> $trikrc
 }
 
 generate_hostapd_conf() {
@@ -46,19 +44,17 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP" >$hostapd_conf
 }
 
-if [ ! $1 = "client" ] && [ ! $1 = "ap" ]
-	then
-		echo "Usage: set_wifi_mode.sh client|ap"
-		exit 1
+if [ ! "$1" = "client" ] && [ ! "$1" = "ap" ]; then
+	echo "Usage: set_wifi_mode.sh client|ap"
+	exit 1
 fi
 
 killall -q udhcpd
 /etc/init.d/hostapd stop
 ifdown $interface
 
-if [ ! -f $trikrc ]
-	then
-		touch $trikrc
+if [ ! -f $trikrc ]; then
+	touch $trikrc
 fi
 
 sed --in-place '/^trik_wifi_mode=/d' $trikrc
@@ -71,9 +67,8 @@ case "$1" in
 	"ap")
 		source $trikrc
 
-		if [ x$trik_wifi_ap_passphrase = x ]
-			then
-				generate_ap_passphrase
+		if [ "${#trik_wifi_ap_passphrase}" -ne "8" ]; then
+			generate_ap_passphrase
 		fi
 
 		generate_hostapd_conf
@@ -84,5 +79,5 @@ case "$1" in
 		;;
 esac
 
-echo "trik_wifi_mode=$1" >>$trikrc
+echo "trik_wifi_mode=$1" >> $trikrc
 
