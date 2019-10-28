@@ -4,6 +4,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=89aea4e17d99a7cacdbeed46a0096b10"
 SUMMARY = "Shell scripts and configuration files for managing network on TRIK controller"
 
+RDEPENDS_${PN} += "bash"
+
 inherit update-rc.d
 INITSCRIPT_NAME = "trik-network"
 
