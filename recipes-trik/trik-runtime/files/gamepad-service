@@ -50,7 +50,7 @@ start() {
 
 do_start() {
   test -p $GAMEPAD_FIFO_PATH || { rm -f $GAMEPAD_FIFO_PATH ; mkfifo $GAMEPAD_FIFO_PATH ; }
-  $UTILITY_NAME -vlp $GAMEPAD_PORT | tee $GAMEPAD_FIFO_PATH &
+  $UTILITY_NAME -vlkp $GAMEPAD_PORT | tee $GAMEPAD_FIFO_PATH &
   wait
 }
 
