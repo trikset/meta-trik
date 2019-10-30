@@ -20,6 +20,7 @@ RDEPENDS_${PN} = "\
   trik-webpanel \
   linux-firmware-trik-wl1271 \
   tcpdump \
+  ti-wifi-utils \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 
