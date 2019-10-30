@@ -19,6 +19,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		dsp-modules \
 		softap-udhcpd-config \
 		trik-network \
+		ti-wifi-utils \
 		fuse \
 		eglibc-utils \
 		packagegroup-triksensors \
