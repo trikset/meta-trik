@@ -1,5 +1,5 @@
-SUMMARY="Trik Sensors "
-DESCRIPTION = "The minimal set of packages reguired to start with soft trik video sensors"
+SUMMARY="TRIK Sensors "
+DESCRIPTION = "The minimal set of packages reguired for TRIK video sensors"
 LICENSE = "Apache-2.0"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

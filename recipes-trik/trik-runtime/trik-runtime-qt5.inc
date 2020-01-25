@@ -10,9 +10,10 @@ DEPENDS += "qtmultimedia qtscript"
 #RREPLACES_${PN} += "trik-runtime"
 RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
-TAG = "${PV}-${TRIK_RUNTIME_UPDATE}"
+TAG ?= "${PV}-${TRIK_RUNTIME_UPDATE}"
+#GIT_REVISION ?= "tag=${TAG};nobranch=1"
+#SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
 SRCREV = "${AUTOREV}"
-
 SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;branch=new_age \
           file://trikGui.sh \
           file://qws_display.sh \
@@ -23,11 +24,10 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;branch=new_
           file://say \
           file://gamepad-service"
 
-
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=no-sanitizers CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker"
+EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"

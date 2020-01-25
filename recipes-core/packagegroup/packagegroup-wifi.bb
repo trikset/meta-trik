@@ -13,12 +13,13 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 
 RDEPENDS_${PN} = "\
-  netcat \
+  netcat-openbsd \
   wpa-supplicant \
   packagegroup-base-wifi \
   hostapd \
   trik-webpanel \
   tcpdump \
+  ti-wifi-utils \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 

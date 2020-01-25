@@ -1,5 +1,5 @@
 #!/bin/sh
-set -euo pipefail
+set -eu
 TEXT="$*"
 VAR=/tmp/trik-say/
 mkdir -p "${VAR}" # TODO: avoid this line. No reason to call mkdir each time

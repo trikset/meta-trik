@@ -2,6 +2,9 @@ SUMMARY += "(TRIK edition)"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
+#until TRIK's own scrtips moved to separate package, we need bash
+RDEPENDS_${PN} += "bash"
+
 RDEPENDS_${PN} += " \
         lighttpd-module-alias \
         lighttpd-module-cgi \
