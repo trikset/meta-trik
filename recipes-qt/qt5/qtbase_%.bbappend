@@ -5,10 +5,7 @@ PACKAGECONFIG_FONTS = "fontconfig freetype"
 PACKAGECONFIG_DISTRO = "icu optimize-size"
 #PACKAGECONFIG_DISTRO += "ltcg"
 #QT_CONFIG_FLAGS += " -reduce-relocations " commented out until QTBUG-36129 is fixed
-#QT_CONFIG_FLAGS += "-force-asserts"
-
-#QT_CONFIG_FLAGS += "-qreal float" very useful, let's check with qt5.12 if it helps
-
+#QT_CONFIG_FLAGS += "-force-asserts -qreal float"
 #QT_CONFIG_FLAGS += "-ltcg"
 #OE_QMAKE_CXXFLAGS_append += " -ffat-lto-objects -ffunction-sections "
 #OE_QMAKE_LFLAGS_append += " -ffunction-sections "

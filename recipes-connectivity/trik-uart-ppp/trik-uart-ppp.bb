@@ -9,7 +9,8 @@ SRC_URI="file://tty_ppp.sh \
          file://winclient.chat \
          file://autologin"
 
-FILES_${PN} += "${datadir}"
+#FILES_${PN} += "${datadir}"
+RDEPENDS_${PN} += "bash"
 
 do_install() {
 	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/autologin

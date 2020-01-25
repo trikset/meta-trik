@@ -12,9 +12,8 @@ RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
 TAG ?= "${PV}-${TRIK_RUNTIME_UPDATE}"
 #GIT_REVISION ?= "tag=${TAG};nobranch=1"
-#SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
 SRCREV = "${AUTOREV}"
-SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;branch=new_age \
+SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
@@ -27,7 +26,7 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;branch=new_
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker"
+EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"

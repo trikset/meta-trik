@@ -8,6 +8,8 @@ SRC_URI = "file://rc.local.etc \
 
 S = "${WORKDIR}"
 
+RDEPENDS_${PN} += "bash"
+
 inherit update-rc.d
 
 INITSCRIPT_NAME = "zrc.local"

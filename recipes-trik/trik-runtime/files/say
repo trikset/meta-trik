@@ -13,7 +13,7 @@ mkdir -p "${VAR}" # TODO: avoid this line. No reason to call mkdir each time
 #    *) V=english ;;
 #esac
 
-V=russian_test #force Russian dictionary. It is mixed thus english words are pronounced too
+V=russian #force Russian dictionary. It is mixed thus english words are pronounced too
 
 CMD="espeak -v $V -z -s 100"
 ID="$CMD $TEXT"

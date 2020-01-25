@@ -5,6 +5,7 @@ PV = "git${SRCREV}"
 #PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 DEPENDS += "python3 rsync-native"
+DEPENDS += "gcc-sanitizers"
 RDEPENDS_${PN} += "bash xz"
 
 require trik-runtime-install-new.inc
