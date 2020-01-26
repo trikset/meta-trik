@@ -37,10 +37,14 @@ utils_list=(
 	"i2cdetect -y 2"
 	"i2cget -y 2 0x48 0xee w"
 	"ifconfig"
+	"lshw"
 	"lsmod"
 	"lsof"
+	"lsusb -v"
 	"ps ax"
 	"uname -a"
+	"v4l2-ctl -d /dev/video2 --all"
+	"xinput list"
 	)
 
 
