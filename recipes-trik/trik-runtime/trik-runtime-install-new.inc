@@ -2,6 +2,7 @@ do_install() {
         install -d ${D}/home/root/trik
         cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
         install -d ${D}/home/root/trik/scripts
+        install -d ${D}/home/root/trik/images
 	 install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
 
         install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
