@@ -1,7 +1,7 @@
 DESCRIPTION = "Software for various robots built using TRIK (http://www.trikset.com/) constructor"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=19cbd64715b51267a47bf3750cc6a8a5"
-RDEPENDS_${PN} = "trik-runtime v4l-utils gawk"
+RDEPENDS_${PN} = "trik-runtime v4l-utils gawk libv4l"
 BRANCH  = "master"
 SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/trikset/trik-models.git;branch=${BRANCH}"

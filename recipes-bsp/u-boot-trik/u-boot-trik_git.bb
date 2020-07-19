@@ -6,9 +6,7 @@ DEPENDS += "bc-native dtc-native"
 SRC_URI_trikboard += "file://update_uboot.sh"
 
 P="${datadir}/${PN}"
-PACKAGES += "${PN}-data"
-FILES_${PN}-data = "${datadir}"
-RDEPENDS_${PN} += "${PN}-data"
+FILES_${PN} += "${datadir}/trik"
 
 do_install_append () {
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh

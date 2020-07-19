@@ -11,6 +11,8 @@ COMPATIBLE_MACHINE = "trikboard"
 BRANCH = "trik-u-boot-2018.05"
 SRCREV = "${AUTOREV}"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
 SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"

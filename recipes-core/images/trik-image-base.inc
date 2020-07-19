@@ -25,7 +25,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		formfactor \
 		coreutils \
 		u-boot-trik \
-		u-boot-trik-data \
 		mini-x-session \
 		linux-trik-data \
 		trik-uart-ppp \
