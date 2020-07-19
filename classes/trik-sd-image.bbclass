@@ -9,7 +9,7 @@ EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 inherit image_types logging user-partion
 inherit image-mklibs
 
-DEPENDS_${PN} += "u-boot-trik"
+DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
 IMAGE_TYPEDEP_img = "ext4"
 IMAGE_TYPEDEP_img.xz = "img"
