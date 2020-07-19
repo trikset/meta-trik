@@ -1,1 +1,1 @@
-PACKAGECONFIG = "alsa gstreamer"
+# PACKAGECONFIG = "alsa"
