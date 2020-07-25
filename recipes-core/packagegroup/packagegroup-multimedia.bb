@@ -9,7 +9,6 @@ RDEPENDS_${PN} = "\
   alsa-utils \
   espeak \
   v4l-utils \
-  gstreamer1.0-plugins-bad \
   gstreamer1.0-plugins-good \
   gstreamer1.0-meta-video \
   gstreamer1.0-plugins-base \
@@ -17,10 +16,10 @@ RDEPENDS_${PN} = "\
   gstreamer1.0-rtsp-server \
   flac \
   mjpg-streamer \
-  ffmpeg \
   live555 \
  "
 #vlc
+#  ffmpeg
 RRECOMMENDS_${PN} = "\
  "
 #pocketsphinx 
