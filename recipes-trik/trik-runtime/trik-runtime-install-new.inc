@@ -30,7 +30,7 @@ do_install() {
               trikWiFi"
 
         install -d ${D}${includedir}/trikRuntime
-        cp -rf ${S}/qslog/*.h ${D}${includedir}/trikRuntime
+        cp -rf ${S}/qslog/qslog/*.h ${D}${includedir}/trikRuntime
         for lib in $LIBS; do
             cp -rf ${S}/${lib}/include/* ${D}${includedir}/trikRuntime/${lib}
         done
