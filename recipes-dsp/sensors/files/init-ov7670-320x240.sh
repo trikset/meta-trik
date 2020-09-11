@@ -85,7 +85,7 @@ cam 0xb0 0x84 #change green/purple stuff on true colors
 #cam 0x3a 0x09
 
 # output drive 1x  // 4x
-cam 0x09 0x0
+cam 0x09 0x0 
 
 #not so bright
 # Automatic Gain Ceiling 4x
