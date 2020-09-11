@@ -14,6 +14,10 @@ sleep 1
 # PUR is now output and does not need any input signals.
 echo 0 > /sys/class/gpio/gpio80/value
 echo Done
+# The comment "immediately remove reset to make Linux happy" is not valid
+# for PCBs version >= 8, but they need this sleep instead. 
+# (to give the kernel some time to see the USB device). So, more sleeps!
+sleep 1
 if lsusb | grep -q '2047:0200'
 then
     exit 0
