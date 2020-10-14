@@ -14,6 +14,8 @@ TRIK_NETWORK=/etc/trik/init_wifi.sh
 # dirty workaround until we have 3.7 kernel
 modprobe wl12xx
 
+/etc/trik/generate_mac4wifi.sh || :
+
 case $1 in
 	start)
 		/etc/trik/init_wifi.sh
