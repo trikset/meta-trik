@@ -10,7 +10,7 @@ if [[ "x$nvsAddr" == "x00:00:00:00:00:00"  &&  "x$ifconfigAddr" == "x00:00:00:00
   newAddr=$(hexdump -n 5 -e '"02:" 4/1 "%02x:" "%02x"' /dev/urandom)
   echo "Setting new WiFi MAC addr with 'calibrator set nvs_mac wl1271-nvs.bin $newAddr'"
   calibrator set nvs_mac wl1271-nvs.bin "$newAddr"
-  rmmod wl12xx
+  rmmod wl12xx || :
   modprobe wl12xx
 fi
 popd

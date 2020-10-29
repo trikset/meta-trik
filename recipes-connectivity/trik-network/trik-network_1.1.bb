@@ -6,18 +6,13 @@ SUMMARY = "Shell scripts and configuration files for managing network on TRIK co
 
 RDEPENDS_${PN} += "bash ti-wifi-utils"
 
-inherit update-rc.d
-INITSCRIPT_NAME = "trik-network"
-
-SRC_URI="file://trik-network.init \
+SRC_URI="\
          file://set_wifi_mode.sh \
-         file://init_wifi.sh \
-	 file://generate_mac4wifi.sh \
+         file://20-init_wifi.sh \
+	 file://10-generate_mac4wifi.sh \
          "
 
-INITSCRIPT_PARAMS = "start 94 2 3 4 5 . "
-
-FILES_{PN}="${sysconfdir}/init.d/trik-network ${sysconfdir}/trik/set_wifi_mode.sh ${sysconfdir}/trik/init_wifi.sh ${sysconfdir}/trik/generate_mac4wifi.sh"
+FILES_${PN} += "${datadir}/trik"
 
 S = "${WORKDIR}"
 
@@ -28,13 +23,13 @@ do_compile() {
 	:
 }
 do_install() {
-	install -D -m 755 -t ${D}${sysconfdir}/init.d ${S}/trik-network.init
-	install -D -m 755 -t ${D}${sysconfdir}/trik/ \
-	            ${S}/set_wifi_mode.sh \
-		    ${S}/init_wifi.sh \
-	            ${S}/generate_mac4wifi.sh
+	install -D -m 755 -t ${D}${datadir}/trik/init.d/ \
+	            ${S}/10-generate_mac4wifi.sh \
+		    ${S}/20-init_wifi.sh
 
-    install -d ${D}/etc/modules-load.d/
+	install -D -m 755 -t ${D}${sysconfdir}/trik/ \
+	            ${S}/set_wifi_mode.sh
+         install -d ${D}/etc/modules-load.d/
     echo wl12xx > ${D}/etc/modules-load.d/wl12xx.conf
 
      install -d ${D}/etc/modprobe.d/
