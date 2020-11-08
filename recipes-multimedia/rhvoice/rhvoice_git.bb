@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
                     file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
 inherit scons pkgconfig 
-inherit features_check
+inherit distro_features_check
 
 REQUIRED_DISTRO_FEATURES="alsa pulseaudio"
 
