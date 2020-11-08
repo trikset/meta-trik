@@ -9,6 +9,7 @@ DEPENDS += "gcc-sanitizers"
 RDEPENDS_${PN} += "bash xz"
 
 require trik-runtime-install-new.inc
+DEPENDS += "rsync-native python3"
 
 #OE_QMAKE_CXXFLAGS_append += " -fno-lto"
 
