@@ -5,7 +5,7 @@ PV = "git${SRCREV}"
 #PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 require trik-runtime-install-new.inc
-DEPENDS += "nanomsg python3"
+DEPENDS += "rsync-native python3"
 RDEPENDS_${PN} += "nanomsg"
 
 #OE_QMAKE_CXXFLAGS_append += " -fno-lto"
