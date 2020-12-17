@@ -1,7 +1,7 @@
 SUMMARY = "Firmware package"
 DESCRIPTION = "Firmware for usb-wifi(ath9k,rt73),wl12xx,bluetooth"
 LICENSE = "LGPL"
-PR = "r1"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,8 +16,6 @@ RDEPENDS_${PN} = "\
   linux-firmware-ath9k \
   linux-firmware-ralink \
   linux-firmware-msp \
-  kernel-module-systec-can \
-  linux-firmware-systec-can \
   packagegroup-ti-drivers \
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
