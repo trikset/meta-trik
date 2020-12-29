@@ -17,6 +17,7 @@ getNewMspFwVer() {
 }
 
 tryUpdate() {
+    set -eu
     # If MSP does not respond we try to reset it and to re-flash
     # Assume i2c-tools are installed ...
     old=$(i2cget -y 2  0x48 0xee w || echo 0xffff)
@@ -25,7 +26,7 @@ tryUpdate() {
     case ${old} in
      0xff* | 0x10* ) MCU=10 ;;
      0x28*) MCU=28 ;;
-     *) echo ERROR in version detection ;;
+     *) echo "ERROR in version detection" ; exit 1 ;;
     esac
 
     FWNAME=$(/bin/ls /etc/trik/msp430/msp-firmware-$MCU*.txt | sort | tail -n 1)
@@ -33,15 +34,14 @@ tryUpdate() {
     if [ -z "$new" ] ; then
       echo Missing new firmware!
       return 2
-elif test "$(hex2dec $new)" -ne "$(hex2dec $old)" ; then
+    elif test "$(hex2dec $new)" -ne "$(hex2dec $old)" ; then
         echo "Updating MSP firmware from $old to $new"
         /etc/trik/msp430/msp_reset.sh
-        /usr/sbin/msp-flasher -o "$FWNAME" || echo Problem
-        return 1;
+        /usr/sbin/msp-flasher -o "$FWNAME"
     else
         echo "MSP firmware ver. $new is up to date."
-        return 0
     fi
+    return 0
 }
 
 tryUpdate
