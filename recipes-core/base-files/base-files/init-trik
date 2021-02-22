@@ -8,7 +8,7 @@
 # Short-Description: Init TRIK-specific features 
 run_init_scripts() {
  dir=/usr/share/trik/init.d
-[ -d $dir ] && for file in $dir/* ; do echo "Running $file" ; . $file ; done
+[ -d $dir ] && for file in $dir/* ; do echo "init-trik: Running $file" ; . $file || echo "init-trik: error in $file, see above" ; done
 }
 
 run_init_scripts
