@@ -12,6 +12,8 @@
 
 set -euo pipefail
 
+. /etc/init.d/functions
+
 DEFAULT_SERVICE_NAME=gamepad-service
 
 CURRENT_SERVICE_NAME=current-gamepad-service

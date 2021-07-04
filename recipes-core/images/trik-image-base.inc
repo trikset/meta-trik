@@ -32,6 +32,8 @@ IMAGE_INSTALL = "packagegroup-base \
 		haveged \
 "
 
+BAD_RECOMMENDATIONS = "rng-tools"
+
 IMAGE_LINGUAS = "en-us ru-ru"
 
 LICENSE = "MIT"
