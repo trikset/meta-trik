@@ -31,6 +31,9 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-uart-ppp \
 		trik-mems \
 		haveged \
+		python3-pip \
+		python3-numpy \
+		python3-pyserial \
 "
 
 IMAGE_LINGUAS = "en-us ru-ru"
