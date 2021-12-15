@@ -9,7 +9,8 @@ SRCREV  = "${AUTOREV}"
 SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;branch=${BRANCH} \
 	   file://mjpg-streamer"
 PR = "r2"
-DEPENDS = "jpeg libv4l"
+DEPENDS = "libv4l"
+RDEPENDS_${PN} += "bash"
 
 # Seems like build config problem. Actually, we do not need it.
 DEPENDS += "libsdl"
