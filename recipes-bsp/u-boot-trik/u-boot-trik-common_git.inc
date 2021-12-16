@@ -3,16 +3,16 @@ SECTION = "bootloaders"
 DEPENDS += "flex-native bison-native"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 PE = "1"
 
 COMPATIBLE_MACHINE = "trikboard"
 
-BRANCH = "trik-u-boot-2018.05"
+BRANCH = "trik-u-boot-2021.10"
 SRCREV = "${AUTOREV}"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH}"
+SRC_URI_trikboard = "git://github.com/iakov/trik-u-boot.git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
