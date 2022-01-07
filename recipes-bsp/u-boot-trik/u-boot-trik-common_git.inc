@@ -16,3 +16,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_trikboard = "git://github.com/iakov/trik-u-boot.git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
+B = "${WORKDIR}/build"
