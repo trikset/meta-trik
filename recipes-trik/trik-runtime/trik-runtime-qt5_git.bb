@@ -1,6 +1,6 @@
 SRCREV="${AUTOREV}"
 TRIK_RUNTIME_UPDATE = "${SRCREV}"
-GIT_REVISION = "branch=master"
+GIT_REVISION = "branch=new_age_dunfell"
 PV = "git${SRCREV}"
 #PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
