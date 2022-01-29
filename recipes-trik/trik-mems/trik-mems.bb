@@ -12,5 +12,6 @@ FILES_${PN} += "${datadir}"
 
 do_install() {
 	install -m 0755 -D -t ${D}/${datadir}/trik/init.d/ ${WORKDIR}/init_mems.sh	
-	install -m 0755 -D -t ${D}/etc/default/trik/ ${WORKDIR}/mems_options.sh 
+	install -m 0755 -D -t ${D}/etc/default/trik/ ${WORKDIR}/mems_options.sh
+	install -m 0755 -D -t ${D}/etc/default/trik/ ${WORKDIR}/init_lidar.sh
 }
