@@ -1,0 +1,38 @@
+From 7a84ef8effcbb4770b27f0af59d84db343d05701 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Torbj=C3=B6rn=20Svensson?= <azoff@svenskalinuxforeningen.se>
+Date: Sat, 2 Nov 2019 16:42:39 +0100
+Subject: psplash: Do mount psplash tmpfs if not mounted
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The change in 5cea0448c5c75b9defc5fc2582e9b0c14e26a4e9 cases the
+following to be printed during boot:
+/etc/rcS.d/S00psplash.sh: line 28: [: -q: binary operator expected
+and the volume is thus never mounted, neither when invoked during
+boot nor shutdown/reboot.
+
+Signed-off-by: Torbjörn Svensson <azoff@svenskalinuxforeningen.se>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ meta/recipes-core/psplash/files/psplash-init | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+(limited to 'meta/recipes-core/psplash/files/psplash-init')
+
+diff --git a/psplash-init b/psplash-init
+index dcb751907f..4bee866b0d 100755
+--- a/psplash-init
++++ b/psplash-init
+@@ -25,7 +25,7 @@ done
+ 
+ export TMPDIR=/mnt/.psplash
+ [ -d $TMPDIR ] || mkdir -p $TMPDIR
+-if [ ! mountpoint -q $TMPDIR ]; then
++if ! mountpoint -q $TMPDIR; then
+ 	mount tmpfs -t tmpfs $TMPDIR -o,size=40k
+ fi
+ 
+-- 
+cgit v1.2
+
