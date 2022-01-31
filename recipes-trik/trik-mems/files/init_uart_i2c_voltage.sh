@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -r /etc/trik/voltage_options.sh ] && source /etc/trik/voltage_options.sh || :
+[ -r /etc/default/trik/uart_i2c_voltage_options.sh ] && source /etc/default/trik/uart_i2c_voltage_options.sh || :
 
 enable_3v() {
         echo low > /sys/class/gpio/gpio30/direction
