@@ -29,7 +29,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		linux-trik-data \
 		trik-uart-ppp \
 		trik-mems \
-		haveged \
 		python3-pip \
 		python3-numpy \
 		python3-pyserial \
