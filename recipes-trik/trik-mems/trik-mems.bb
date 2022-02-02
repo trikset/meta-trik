@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=89aea4e17d99a7ca
 RDEPENDS_${PN} += "base-files bash"
 
 SRC_URI="file://init_mems.sh \
+         file://init_lidar.sh \
          file://mems_options.sh"
 
 FILES_${PN} += "${datadir}"
