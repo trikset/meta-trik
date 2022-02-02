@@ -18,6 +18,6 @@ EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch CONFIG+=sanitize_address CONFIG+=sanit
 
 # For script gathering logs information
 RDEPENDS_${PN} += "bash xz"
-#INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 #INHIBIT_PACKAGE_STRIP = "1"
 #DEBUG_BUILD = "1"
