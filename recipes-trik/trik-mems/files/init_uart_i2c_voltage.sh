@@ -16,7 +16,7 @@ enable_5v() {
 main() {
         echo 30 > /sys/class/gpio/export
 
-        if [[ "$ENABLE_5V" == 1]]; then
+        if [[ "$ENABLE_5V" == 1 ]]; then
                 enable_5v
         else
                 enable_3v
