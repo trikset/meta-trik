@@ -1,4 +1,4 @@
-PR="r8"
+PR="r9"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
 IMAGE_INSTALL = "packagegroup-base \
@@ -30,9 +30,9 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-uart-ppp \
 		trik-mems \
 		python3-pip \
-		python3-numpy \
-		python3-pyserial \
 "
+
+BAD_RECOMMENDATIONS += "rng-tools"
 
 IMAGE_LINGUAS = "en-us ru-ru"
 
@@ -43,6 +43,6 @@ inherit core-image
 IMAGE_ROOTFS_SIZE = "1280000"
 
 # remove not needed ipkg informations
-#ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
+ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
 
 

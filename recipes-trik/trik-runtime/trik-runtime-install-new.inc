@@ -1,4 +1,3 @@
-RDEPENDS_${PN} += "python3-numpy"
 do_install() {
         install -d ${D}/home/root/trik
         cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
