@@ -1,5 +1,6 @@
 do_install() {
         install -d ${D}/home/root/trik
+        install -m 0666 -t ${D}/home/root/trik/ ${S}/resources/lsan.supp
         cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
         install -d ${D}/home/root/trik/scripts
         install -d ${D}/home/root/trik/images
