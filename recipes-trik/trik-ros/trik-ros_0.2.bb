@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://package.xml;;beginline=16;endline=16;md5=87c9cb252374
 inherit catkin cmake_qt5
 
 DEPENDS = "trik-runtime-qt5 nodelet sensor-msgs geometry-msgs"
-SRC_URI = "git://github.com/trikset/${BPN};branch=master;tag=${PV}"
+SRC_URI = "git://github.com/trikset/${BPN};branch=master;protocol=https;tag=${PV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE_prepend = "-DQT=${STAGING_INCDIR}/qt5 -DTRIK=${STAGING_INCDIR}/trikRuntime "

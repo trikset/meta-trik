@@ -20,7 +20,7 @@ RDEPENDS_${PN} += "glibmm"
 #DEPENDS += "${PULSE_rhvoice}"
 #RDEPENDS_${PN} += "${PULSE_rhvoice}"
 
-SRC_URI = "git://github.com/iakov/RHVoice.git;branch=TRIKhotfix"
+SRC_URI = "git://github.com/iakov/RHVoice.git;protocol=https;branch=TRIKhotfix"
 #SRCREV = "master"
 SRCREV = "TRIKhotfix"
 

@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "trikboard"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 BRANCH = "trik-u-boot-2013.01.y"
 SRCREV = "${AUTOREV}"
-SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;branch=${BRANCH} \
+SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;protocol=https;branch=${BRANCH} \
                      file://reset_uboot.sh file://update_uboot.sh \
                      file://u-boot-gzip.ais \
                      "

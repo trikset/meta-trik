@@ -12,7 +12,7 @@ KERNEL_MODULE_AUTOLOAD += "jex_epwm"
 KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
-SRC_URI = "git://github.com/trikset/trik-linux.git;branch=trik-linux-3.6.7-release-2016-06-20;tag=${BPN}-${PV} \
+SRC_URI = "git://github.com/trikset/trik-linux.git;branch=trik-linux-3.6.7-release-2016-06-20;protocol=https;tag=${BPN}-${PV} \
 	   file://defconfig"
 
 S = "${WORKDIR}/git"

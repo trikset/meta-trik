@@ -11,7 +11,7 @@ DEPENDS += "virtual/libsdl2"
 #libsdl-mixer libsdl-image
 
 
-SRC_URI = "git://github.com/rlsosborne/doom;rev=master\
+SRC_URI = "git://github.com/rlsosborne/doom;protocol=https;rev=master\
             file://no_inline.patch\
             file://pixelformat_bgr565.patch\
             "

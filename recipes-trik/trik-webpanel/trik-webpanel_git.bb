@@ -8,7 +8,7 @@ SRCREV = "${AUTOREV}"
 PV="0-git${SRCPV}"
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/trikset/trik-webpanel.git;branch=master"
+SRC_URI = "git://github.com/trikset/trik-webpanel.git;protocol=https;branch=master"
 
 do_compile(){
 	bbnote "Empty do_compile task"

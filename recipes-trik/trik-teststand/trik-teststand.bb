@@ -8,7 +8,7 @@ inherit qmake5
 DEPENDS += "trik-runtime-qt5"
 #RREPLACES_${PN} += "trik-runtime"
 SRCREV="${AUTOREV}"
-SRC_URI = "git://github.com/trikset/${PN}.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/trikset/${PN}.git;protocol=https;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 EXTRA_QMAKEVARS_PRE = "CONFIG+=nosanitizers"
 

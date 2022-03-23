@@ -14,7 +14,7 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV = "${AUTOREV}"
 BRANCH = "trik-linux-3.6.y-release"
-SRC_URI = "git://github.com/trikset/trik-linux.git;branch=${BRANCH} \
+SRC_URI = "git://github.com/trikset/trik-linux.git;protocol=https;branch=${BRANCH} \
 	   file://defconfig"
 
 S = "${WORKDIR}/git"

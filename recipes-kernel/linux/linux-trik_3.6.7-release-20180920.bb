@@ -13,7 +13,7 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV="${AUTOREV}"
-SRC_URI = "git://github.com/trikset/trik-linux;protocol=https;branch=trik-linux-3.6.7-master \
+SRC_URI = "git://github.com/trikset/trik-linux;protocol=https;protocol=https;branch=trik-linux-3.6.7-master \
 	   file://defconfig \
            file://display_settings.sh \
            "

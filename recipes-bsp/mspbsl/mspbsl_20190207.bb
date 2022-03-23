@@ -10,7 +10,7 @@ S="${WORKDIR}/git"
 BRANCH="master"
 TAG="${PV}"
 
-SRC_URI ="git://github.com/trikset/trik-mspbsl-library.git;branch=${BRANCH};tag=${TAG}"
+SRC_URI ="git://github.com/trikset/trik-mspbsl-library.git;branch=${BRANCH};protocol=https;tag=${TAG}"
 
 LIC_FILES_CHKSUM="file://LICENSE.txt;beginline=1;endline=355;md5=fd140d36d9ffcb0548c8c21659083810"
 

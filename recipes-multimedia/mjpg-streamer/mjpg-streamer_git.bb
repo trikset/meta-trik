@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 BRANCH = "trik-master"
 SRCREV  = "${AUTOREV}"
-SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;branch=${BRANCH} \
+SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;protocol=https;branch=${BRANCH} \
 	   file://mjpg-streamer"
 PR = "r2"
 DEPENDS = "libv4l"

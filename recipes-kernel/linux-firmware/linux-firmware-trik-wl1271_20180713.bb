@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.ti-connectivity;md5=186e7a43cf6c274283ad81272
 RPROVIDES_${PN}="linux-firmware-wl12xx"
 RCONFLICTS_${PN}="linux-firmware-wl12xx"
 
-SRC_URI = "git://github.com/trikset/trik-firmware.git;tag=${PV}"
+SRC_URI = "git://github.com/trikset/trik-firmware.git;protocol=https;tag=${PV}"
 
 S = "${WORKDIR}/git"
 
