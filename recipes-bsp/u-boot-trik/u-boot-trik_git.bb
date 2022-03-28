@@ -40,6 +40,8 @@ do_install_append () {
 
 
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh
+  install -p -D -m 0644 -t ${D}/ ${WORKDIR}/u-boot.scr
+  ln -s u-boot.scr ${D}/u-boot.run
 }
 
 do_deploy_append() {
