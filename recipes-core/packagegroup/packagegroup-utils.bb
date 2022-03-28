@@ -37,7 +37,6 @@ RDEPENDS_${PN} = "\
   rp-pppoe \
   samba \
   winbind \
-  bash-completion \
   openvpn \
   can-utils \
   iproute2 \
