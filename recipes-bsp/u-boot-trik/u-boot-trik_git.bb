@@ -14,6 +14,7 @@ SRCREV = "${AUTOREV}"
 SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;protocol=https;branch=${BRANCH} \
                      file://reset_uboot.sh file://update_uboot.sh \
                      file://u-boot-gzip.ais \
+                     file://u-boot.scr \
                      "
 
 #UBOOT_LOCALVERSION = "-git${@d.getVar('SRCPV', True).partition('+')[2][0:7]}"
@@ -40,8 +41,8 @@ do_install_append () {
 
 
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh
-  install -p -D -m 0644 -t ${D}/ ${WORKDIR}/u-boot.scr
-  ln -s u-boot.scr ${D}/u-boot.run
+  install -p -D -m 0644 -t ${D}${P} ${WORKDIR}/u-boot.scr
+  ln -s ${P}/u-boot.scr ${D}/u-boot.run
 }
 
 do_deploy_append() {
