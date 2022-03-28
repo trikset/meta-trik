@@ -45,6 +45,7 @@ getty|login)
   exec_login
   ;;
 lidar|nothing)
+  echo 1 > /sys/class/gpio/gpio30/value
   exec_nothing
   ;;
 *)
