@@ -11,7 +11,8 @@ RDEPENDS_${PN} += " \
         lighttpd-module-rewrite \
         lighttpd-module-redirect \
         lighttpd-module-proxy \
-         lighttpd-module-expire \
+        lighttpd-module-expire \
+        lighttpd-module-compress \
 "
 
 SRC_URI_append = "file://wpa-configurator.sh \
