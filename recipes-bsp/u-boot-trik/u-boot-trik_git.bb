@@ -12,9 +12,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 BRANCH = "trik-u-boot-2013.01.y"
 SRCREV = "${AUTOREV}"
 # u-boot.inc does not set INC_PR variable, so pretend that it is "r0"
-PR = "r0.2"
+PR = "r0.3"
 SRC_URI_trikboard = "git://github.com/trikset/trik-u-boot.git;protocol=https;branch=${BRANCH} \
-                     file://reset_uboot.sh file://update_uboot.sh \
+                     file://update_uboot.sh \
                      file://u-boot-gzip.ais \
                      file://u-boot.cmd \
                      "
@@ -42,7 +42,7 @@ do_compile_append() {
 }
 
 do_install_append () {
-  install -p -D -t ${D}${P} ${WORKDIR}/reset_uboot.sh ${WORKDIR}/u-boot-gzip.ais
+  install -p -D -t ${D}${P} ${WORKDIR}/u-boot-gzip.ais
   install -p -D -m 0755 -t ${D}${datadir}/trik/init.d/ ${WORKDIR}/update_uboot.sh
   install -p -D -m 0644 -t ${D}${P} ${WORKDIR}/u-boot.scr
   ln -s ${P}/u-boot.scr ${D}/u-boot.run
@@ -52,4 +52,3 @@ do_deploy_append() {
 #  install -p -D -m 0644 -t ${DEPLOYDIR} ${UBOOT_MAKE_TARGET}
    install -p -D -m 0644 -t ${DEPLOYDIR} ${WORKDIR}/u-boot-gzip.ais
 }
-
