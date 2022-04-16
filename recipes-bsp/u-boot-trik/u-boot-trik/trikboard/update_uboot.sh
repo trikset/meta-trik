@@ -11,9 +11,15 @@ if cmp -s $IMAGE_ON_SD /tmp/u-boot.ais; then
   echo "U-Boot is OK"
 else
   echo "### FLASHING U-BOOT... "
-  flashcp -v $IMAGE_ON_SD /dev/mtd0
-  flash_erase /dev/mtd1 0 0
-  echo DONE
+  # According to changelog, some devices have 128K
+  # internal spi flash. Ignore them.
+  if grep -q 'mtd0: 00040000' /proc/mtd; then
+    flashcp -v $IMAGE_ON_SD /dev/mtd0
+    flash_erase /dev/mtd1 0 0
+    echo DONE
+  else
+    echo U-boot partition is too small, skip update
+  fi
 fi
 
 rm -f /tmp/u-boot.ais
