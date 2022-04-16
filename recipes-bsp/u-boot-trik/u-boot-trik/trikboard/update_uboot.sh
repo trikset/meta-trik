@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IMAGE_ON_SD=/usr/share/u-boot-trik/u-boot-gzip.ais
+IMAGE_ON_SD=$(readlink -f /boot/u-boot-gzip.ais)
 IMAGE_ON_SD_SIZE=$(stat -L -c '%s' $IMAGE_ON_SD)
 
 # Copy expected amount of bytes to RAM
