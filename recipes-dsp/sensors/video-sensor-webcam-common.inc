@@ -2,7 +2,7 @@ HOMEPAGE 	 = "http://trikset.com"
 LICENSE		 = "Apache-2.0"
 LIC_FILES_CHKSUM ="file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 RDEPENDS_${PN}   = "common-sensors"
-SENSOR_RELEASE_DATE = "180723"
+SENSOR_RELEASE_DATE = "220516"
 
 #PR="r1"
 
