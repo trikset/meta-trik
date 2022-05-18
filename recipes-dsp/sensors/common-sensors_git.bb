@@ -4,6 +4,8 @@ SUMMARY		 = "Init script  for ov7670 camera "
 PR="1"
 SRC_URI = "file://media-sensor file://init-ov7670-320x240.sh file://media-sensor-dummy"
 
+RDEPENDS_${PN} += "bash"
+
 do_install() {
 	install -d -m 0755 ${D}/etc/trik/
 	install -d -m 0755 ${D}/etc/init.d/
