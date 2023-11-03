@@ -7,6 +7,7 @@ RDEPENDS_${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mj
 
 inherit qmake5 pkgconfig
 DEPENDS += "qtmultimedia qtscript qtserialport"
+DEPENDS += "qtquick1 qtquickcontrols2 qtquickcontrols"
 #RREPLACES_${PN} += "trik-runtime"
 RCONFLICTS_${PN} += "trik-runtime-qt4"
 RPROVIDES_${PN} += "trik-runtime"
