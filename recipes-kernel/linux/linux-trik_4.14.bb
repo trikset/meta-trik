@@ -21,7 +21,6 @@ LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10df
 
 PACKAGES += "${PN}-data"
 FILES:${PN}-data = "${datadir} ${sysconfdir}"
-DEPENDS += "dtc"
 RDEPENDS:${PN} += "${PN}-data"
 
 RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
