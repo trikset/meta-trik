@@ -11,7 +11,7 @@ inherit packagegroup
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
   iptables \
   mtd-utils \
   evtest \
@@ -54,7 +54,7 @@ RDEPENDS_${PN} = "\
 "
 #  lshw
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
 

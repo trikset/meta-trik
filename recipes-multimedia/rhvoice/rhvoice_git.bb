@@ -10,15 +10,15 @@ inherit features_check
 REQUIRED_DISTRO_FEATURES="alsa pulseaudio"
 
 DEPENDS +=  "pulseaudio"
-RDEPENDS_${PN} += "libpulse-simple"
+RDEPENDS:${PN} += "libpulse-simple"
 
 DEPENDS +=  "glibmm"
-RDEPENDS_${PN} += "glibmm"
+RDEPENDS:${PN} += "glibmm"
 
 
 #PULSE_rhvoice = "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
 #DEPENDS += "${PULSE_rhvoice}"
-#RDEPENDS_${PN} += "${PULSE_rhvoice}"
+#RDEPENDS:${PN} += "${PULSE_rhvoice}"
 
 SRC_URI = "git://github.com/iakov/RHVoice.git;branch=TRIKhotfix"
 #SRCREV = "master"
@@ -28,7 +28,7 @@ PV = "0.5+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${sysconfdir}/RHVoice\
+FILES:${PN} += "${sysconfdir}/RHVoice\
                 ${datadir}/RHVoice/languages/English\
                 ${datadir}/RHVoice/languages/Russian\
                 ${datadir}/RHVoice/voices/aleksandr\

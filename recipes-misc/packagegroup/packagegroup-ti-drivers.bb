@@ -3,13 +3,13 @@ LICENSE="MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
 	linux-firmware-wl12xx \
 	rfkill \
 	cpufrequtils \
 	"
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
 	\
 	kernel-module-bluetooth \
 	kernel-module-hci-usb \

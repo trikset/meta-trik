@@ -5,15 +5,15 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=89aea4e17d99a7ca
 PV = "1.0"
 PR = "r1"
 
-RDEPENDS_${PN} += "base-files bash"
+RDEPENDS:${PN} += "base-files bash"
 
 SRC_URI="file://tty_ppp.sh \
 	 file://tty_login.sh \
          file://winclient.chat \
          file://autologin"
 
-FILES_${PN} += "${datadir}"
-RDEPENDS_${PN} += "bash"
+FILES:${PN} += "${datadir}"
+RDEPENDS:${PN} += "bash"
 
 do_install() {
 	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/autologin

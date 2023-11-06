@@ -4,15 +4,15 @@ IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 XZ_DICTIONARY_SIZE = "128"
 XZ_THREADS = "2"
 XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
-EXTRA_IMAGECMD_ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
+EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
 inherit image-mklibs
 
 DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
-IMAGE_TYPEDEP_img = "ext4"
-IMAGE_TYPEDEP_img.xz = "img"
+IMAGE_TYPEDEP:img = "ext4"
+IMAGE_TYPEDEP:img.xz = "img"
 
 du_image_img[depends] += 	"\
 			parted-native:do_populate_sysroot \
@@ -37,7 +37,7 @@ TRIKIMG_USER_PARTION_SIZE ?= "1024"
 TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ext4"
 TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.img"
 
-IMAGE_CMD_img () {
+IMAGE_CMD:img () {
  do_bootable_sdimg
 }
 

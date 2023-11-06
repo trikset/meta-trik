@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-do_install_append() {
+do_install:append() {
 	echo "tg:5:respawn:/etc/trik/trikGui.sh" >> ${D}${sysconfdir}/inittab
 	echo "strm:5:respawn:/etc/trik/current-mjpg-streamer" >> ${D}${sysconfdir}/inittab
 	echo "ms:5:respawn:/etc/trik/current-media-sensor" >> ${D}${sysconfdir}/inittab

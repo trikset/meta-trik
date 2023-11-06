@@ -1,3 +1,3 @@
-DEPENDS_remove += "qtdeclarative"
+DEPENDS:remove += "qtdeclarative"
 DEPENDS += "qtbase"
 # PACKAGECONFIG = "alsa"

@@ -5,7 +5,7 @@ LICENSE = "CLOSED"
 inherit module
 
 KERNEL_MODULE_AUTOLOAD += "syslink"
-RDEPENDS_${PN} += "cmem-mod"
+RDEPENDS:${PN} += "cmem-mod"
 SRC_URI = "file://syslink.ko"
 
 do_compile() {
