@@ -2,3 +2,6 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/trikset/meta-trik/badge)](https://www.codefactor.io/repository/github/trikset/meta-trik)
 # meta-trik
 Meta layer for trik platform
+
+# TODO
+1. Add trik-ros
