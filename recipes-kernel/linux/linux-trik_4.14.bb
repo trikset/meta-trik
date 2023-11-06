@@ -11,7 +11,7 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV="${AUTOREV}"
-SRC_URI = "git://github.com/IgnatSergeev/ti-linux-kernel.git;protocol=https;branch=trikset-ti-linux-4.14.y \
+SRC_URI = "git://github.com/trikset/ti-linux-kernel.git;protocol=https;branch=trikset-ti-linux-4.14.y \
 	   file://defconfig \
            file://display_settings.sh \
            "
