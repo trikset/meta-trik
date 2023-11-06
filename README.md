@@ -5,3 +5,5 @@ Meta layer for trik platform
 
 # TODO
 1. Add trik-ros
+2. image-mklibs
+3. image-prelink
