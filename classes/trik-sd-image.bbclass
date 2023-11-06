@@ -7,7 +7,7 @@ XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --
 EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
-inherit image-mklibs
+#TODO image optimistaion
 
 DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
