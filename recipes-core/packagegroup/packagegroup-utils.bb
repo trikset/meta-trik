@@ -42,7 +42,6 @@ RDEPENDS:${PN} = "\
   iproute2 \
   iftop \
   iotop \
-  dstat \
   fbgrab \
   fim \
   psmisc \
@@ -52,6 +51,7 @@ RDEPENDS:${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
   dbus-dev \
 "
+#TODO add dstat
 #  lshw
 
 RRECOMMENDS:${PN} = "\
