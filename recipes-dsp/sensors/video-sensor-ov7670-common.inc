@@ -12,8 +12,8 @@ TAG="${SENSOR_RELEASE_DATE}"
 SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;tag=${TAG};destsuffix=arm;name=arm "
 SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;tag=${TAG};destsuffix=dsp;name=dsp"
 SRCREV_FORMAT = "repo1_repo2"
-SRCREV_arm = "583ffae63670dbc0a692300bc86c43a863ef819e"
-SRCREV_dsp = "ad4eae8b6a9e2bec237be390942340c8e170cef0"
+SRCREV_arm = "180723"
+SRCREV_dsp = "180723"
 # ORLY????
 RDEPENDS:${PN} += "libv4l"
 
