@@ -14,6 +14,7 @@ SRCREV="${AUTOREV}"
 SRC_URI = "git://github.com/trikset/ti-linux-kernel.git;protocol=https;branch=trikset-ti-linux-4.14.y \
 	   file://defconfig \
            file://display_settings.sh \
+           file://scripts/dtc/update-dtc-source.sh \
            "
 
 S = "${WORKDIR}/git"
