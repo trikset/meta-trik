@@ -14,8 +14,8 @@ SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;rev=159fee9f664c
 # ORLY????
 RDEPENDS:${PN} += "libv4l"
 
-S_DSP_trikboard ="${WORKDIR}/dsp"
-S_ARM_trikboard ="${WORKDIR}/arm"
+S_DSP ="${WORKDIR}/dsp"
+S_ARM ="${WORKDIR}/arm"
 do_compile() {
 	:
 }
