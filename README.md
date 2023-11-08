@@ -7,3 +7,4 @@ Meta layer for trik platform
 1. Add trik-ros
 2. image-mklibs
 3. image-prelink
+4. Remove ti wifi utils(meta ti)
