@@ -8,8 +8,8 @@ SENSOR_RELEASE_DATE = "180723"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
-SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;branch=master;tag=${TAG};destsuffix=arm "
-SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;branch=master;tag=${TAG};destsuffix=dsp"
+SRC_URI ="git://github.com/trikset/trik-media-sensors-arm.git;rev=17b549e0dc745d9786b287411060237630f23fd6;destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;rev=159fee9f664cb405c65aff495893a35dbefacbe1;destsuffix=dsp"
 
 # ORLY????
 RDEPENDS:${PN}:append = " libv4l "
