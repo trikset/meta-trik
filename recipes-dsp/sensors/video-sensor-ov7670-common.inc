@@ -9,6 +9,7 @@ SENSOR_RELEASE_DATE = "180723"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
+SRCREV = "${AUTOREV}"
 SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;branch=master;tag=${TAG};destsuffix=arm "
 SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;branch=master;tag=${TAG};destsuffix=dsp"
 
