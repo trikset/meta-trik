@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "trikboard"
 BRANCH = "trik-u-boot-2021.10"
 SRCREV = "${AUTOREV}"
 
-#FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "git://github.com/iakov/trik-u-boot.git;branch=${BRANCH}"
 

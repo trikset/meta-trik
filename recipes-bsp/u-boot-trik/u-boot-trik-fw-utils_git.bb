@@ -3,7 +3,7 @@ require u-boot-trik-common_${PV}.inc
 SUMMARY = "U-Boot bootloader fw_printenv/setenv utilities"
 DEPENDS += "mtd-utils"
 
-SRC_URI_trikboard += "file://fw_env.config"
+SRC_URI += "file://fw_env.config"
 
 INSANE_SKIP:${PN} = "already-stripped"
 EXTRA_OEMAKE:class-target = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${CC} ${CFLAGS} ${LDFLAGS}" HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}" V=1'
