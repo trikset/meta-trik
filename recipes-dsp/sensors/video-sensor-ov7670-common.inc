@@ -9,11 +9,8 @@ SENSOR_RELEASE_DATE = "180723"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
-SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;branch=master;destsuffix=arm "
-SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;branch=master;destsuffix=dsp"
-SRCREV_FORMAT = "repo1_repo2"
-SRCREV_arm = "583ffae63670dbc0a692300bc86c43a863ef819e"
-SRCREV_dsp = "ad4eae8b6a9e2bec237be390942340c8e170cef0"
+SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;rev=17b549e0dc745d9786b287411060237630f23fd6;destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;rev=159fee9f664cb405c65aff495893a35dbefacbe1;destsuffix=dsp"
 # ORLY????
 RDEPENDS:${PN} += "libv4l"
 
