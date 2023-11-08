@@ -17,7 +17,6 @@ RDEPENDS:${PN} += "libv4l"
 S_DSP ="${WORKDIR}/dsp"
 S_ARM ="${WORKDIR}/arm"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
 do_compile() {
 	:
 }
@@ -39,4 +38,4 @@ do_install() {
 #INHIBIT_PACKAGE_STRIP = "1"
 #INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INSANE_SKIP:${PN}_trikboard = "ldflags arch"
+INSANE_SKIP:${PN} = "ldflags arch"
