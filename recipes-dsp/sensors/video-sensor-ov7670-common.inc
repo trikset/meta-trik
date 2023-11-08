@@ -16,6 +16,8 @@ RDEPENDS:${PN} += "libv4l"
 
 S_DSP ="${WORKDIR}/dsp"
 S_ARM ="${WORKDIR}/arm"
+
+TARGET_CC_ARCH += "${LDFLAGS}"
 do_compile() {
 	:
 }
