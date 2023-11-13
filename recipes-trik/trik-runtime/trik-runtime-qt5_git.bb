@@ -14,7 +14,7 @@ DEPENDS += "rsync-native python3"
 #OE_QMAKE_CXXFLAGS:append += " -fno-lto"
 
 #We need to switch precompiled headers off until this issue is fixed in trik-runtime sources
-EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch CONFIG+=sanitize_address CONFIG+=sanitize_undefined DEFINES+=PY_MINOR_VERSION=10"
+EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch CONFIG+=sanitize_address CONFIG+=sanitize_undefined"
 
 # For script gathering logs information
 RDEPENDS:${PN} += "bash xz"
