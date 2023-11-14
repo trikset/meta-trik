@@ -13,7 +13,7 @@ RPROVIDES:${PN} += "trik-runtime"
 TAG ?= "${PV}-${TRIK_RUNTIME_UPDATE}"
 #GIT_REVISION ?= "tag=${TAG};nobranch=1"
 SRCREV = "${AUTOREV}"
-SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
+SRC_URI = "gitsm://github.com/IgnatSergeev/trikRuntime.git;protocol=https;branch=kirkstone \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
