@@ -2,6 +2,7 @@ SECTION = "Kernel"
 KERNEL_VERSION ="4.14"
 DESCRIPTION = "Linux Kernel ${KERNEL_VERSION} for TRIK"
 LICENSE = "GPLv2"
+KERNEL_IMAGETYPE = "zImage"
 
 inherit kernel
 
