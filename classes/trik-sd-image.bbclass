@@ -7,7 +7,7 @@ XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --
 EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
-#TODO image-mklibs
+inherit image-mklibs
 
 DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4 ext4.xz img img.xz"
@@ -27,7 +27,7 @@ IMAGE_FSTYPES = "img.xz img"
 
 EXCLUDE_FROM_WORLD = "1"
 
-#TODO inherit image-prelink
+inherit image-prelink
 
 IMGDEPLOYDIR ??= "${DEPLOY_DIR_IMAGE}"
 TRIKIMG_USER_PARTION = "${IMGDEPLOYDIR}/${IMAGE_NAME}.user-part.vfat"
