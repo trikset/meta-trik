@@ -144,12 +144,12 @@ python () {
         bb.build.addtask('do_linkerpaths', 'do_configure', 'do_patch', d)
 }
 
-do_configure_prepend () {
+do_configure[prepend] () {
         # Disable documentation!
         echo "all:" > ${S}/doc/Makefile.am
 }
 
-do_install_append () {
+do_install[append] () {
 	install -d ${D}${sysconfdir}/cron.daily ${D}${sysconfdir}/default ${D}${sysconfdir}/rpm
 	install -m 0644 ${WORKDIR}/prelink.conf ${D}${sysconfdir}/prelink.conf
 	install -m 0644 ${WORKDIR}/prelink.cron.daily ${D}${sysconfdir}/cron.daily/prelink
