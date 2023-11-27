@@ -40,7 +40,7 @@ UPSTREAM_CHECK_COMMITS = "1"
 COMPATIBLE_HOST_libc-musl = 'null'
 
 TARGET_OS_ORIG := "${TARGET_OS}"
-OVERRIDES_append = ":${TARGET_OS_ORIG}"
+OVERRIDES:append = ":${TARGET_OS_ORIG}"
 
 S = "${WORKDIR}/git"
 
