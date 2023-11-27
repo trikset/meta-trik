@@ -23,7 +23,7 @@ PACKAGES += "${PN}-data"
 FILES:${PN}-data = "${datadir} ${sysconfdir}"
 RDEPENDS:${PN} += "${PN}-data mkimage"
 
-RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
+RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree mkimage"
 
 do_install:append(){
     install -p -D -m 0755 -t ${D}${sysconfdir}/trik/ ${WORKDIR}/display_settings.sh
