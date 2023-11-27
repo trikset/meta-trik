@@ -3,8 +3,7 @@ require conf/machine/include/arm/armv5/tune-arm926ejs.inc
 # Increase this everytime you change something in the kernel
 MACHINE_KERNEL_PR = "r54"
 
-KERNEL_IMAGETYPE = "fitImage"
-KERNEL_CLASSES = "kernel-fitimage"
+KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
