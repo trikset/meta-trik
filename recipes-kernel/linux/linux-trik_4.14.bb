@@ -2,7 +2,7 @@ SECTION = "Kernel"
 KERNEL_VERSION ="4.14"
 DESCRIPTION = "Linux Kernel ${KERNEL_VERSION} for TRIK"
 LICENSE = "GPLv2"
-KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPE = "uImage"
 
 inherit kernel
 
@@ -21,9 +21,9 @@ LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10df
 
 PACKAGES += "${PN}-data"
 FILES:${PN}-data = "${datadir} ${sysconfdir}"
-RDEPENDS:${PN} += "${PN}-data"
+RDEPENDS:${PN} += "${PN}-data u-boot-mkimage"
 
-RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
+RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree u-boot-mkimage"
 
 do_install:append(){
     install -p -D -m 0755 -t ${D}${sysconfdir}/trik/ ${WORKDIR}/display_settings.sh
