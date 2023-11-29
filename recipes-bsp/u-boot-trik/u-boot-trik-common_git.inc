@@ -1,5 +1,5 @@
 HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
-#SECTION = "bootloaders"
+SECTION = "bootloaders"
 DEPENDS += "flex-native bison-native"
 
 LICENSE = "GPLv2+"
