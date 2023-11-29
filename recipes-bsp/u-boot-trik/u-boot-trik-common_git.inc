@@ -1,5 +1,5 @@
 HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
-SECTION = "bootloaders"
+#SECTION = "bootloaders"
 DEPENDS += "flex-native bison-native"
 
 LICENSE = "GPLv2+"
@@ -15,6 +15,5 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "git://github.com/iakov/trik-u-boot.git;branch=${BRANCH}"
 
-S = "${WORKDIR}/git"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
