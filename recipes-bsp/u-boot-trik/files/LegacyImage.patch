@@ -1,0 +1,18 @@
+Subject: [PATCH] Checking boot files
+---
+Index: include/configs/trikboard.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/include/configs/trikboard.h b/include/configs/trikboard.h
+--- a/include/configs/trikboard.h	(revision 77a871dd899a7a124829091e9ae99e8780dbafc8)
++++ b/include/configs/trikboard.h	(date 1701369762324)
+@@ -143,6 +143,7 @@
+ /*
+  * U-Boot general configuration
+  */
++#define CONFIG_LEGACY_IMAGE_FORMAT /* Allow run legacy boot script formats */
+ #define CONFIG_BOOTFILE		"uImage" /* Boot file name */
+ #define CONFIG_SYS_CBSIZE	1024 /* Console I/O Buffer Size	*/
+ #define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE /* Boot Args Buffer Size */
