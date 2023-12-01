@@ -1,0 +1,28 @@
+Subject: [PATCH] BootDir
+---
+Index: include/configs/trikboard.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/include/configs/trikboard.h b/include/configs/trikboard.h
+--- a/include/configs/trikboard.h	(revision 77a871dd899a7a124829091e9ae99e8780dbafc8)
++++ b/include/configs/trikboard.h	(date 1701431504078)
+@@ -171,14 +171,14 @@
+ 	DEFAULT_MMC_TI_ARGS \
+ 	"boot=mmc\0" \
+ 	"bootpart=0:1\0" \
+-	"bootdir=/boot\0" \
+-	"bootfile=zImage\0" \
++	"bootdir=/\0" \
++	"bootfile=uImage\0" \
+ 	"fdtfile=trikboard.dtb\0" \
+ 	"boot_fdt=try\0" \
+ 	"boot_fit=0\0" \
+ 	"console=ttyS1,115200n8\0" \
+ 	"hwconfig=dsp:wake=yes\0" \
+-	"rootdev=/dev/mmcblk0p1\0" \
++	"rootdev=/dev/mmcblk0p2\0" \
+ 	"optargs=mem=128M@0xC0000000 mem=64M@0xCC000000 noinitrd vt.global_cursor_default=0 consoleblank=0\0" \
+ 	"trik_uboot_version=20180422"
+ 
