@@ -45,7 +45,7 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 MBR_SIZE ?= "4K"
 BLOCK_SIZE ?= "1024"
-ALIGNMENT ?= "1M"
+ALIGNMENT ?= "4K"
 
 
 file_size() {
