@@ -2,7 +2,7 @@ SECTION = "Kernel"
 KERNEL_VERSION ="4.14"
 DESCRIPTION = "Linux Kernel ${KERNEL_VERSION} for TRIK"
 LICENSE = "GPLv2"
-KERNEL_IMAGETYPE = "uImage"
+KERNEL_IMAGETYPE = "zImage"
 
 inherit kernel
 
@@ -21,7 +21,7 @@ LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10df
 
 PACKAGES += "${PN}-data"
 FILES:${PN}-data = "${datadir} ${sysconfdir}"
-DEPENDS += "u-boot-mkimage-native"
+#DEPENDS += "u-boot-mkimage-native"
 RDEPENDS:${PN} += "${PN}-data"
 
 RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
