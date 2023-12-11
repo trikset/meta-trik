@@ -10,18 +10,9 @@ inherit image_types logging user-partion
 #TODO image-mklibs
 
 DEPENDS += "u-boot-trik"
-IMAGE_TYPES += "ext4 ext4.xz img img.xz"
-IMAGE_TYPEDEP:img = "ext4"
-IMAGE_TYPEDEP:img.xz = "img"
+IMAGE_TYPES += "ext4 img"
 
-du_image_img[depends] += 	"\
-			parted-native:do_populate_sysroot \
-			e2fsprogs-native:do_populate_sysroot  \
-			dosfstools-native:do_populate_sysroot  \
-			mtools-native:do_populate_sysroot  \
-			"
-
-IMAGE_FSTYPES = "img.xz img"
+IMAGE_FSTYPES = "img"
 
 #IMAGE_TYPES_MASKED = "img"
 
