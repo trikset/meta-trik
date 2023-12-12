@@ -88,7 +88,7 @@ do_bootable_sdimg(){
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-$((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
+8,,83
 EOD
 
 }
