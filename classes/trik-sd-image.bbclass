@@ -44,7 +44,7 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 #}
 
 MBR_SIZE ?= "4K"
-BLOCK_SIZE ?= "1024"
+BLOCK_SIZE ?= "4096"
 ALIGNMENT ?= "1M"
 
 
@@ -88,7 +88,7 @@ do_bootable_sdimg(){
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-$((${AIS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
+8,,83
 EOD
 
 }
