@@ -3,8 +3,7 @@ require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 
 DEPENDS += "bc-native dtc-native"
 
-SRC_URI += "file://update_uboot.sh \
-            "
+SRC_URI += "file://update_uboot.sh"
 
 P="${datadir}/${PN}"
 FILES:${PN} += "${datadir}/trik"
