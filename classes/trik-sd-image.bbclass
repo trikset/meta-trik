@@ -135,20 +135,25 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     subprocess.call(["debugfs", "-w", outFile, "-f", script.name])
     script.unlink(script.name)
 
-IMAGE_CMD:img () {
+create_img() {
  rm -f ${TRIKIMG_FILE}
  cp ${TRIKIMG_ROOTFS} ${TRIKIMG_FILE}
- do_bootable_sdimg
 }
 
-python do_bootable_sdimg() {
+python IMAGE_CMD:img () {
+ bb.build.exec_func("create_img", d)
+ bb.build.exec_func("insert_uboot", d)
+}
+
+ERROR_QA:remove = "version-going-backwards"
+
+python insert_uboot() {
     import os
 
     insert_file_ext4("${TRIKIMG_FILE}", "${DEPLOY_DIR_IMAGE}/u-boot.ais", os.stat("${DEPLOY_DIR_IMAGE}/u-boot.ais").file_stats.st_size * 1024, 4)
 }
 
-do_bootable_sdimg[depends] += "util-linux-native:do_populate_sysroot \
+IMAGE_CMD:img[depends] += "util-linux-native:do_populate_sysroot \
                                coreutils-native:do_populate_sysroot \
                                u-boot-trik:do_deploy \
                                ${PN}:do_image_ext4"
-addtask bootable_sdimg after do_image_ext4
