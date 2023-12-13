@@ -7,26 +7,39 @@ XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --
 EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
-#TODO image-mklibs
+# inherit image-mklibs
 
 DEPENDS += "u-boot-trik"
-IMAGE_TYPES += "ext4"
+IMAGE_TYPES += "ext4 ext4.xz img img.xz"
+IMAGE_TYPEDEP:img = "ext4"
+IMAGE_TYPEDEP:img.xz = "img"
 
-IMAGE_FSTYPES = "ext4"
+du_image_img[depends] += 	"\
+			parted-native:do_populate_sysroot \
+			e2fsprogs-native:do_populate_sysroot  \
+			dosfstools-native:do_populate_sysroot  \
+			mtools-native:do_populate_sysroot  \
+			"
+
+IMAGE_FSTYPES = "img.xz img"
 
 #IMAGE_TYPES_MASKED = "img"
 
 EXCLUDE_FROM_WORLD = "1"
 
-#TODO inherit image-prelink
+#inherit image-prelink
 
 IMGDEPLOYDIR ??= "${DEPLOY_DIR_IMAGE}"
 TRIKIMG_USER_PARTION = "${IMGDEPLOYDIR}/${IMAGE_NAME}.user-part.vfat"
 TRIKIMG_USER_PARTION_LABEL ?= "TRIKUSER"
 TRIKIMG_USER_PARTION_SIZE ?= "1024"
 
-TRIKIMG_ROOTFS ?=  "${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ext4"
-TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.img"
+TRIKIMG_ROOTFS =  "${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ext4"
+TRIKIMG_FILE ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.img"
+
+IMAGE_CMD:img () {
+ do_bootable_sdimg
+}
 
 # temporary add timestamp into conffs
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
@@ -36,127 +49,59 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 #	truncate "-s >${TRIKIMG_USER_PARTION_SIZE}K" ${TRIKIMG_USER_PARTION}
 #	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR}/image-version-info
 #	mkdosfs -F 32 -n ${TRIKIMG_USER_PARTION_LABEL} -d ${WORKDIR}/${TRIK_USER_PARTION_CREATION_DIR} ${TRIKIMG_USER_PARTION}
-# }
+#}
 
 MBR_SIZE ?= "4K"
 BLOCK_SIZE ?= "4096"
-ALIGNMENT ?= "4"
-DIRECT_BLOCKS ?= "12"
-SECTOR_SIZE ?= "512"
-BLOCKS_PER_INDIRECT_BLOCK = "1024"
-# ${BLOCK_SIZE} / 4
+ALIGNMENT ?= "4K"
 
-def write_indirect_block(d, device, indirect_block, blocks):
-    import sys
-    import tempfile
-    import struct
-    import subprocess
 
-    block_size = int(d.getVar("BLOCK_SIZE"))
-    blocks_per_indirect_block = int(d.getVar("BLOCKS_PER_INDIRECT_BLOCK"))
-
-    print("writing indirect block ", indirect_block)
-    dev = open(device, "wb")
-    dev.seek(indirect_block * block_size)
-    for block in blocks:
-        bin_block = struct.pack("<I", int(block))
-        dev.write(bin_block)
-    zero = struct.pack("<I", 0)
-    for x in range(len(blocks), blocks_per_indirect_block):
-        dev.write(zero)
-    dev.close()
-
-def insert_file_ext4(d, outFile, inFile, sizeKb, offsetKb):
-    import sys
-    import tempfile
-    import struct
-    import subprocess
-
-    block_size = int(d.getVar("BLOCK_SIZE"))
-    direct_blocks = int(d.getVar("DIRECT_BLOCKS"))
-    sector_size = int(d.getVar("SECTOR_SIZE"))
-    blocks_per_indirect_block = int(d.getVar("BLOCKS_PER_INDIRECT_BLOCK"))
-
-    size = int(sizeKb) * 1024 # Size in bytes
-    offset = int(offsetKb) * 1024 # Offset from the start of the outFile in bytes
-
-    if size > 0xFFFFFFFF:
-        print("Unable to allocate files over 4GB.")
-        return
-
-    ind_blocks = (size_blocks - direct_blocks) / blocks_per_indirect_block
-    if (size_blocks - direct_blocks) % blocks_per_indirect_block != 0:
-        ind_blocks += 1
-    has_dind_block = ind_blocks > 1
-    total_blocks = size_blocks + ind_blocks
-    if has_dind_block:
-        total_blocks += 1
-
-    offset_block = offset / block_size
-    print("Finding ", total_blocks, " free blocks from block ", offset_block)
-    process = subprocess.Popen(["debugfs", outFile, "-R", "ffb %d %d" % (total_blocks, offset_block)], stdout=subprocess.PIPE)
-    output = process.stdout
-    blocks = output.readline().split(" ")[3:]
-    output.close()
-    blocks = filter(lambda x: len(x.strip(" \n")) > 0, blocks)
-    if len(blocks) != total_blocks:
-        print("Not enough free blocks found for the inFile.")
-        return
-
-    if ind_blocks > 0:
-        write_indirect_block(d, outFile, int(blocks[direct_blocks]), blocks[direct_blocks + 1 : direct_blocks + 1 + blocks_per_indirect_block])
-
-    if has_dind_block:
-        dind_block_index = direct_blocks + 1 + blocks_per_indirect_block
-        dind_block = blocks[dind_block_index]
-        ind_block_indices = [dind_block_index+1+(i*(blocks_per_indirect_block+1)) for i in range(ind_blocks-1)]
-        write_indirect_block(d, outFile, int(dind_block), [blocks[i] for i in ind_block_indices])
-        for i in ind_block_indices:
-            write_indirect_block(d, outFile, int(blocks[i]), blocks[i+1:i+1+blocks_per_indirect_block])
-
-    script = tempfile.NamedTemporaryFile(mode = "w", delete = False)
-    for block in blocks:
-        script.write("setb %s\n" % (block,))
-
-    for i in range(direct_blocks):
-        script.write("sif %s block[%d] %s\n" % (inFile, i, blocks[i]))
-
-    if size_blocks > direct_blocks:
-        script.write("sif %s block[IND] %s\n" % (inFile, blocks[direct_blocks]))
-
-    if has_dind_block:
-        script.write("sif %s block[DIND] %s\n" % (inFile, dind_block))
-
-    script.write("sif %s size %d\n" % (inFile, size))
-    script.close()
-
-    print("Modifying file")
-    subprocess.call(["debugfs", "-w", outFile, "-f", script.name])
-    script.unlink(script.name)
-
-create_img() {
- rm -f ${TRIKIMG_FILE}
- cp ${TRIKIMG_ROOTFS} ${TRIKIMG_FILE}
+file_size() {
+ du --summarize  --dereference-args  --apparent-size --block-size=${BLOCK_SIZE} "$1" | cut -f 1
 }
 
-mark_part() {
- sfdisk  ${TRIKIMG_FILE} << EOD
+align() {
+ truncate -s %${ALIGNMENT} "$1"
+}
+
+reserve() {
+truncate -s "+$1K" ${TRIKIMG_FILE}
+align ${TRIKIMG_FILE}
+file_size ${TRIKIMG_FILE}
+}
+
+reserve_for() {
+   local size
+   size=$(file_size "$1")
+   reserve $size
+}
+
+insert_at() {
+bbnote "Inserting $2 at $1"
+dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=none
+}
+
+
+
+do_bootable_sdimg(){
+	local UBOOT_AIS="${DEPLOY_DIR_IMAGE}/u-boot.ais"
+        local IMAGE="${TRIKIMG_FILE}"
+	rm -f ${IMAGE}
+	truncate -s ${MBR_SIZE} ${IMAGE}
+	AIS_OFFSET=$(file_size ${IMAGE})
+	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
+	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
+	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
+
+	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-8,,83
+$((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
 EOD
-}
-# Так(Все ок кроме факта лежит ли оно в 8 секторе), заменив начало раздела, попробовать убрать добавление u-boot(возможно уже есть в создании ext4), с добавление mbr, с mbr и другим началом раздела
-python do_bootable_sdimg() {
- bb.build.exec_func("create_img", d)
- bb.build.exec_func("insert_uboot", d)
- bb.build.exec_func("mark_part", d)
+
 }
 
-python insert_uboot() {
-    import os
-
-    insert_file_ext4(d, d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").st_size * 1024, 4)
-}
-
-addtask bootable_sdimg after do_image_ext4 u-boot-trik:do_deploy coreutils-native:do_populate_sysroot util-linux-native:do_populate_sysroot before do_build
+do_bootable_sdimg[depends] += "util-linux-native:do_populate_sysroot \
+                               coreutils-native:do_populate_sysroot \
+                               u-boot-trik:do_deploy \
+                               ${PN}:do_image_ext4"
