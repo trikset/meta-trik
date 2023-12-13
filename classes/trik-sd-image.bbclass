@@ -12,7 +12,7 @@ inherit image_types logging user-partion
 DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4"
 
-
+IMAGE_FSTYPES = "ext4"
 
 #IMAGE_TYPES_MASKED = "img"
 
@@ -156,3 +156,5 @@ do_bootable_sdimg[depends] += "util-linux-native:do_populate_sysroot \
                                coreutils-native:do_populate_sysroot \
                                u-boot-trik:do_deploy \
                                ${PN}:do_image_ext4"
+
+addtask bootable_sdimg
