@@ -144,8 +144,6 @@ python do_bootable_sdimg() {
  bb.build.exec_func("insert_uboot", d)
 }
 
-ERROR_QA:remove = "version-going-backwards"
-
 python insert_uboot() {
     import os
 
