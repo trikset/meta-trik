@@ -85,7 +85,7 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
 
     if size > 0xFFFFFFFF:
         # Supporting this requires two things: triple indirect block support, and proper handling of size_high when changing the inode
-        print "Unable to allocate files over 4GB."
+        print("Unable to allocate files over 4GB.")
         return
 
     # Because size is specified in MB, it should always be exactly divisable by BLOCK_SIZE.
@@ -102,7 +102,7 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
 
     # Find free blocks we can use at the offset
     offset_block = offset / block_size
-    print "Finding ", total_blocks, " free blocks from block ", offset_block
+    print("Finding ", total_blocks, " free blocks from block ", offset_block)
     process = subprocess.Popen(["debugfs", outFile, "-R", "ffb %d %d" % (total_blocks, offset_block)], stdout=subprocess.PIPE)
     output = process.stdout
     # The first three entries after splitting are "Free", "blocks", "found:", so we skip those.
@@ -111,7 +111,7 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     # The last entry may contain a line-break. Removing it this way to be safe.
     blocks = filter(lambda x: len(x.strip(" \n")) > 0, blocks)
     if len(blocks) != total_blocks:
-        print "Not enough free blocks found for the inFile."
+        print("Not enough free blocks found for the inFile.")
         return
 
     # The direct blocks in the inode are blocks 0-11
@@ -155,7 +155,7 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     script.close()
 
     # execute the script
-    print "Modifying file"
+    print("Modifying file")
     subprocess.call(["debugfs", "-w", outFile, "-f", script.name])
     script.unlink(script.name)
 
