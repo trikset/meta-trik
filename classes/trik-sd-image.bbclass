@@ -48,8 +48,8 @@ BLOCK_SIZE ?= "4096"
 ALIGNMENT ?= "4"
 DIRECT_BLOCKS ?= "12"
 SECTOR_SIZE ?= "512"
-BLOCKS_PER_INDIRECT_BLOCK = "1024" #${BLOCK_SIZE} / 4
-
+BLOCKS_PER_INDIRECT_BLOCK = "1024"
+# ${BLOCK_SIZE} / 4
 def write_indirect_block(device, indirect_block, blocks):
     import sys
     import tempfile
