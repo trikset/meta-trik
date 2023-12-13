@@ -65,7 +65,7 @@ align() {
 }
 
 reserve() {
-truncate -s "+$1K" ${TRIKIMG_FILE}
+truncate -o ${BLOCK_SIZE} -s "$1" ${TRIKIMG_FILE}
 align ${TRIKIMG_FILE}
 file_size ${TRIKIMG_FILE}
 }
