@@ -46,7 +46,7 @@ SECTOR_SIZE ?= "512"
 BLOCKS_PER_INDIRECT_BLOCK = "1024"
 # ${BLOCK_SIZE} / 4
 
-def write_indirect_block(device, indirect_block, blocks):
+def write_indirect_block(d, device, indirect_block, blocks):
     import sys
     import tempfile
     import struct
@@ -66,7 +66,7 @@ def write_indirect_block(device, indirect_block, blocks):
         dev.write(zero)
     dev.close()
 
-def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
+def insert_file_ext4(d, outFile, inFile, sizeKb, offsetKb):
     import sys
     import tempfile
     import struct
@@ -104,15 +104,15 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
         return
 
     if ind_blocks > 0:
-        write_indirect_block(outFile, int(blocks[direct_blocks]), blocks[direct_blocks + 1 : direct_blocks + 1 + blocks_per_indirect_block])
+        write_indirect_block(d, outFile, int(blocks[direct_blocks]), blocks[direct_blocks + 1 : direct_blocks + 1 + blocks_per_indirect_block])
 
     if has_dind_block:
         dind_block_index = direct_blocks + 1 + blocks_per_indirect_block
         dind_block = blocks[dind_block_index]
         ind_block_indices = [dind_block_index+1+(i*(blocks_per_indirect_block+1)) for i in range(ind_blocks-1)]
-        write_indirect_block(outFile, int(dind_block), [blocks[i] for i in ind_block_indices])
+        write_indirect_block(d, outFile, int(dind_block), [blocks[i] for i in ind_block_indices])
         for i in ind_block_indices:
-            write_indirect_block(outFile, int(blocks[i]), blocks[i+1:i+1+blocks_per_indirect_block])
+            write_indirect_block(d, outFile, int(blocks[i]), blocks[i+1:i+1+blocks_per_indirect_block])
 
     script = tempfile.NamedTemporaryFile(mode = "w", delete = False)
     for block in blocks:
@@ -147,7 +147,7 @@ python do_bootable_sdimg() {
 python insert_uboot() {
     import os
 
-    insert_file_ext4(d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").st_size * 1024, 4)
+    insert_file_ext4(d, d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").st_size * 1024, 4)
 }
 
 addtask bootable_sdimg after do_image_ext4 u-boot-trik:do_deploy coreutils-native:do_populate_sysroot util-linux-native:do_populate_sysroot before do_build
