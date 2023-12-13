@@ -77,8 +77,8 @@ def insert_file_ext4(d, outFile, inFile, sizeKb, offsetKb):
     sector_size = int(d.getVar("SECTOR_SIZE"))
     blocks_per_indirect_block = int(d.getVar("BLOCKS_PER_INDIRECT_BLOCK"))
 
-    size = int(size) * 1024 # Size in bytes
-    offset = int(offset) * 1024 # Offset from the start of the outFile in bytes
+    size = int(sizeKb) * 1024 # Size in bytes
+    offset = int(offsetKb) * 1024 # Offset from the start of the outFile in bytes
 
     if size > 0xFFFFFFFF:
         print("Unable to allocate files over 4GB.")
