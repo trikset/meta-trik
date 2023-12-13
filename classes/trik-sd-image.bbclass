@@ -10,8 +10,7 @@ inherit image_types logging user-partion
 #TODO image-mklibs
 
 DEPENDS += "u-boot-trik"
-IMAGE_TYPES += "ext4 img"
-IMAGE_TYPEDEP:img = "ext4"
+IMAGE_TYPES += "ext4"
 
 IMAGE_FSTYPES = "img"
 
@@ -140,7 +139,7 @@ create_img() {
  cp ${TRIKIMG_ROOTFS} ${TRIKIMG_FILE}
 }
 
-python IMAGE_CMD:img () {
+python do_bootable_sdimg() {
  bb.build.exec_func("create_img", d)
  bb.build.exec_func("insert_uboot", d)
 }
@@ -153,7 +152,7 @@ python insert_uboot() {
     insert_file_ext4("${TRIKIMG_FILE}", "${DEPLOY_DIR_IMAGE}/u-boot.ais", os.stat("${DEPLOY_DIR_IMAGE}/u-boot.ais").file_stats.st_size * 1024, 4)
 }
 
-IMAGE_CMD:img[depends] += "util-linux-native:do_populate_sysroot \
+do_bootable_sdimg[depends] += "util-linux-native:do_populate_sysroot \
                                coreutils-native:do_populate_sysroot \
                                u-boot-trik:do_deploy \
                                ${PN}:do_image_ext4"
