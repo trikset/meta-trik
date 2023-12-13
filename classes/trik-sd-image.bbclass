@@ -56,7 +56,7 @@ def write_indirect_block(device, indirect_block, blocks):
     block_size = int(d.getVarFlag("BLOCK_SIZE"))
     blocks_per_indirect_block = int(d.getVarFlag("BLOCKS_PER_INDIRECT_BLOCK"))
 
-    print "writing indirect block ", indirect_block
+    print("writing indirect block ", indirect_block)
     dev = open(device, "wb")
     dev.seek(indirect_block * block_size)
     # Write blocks
