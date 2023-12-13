@@ -149,7 +149,7 @@ ERROR_QA:remove = "version-going-backwards"
 python insert_uboot() {
     import os
 
-    insert_file_ext4(d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").file_stats.st_size * 1024, 4)
+    insert_file_ext4(d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").st_size * 1024, 4)
 }
 
 addtask bootable_sdimg after do_image_ext4 u-boot-trik:do_deploy coreutils-native:do_populate_sysroot util-linux-native:do_populate_sysroot before do_build
