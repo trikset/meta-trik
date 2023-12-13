@@ -93,7 +93,6 @@ do_bootable_sdimg(){
 
 	bbnote("AIS_OFFSET: ${AIS_OFFSET}")
 	bbnote("ROOTFS_OFFSET: ${ROOTFS_OFFSET}")
-    bbnote("FIRST_SECTOR: $((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512))")
 
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
