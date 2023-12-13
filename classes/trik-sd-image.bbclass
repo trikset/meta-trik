@@ -50,27 +50,26 @@ DIRECT_BLOCKS ?= "12"
 SECTOR_SIZE ?= "512"
 BLOCKS_PER_INDIRECT_BLOCK = "1024"
 # ${BLOCK_SIZE} / 4
+
 def write_indirect_block(device, indirect_block, blocks):
     import sys
     import tempfile
     import struct
     import subprocess
 
-    BLOCK_SIZE = int(${BLOCK_SIZE})
-    DIRECT_BLOCKS = int(${DIRECT_BLOCKS})
-    SECTOR_SIZE = int(${SECTOR_SIZE})
-    BLOCKS_PER_INDIRECT_BLOCK = int(${BLOCKS_PER_INDIRECT_BLOCK})
+    block_size = int(d.getVarFlag("BLOCK_SIZE"))
+    blocks_per_indirect_block = int(d.getVarFlag("BLOCKS_PER_INDIRECT_BLOCK"))
 
     print "writing indirect block ", indirect_block
     dev = open(device, "wb")
-    dev.seek(indirect_block * BLOCK_SIZE)
+    dev.seek(indirect_block * block_size)
     # Write blocks
     for block in blocks:
         bin_block = struct.pack("<I", int(block))
         dev.write(bin_block)
     zero = struct.pack("<I", 0)
     # Zero out the rest of the block
-    for x in range(len(blocks), BLOCKS_PER_INDIRECT_BLOCK):
+    for x in range(len(blocks), blocks_per_indirect_block):
         dev.write(zero)
     dev.close()
 
@@ -80,10 +79,10 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     import struct
     import subprocess
 
-    BLOCK_SIZE = int(${BLOCK_SIZE})
-    DIRECT_BLOCKS = int(${DIRECT_BLOCKS})
-    SECTOR_SIZE = int(${SECTOR_SIZE})
-    BLOCKS_PER_INDIRECT_BLOCK = int(${BLOCKS_PER_INDIRECT_BLOCK})
+    block_size = int(d.getVarFlag("BLOCK_SIZE"))
+    direct_blocks = int(d.getVarFlag("DIRECT_BLOCKS"))
+    sector_size = int(d.getVarFlag("SECTOR_SIZE"))
+    blocks_per_indirect_block = int(d.getVarFlag("BLOCKS_PER_INDIRECT_BLOCK"))
 
     size = int(size) * 1024 # Size in KB
     offset = int(offset) * 1024 # Offset from the start of the outFile in KB
@@ -94,10 +93,10 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
         return
 
     # Because size is specified in MB, it should always be exactly divisable by BLOCK_SIZE.
-    size_blocks = size / BLOCK_SIZE
+    size_blocks = size / block_size
     # We need 1 indirect block for each 1024 blocks over 12 blocks.
-    ind_blocks = (size_blocks - DIRECT_BLOCKS) / BLOCKS_PER_INDIRECT_BLOCK
-    if (size_blocks - DIRECT_BLOCKS) % BLOCKS_PER_INDIRECT_BLOCK != 0:
+    ind_blocks = (size_blocks - direct_blocks) / blocks_per_indirect_block
+    if (size_blocks - direct_blocks) % blocks_per_indirect_block != 0:
         ind_blocks += 1
     # We need a double indirect block if we have more than one indirect block
     has_dind_block = ind_blocks > 1
@@ -106,7 +105,7 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
         total_blocks += 1
 
     # Find free blocks we can use at the offset
-    offset_block = offset / BLOCK_SIZE
+    offset_block = offset / block_size
     print "Finding ", total_blocks, " free blocks from block ", offset_block
     process = subprocess.Popen(["debugfs", outFile, "-R", "ffb %d %d" % (total_blocks, offset_block)], stdout=subprocess.PIPE)
     output = process.stdout
@@ -122,17 +121,17 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     # The direct blocks in the inode are blocks 0-11
     # Write the first indirect block, listing the blocks for file blocks 12-1035 (inclusive)
     if ind_blocks > 0:
-        write_indirect_block(outFile, int(blocks[DIRECT_BLOCKS]), blocks[DIRECT_BLOCKS + 1 : DIRECT_BLOCKS + 1 + BLOCKS_PER_INDIRECT_BLOCK])
+        write_indirect_block(outFile, int(blocks[direct_blocks]), blocks[direct_blocks + 1 : direct_blocks + 1 + blocks_per_indirect_block])
 
     if has_dind_block:
-        dind_block_index = DIRECT_BLOCKS + 1 + BLOCKS_PER_INDIRECT_BLOCK
+        dind_block_index = direct_blocks + 1 + blocks_per_indirect_block
         dind_block = blocks[dind_block_index]
-        ind_block_indices = [dind_block_index+1+(i*(BLOCKS_PER_INDIRECT_BLOCK+1)) for i in range(ind_blocks-1)]
+        ind_block_indices = [dind_block_index+1+(i*(blocks_per_indirect_block+1)) for i in range(ind_blocks-1)]
         # Write the double indirect block, listing the blocks for the remaining indirect block
         write_indirect_block(outFile, int(dind_block), [blocks[i] for i in ind_block_indices])
         # Write the remaining indirect blocks, listing the relevant file blocks
         for i in ind_block_indices:
-            write_indirect_block(outFile, int(blocks[i]), blocks[i+1:i+1+BLOCKS_PER_INDIRECT_BLOCK])
+            write_indirect_block(outFile, int(blocks[i]), blocks[i+1:i+1+blocks_per_indirect_block])
 
     # Time to generate a script for debugfs
     script = tempfile.NamedTemporaryFile(mode = "w", delete = False)
@@ -141,19 +140,19 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
         script.write("setb %s\n" % (block,))
 
     # Change direct blocks in the inode
-    for i in range(DIRECT_BLOCKS):
+    for i in range(direct_blocks):
         script.write("sif %s block[%d] %s\n" % (inFile, i, blocks[i]))
 
     # Change indirect block in the inode
-    if size_blocks > DIRECT_BLOCKS:
-        script.write("sif %s block[IND] %s\n" % (inFile, blocks[DIRECT_BLOCKS]))
+    if size_blocks > direct_blocks:
+        script.write("sif %s block[IND] %s\n" % (inFile, blocks[direct_blocks]))
 
     # Change double indirect block in the inode
     if has_dind_block:
         script.write("sif %s block[DIND] %s\n" % (inFile, dind_block))
 
     # Set total number of blocks in the inode (this value seems to actually be sectors
-    script.write("sif %s blocks %d\n" % (inFile, total_blocks * (BLOCK_SIZE / SECTOR_SIZE)))
+    script.write("sif %s blocks %d\n" % (inFile, total_blocks * (block_size / sector_size)))
     # Set file size in the inode
     # TODO: Need support of size_high for large files
     script.write("sif %s size %d\n" % (inFile, size))
