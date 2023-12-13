@@ -12,7 +12,7 @@ inherit image_types logging user-partion
 DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4"
 
-IMAGE_FSTYPES = "img"
+
 
 #IMAGE_TYPES_MASKED = "img"
 
