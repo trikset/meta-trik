@@ -139,9 +139,18 @@ create_img() {
  cp ${TRIKIMG_ROOTFS} ${TRIKIMG_FILE}
 }
 
+mark_part() {
+ sfdisk  ${TRIKIMG_FILE} << EOD
+unit: sectors
+label: dos
+8,,83
+EOD
+}
+
 python do_bootable_sdimg() {
  bb.build.exec_func("create_img", d)
  bb.build.exec_func("insert_uboot", d)
+ bb.build.exec_func("mark_part", d)
 }
 
 python insert_uboot() {
