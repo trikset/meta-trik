@@ -88,8 +88,8 @@ do_bootable_sdimg(){
 	truncate -s ${MBR_SIZE} ${IMAGE}
 	AIS_OFFSET=$(file_size ${IMAGE})
 	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
-	bbdebug "AIS_OFFSET: ${AIS_OFFSET}"
-    bbdebug "ROOTFS_OFFSET: ${ROOTFS_OFFSET}"
+	bbdebug 3 "AIS_OFFSET: ${AIS_OFFSET}"
+    bbdebug 3 "ROOTFS_OFFSET: ${ROOTFS_OFFSET}"
 	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
 	sfdisk  ${IMAGE} << EOD
