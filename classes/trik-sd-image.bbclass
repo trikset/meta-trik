@@ -90,8 +90,13 @@ do_bootable_sdimg(){
 	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
 	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
-	bbnote("AIS_OFFSET: ${AIS_OFFSET}")
-	bbnote("ROOTFS_OFFSET: ${ROOTFS_OFFSET}")
+	bbnote "AIS_OFFSET: ${AIS_OFFSET}"
+	bbnote "ROOTFS_OFFSET: ${ROOTFS_OFFSET}"
+	sfdisk  ${IMAGE} << EOD
+unit: sectors
+label: dos
+$((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
+EOD
 
 }
 
