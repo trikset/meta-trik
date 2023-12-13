@@ -10,7 +10,7 @@ inherit image_types logging user-partion
 #TODO image-mklibs
 
 DEPENDS += "u-boot-trik"
-IMAGE_TYPES += "ext4 img"
+IMAGE_TYPES += "img ext4"
 IMAGE_TYPEDEP:img = "ext4"
 
 du_image_img[depends] += 	"\
