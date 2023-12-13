@@ -81,7 +81,15 @@ bbnote "Inserting $2 at $1"
 dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=none
 }
 
-
+python calc_fs_sector() {
+    rootfs_blocks_offset = int(d.getVar("ROOTFS_OFFSET"))
+    bb.note("ROOTFS_OFFSET: ", rootfs_blocks_offset)
+    block_size = int(d.getVar("BLOCK_SIZE"))
+    bb.note("BLOCK_SIZE: ", block_size)
+    first_sector = rootfs_blocks_offset * block_size / 512;
+    d.setVar("FIRST_SECTOR", first_sector)
+    bb.note("FIRST_SECTOR: ", first_sector)
+}
 
 do_bootable_sdimg(){
 	local UBOOT_AIS="${DEPLOY_DIR_IMAGE}/u-boot.ais"
@@ -92,11 +100,12 @@ do_bootable_sdimg(){
 	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
 	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
+	calc_fs_sector
 
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-$((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512)),,83
+${FIRST_SECTOR},,83
 EOD
 
 }
