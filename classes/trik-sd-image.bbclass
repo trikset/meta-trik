@@ -13,7 +13,7 @@ DEPENDS += "u-boot-trik"
 IMAGE_TYPES += "ext4 img"
 IMAGE_TYPEDEP:img = "ext4"
 
-do_image_img[depends] += 	"\
+IMAGE_DEPENDS:img += 	"\
 			parted-native:do_populate_sysroot \
 			e2fsprogs-native:do_populate_sysroot  \
 			dosfstools-native:do_populate_sysroot  \
