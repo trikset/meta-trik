@@ -165,11 +165,11 @@ def insert_file_ext4(outFile, inFile, sizeKb, offsetKb):
     script.unlink(script.name)
 
 
-python insert_uboot():
+python insert_uboot() {
     import os
 
     insert_file_ext4("${IMAGE}", "${DEPLOY_DIR_IMAGE}/u-boot.ais", os.stat("${DEPLOY_DIR_IMAGE}/u-boot.ais").file_stats.st_size * 1024, 4)
-
+}
 insert_uboot[depends] += "util-linux-native:do_populate_sysroot \
                                coreutils-native:do_populate_sysroot \
                                u-boot-trik:do_deploy \
