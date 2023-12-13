@@ -1,5 +1,5 @@
 
-IMAGE_ROOTFS_ALIGNMENT ?= "4"
+IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
 XZ_DICTIONARY_SIZE = "128"
 XZ_THREADS = "2"
@@ -10,7 +10,7 @@ inherit image_types logging user-partion
 #TODO image-mklibs
 
 DEPENDS += "u-boot-trik"
-IMAGE_TYPES += " ext4"
+IMAGE_TYPES += "ext4"
 
 IMAGE_FSTYPES = "ext4"
 
