@@ -78,14 +78,14 @@ dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=n
 do_bootable_sdimg(){
     local IMAGE="${TRIKIMG_FILE}"
 	rm -f ${IMAGE}
-	truncate -s ${MBR_SIZE} ${IMAGE}
+	truncate -s "4K" ${IMAGE}
 	ROOTFS_OFFSET=$(file_size ${IMAGE})
-	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
+	insert_at 4 ${TRIKIMG_ROOTFS}
 
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-$(${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512),,83
+8,,83
 EOD
 
 }
