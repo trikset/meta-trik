@@ -65,7 +65,7 @@ align() {
 }
 
 reserve() {
-truncate -o ${BLOCK_SIZE} -s "$1" ${TRIKIMG_FILE}
+truncate -o ${BLOCK_SIZE} -s "+$1" ${TRIKIMG_FILE}
 align ${TRIKIMG_FILE}
 file_size ${TRIKIMG_FILE}
 }
@@ -90,6 +90,7 @@ do_bootable_sdimg(){
 	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
 	bbdebug 3 "AIS_OFFSET: ${AIS_OFFSET}"
     bbdebug 3 "ROOTFS_OFFSET: ${ROOTFS_OFFSET}"
+    bbdebug 3 "ROOTFS_OFFSET: $((${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512))"
 	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
 	sfdisk  ${IMAGE} << EOD
