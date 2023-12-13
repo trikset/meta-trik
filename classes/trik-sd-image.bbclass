@@ -146,7 +146,7 @@ label: dos
 8,,83
 EOD
 }
-
+# Так(Все ок кроме факта лежит ли оно в 8 секторе), заменив начало раздела, попробовать убрать добавление u-boot(возможно уже есть в создании ext4), с добавление mbr, с mbr и другим началом раздела
 python do_bootable_sdimg() {
  bb.build.exec_func("create_img", d)
  bb.build.exec_func("insert_uboot", d)
