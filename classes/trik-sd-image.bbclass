@@ -1,5 +1,5 @@
 
-IMAGE_ROOTFS_ALIGNMENT ?= "4"
+IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
 XZ_DICTIONARY_SIZE = "128"
 XZ_THREADS = "2"
@@ -44,8 +44,8 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 #}
 
 MBR_SIZE ?= "4K"
-BLOCK_SIZE ?= "4096"
-ALIGNMENT ?= "4"
+BLOCK_SIZE ?= "1024"
+ALIGNMENT ?= "1M"
 
 
 file_size() {
