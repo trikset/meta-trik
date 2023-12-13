@@ -1,7 +1,8 @@
 PR="r9"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
-IMAGE_INSTALL = "packagegroup-base \
+IMAGE_INSTALL = "u-boot-trik \
+        packagegroup-base \
 		packagegroup-core-boot \
 		${CORE_IMAGE_EXTRA_INSTALL} \
 		packagegroup-wifi \
@@ -24,7 +25,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		distro-feed-configs \
 		formfactor \
 		coreutils \
-		u-boot-trik \
 		mini-x-session \
 		linux-trik-data \
 		trik-uart-ppp \

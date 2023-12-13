@@ -76,19 +76,16 @@ dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=n
 
 
 do_bootable_sdimg(){
-	local UBOOT_AIS="${DEPLOY_DIR_IMAGE}/u-boot.ais"
-        local IMAGE="${TRIKIMG_FILE}"
+    local IMAGE="${TRIKIMG_FILE}"
 	rm -f ${IMAGE}
 	truncate -s ${MBR_SIZE} ${IMAGE}
-	AIS_OFFSET=$(file_size ${IMAGE})
-	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
-	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
+	ROOTFS_OFFSET=$(file_size ${IMAGE})
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
 
 	sfdisk  ${IMAGE} << EOD
 unit: sectors
 label: dos
-8,,83
+$(${ROOTFS_OFFSET} * ${BLOCK_SIZE} / 512),,83
 EOD
 
 }
