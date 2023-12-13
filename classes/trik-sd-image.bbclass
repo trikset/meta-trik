@@ -149,7 +149,7 @@ ERROR_QA:remove = "version-going-backwards"
 python insert_uboot() {
     import os
 
-    insert_file_ext4d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").file_stats.st_size * 1024, 4)
+    insert_file_ext4(d.getVar("TRIKIMG_FILE"), d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais", os.stat(d.getVar("DEPLOY_DIR_IMAGE") + "/u-boot.ais").file_stats.st_size * 1024, 4)
 }
 
 
