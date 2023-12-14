@@ -42,3 +42,4 @@ inherit core-image
 
 #IMAGE_ROOTFS_SIZE = "1280000"
 
+
