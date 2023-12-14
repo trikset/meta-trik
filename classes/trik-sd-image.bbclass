@@ -4,7 +4,7 @@ IMAGE_ROOTFS_ALIGNMENT ?= "4"
 XZ_DICTIONARY_SIZE = "128"
 XZ_THREADS = "2"
 XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
-EXTRA_IMAGECMD:ext4 =+ " -b 4096 -i 4096 "
+EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
 # inherit image-mklibs
@@ -78,7 +78,7 @@ reserve_for() {
 
 insert_at() {
 bbnote "Inserting $2 at $1"
-dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=none
+dd "if=$2" "of=${TRIKIMG_FILE}" bs=${BLOCK_SIZE} "seek=$1" status=none
 }
 
 do_bootable_sdimg(){
