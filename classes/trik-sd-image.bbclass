@@ -4,7 +4,7 @@ IMAGE_ROOTFS_ALIGNMENT ?= "4"
 XZ_DICTIONARY_SIZE = "128"
 XZ_THREADS = "2"
 XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
-EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
+EXTRA_IMAGECMD:ext4 =+ " -b 4096 -i 4096 "
 
 inherit image_types logging user-partion
 # inherit image-mklibs
@@ -88,8 +88,6 @@ do_bootable_sdimg(){
 	truncate -s ${MBR_SIZE} ${IMAGE}
 	AIS_OFFSET=$(file_size ${IMAGE})
 	ROOTFS_OFFSET=$(reserve_for ${UBOOT_AIS})
-	bbdebug 3 "AIS_OFFSET: ${AIS_OFFSET}"
-    bbdebug 3 "ROOTFS_OFFSET: ${ROOTFS_OFFSET}"
 	insert_at ${AIS_OFFSET} ${UBOOT_AIS}
 	insert_at ${ROOTFS_OFFSET} ${TRIKIMG_ROOTFS}
 	sfdisk  ${IMAGE} << EOD
