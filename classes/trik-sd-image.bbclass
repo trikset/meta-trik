@@ -78,7 +78,7 @@ reserve_for() {
 
 insert_at() {
 bbnote "Inserting $2 at $1"
-dd "if=$2" "of=${TRIKIMG_FILE}" bs=${BLOCK_SIZE} "seek=$1" status=none
+dd "if=$2" "of=${TRIKIMG_FILE}" conv=notrunc bs=${BLOCK_SIZE} "seek=$1" status=none
 }
 
 do_bootable_sdimg(){

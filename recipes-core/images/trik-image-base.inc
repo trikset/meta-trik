@@ -40,5 +40,5 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE = "1280000"
+#IMAGE_ROOTFS_SIZE = "1280000"
 
