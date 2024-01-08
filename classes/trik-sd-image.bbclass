@@ -1,8 +1,8 @@
 
-IMAGE_ROOTFS_ALIGNMENT ?= "4"
+IMAGE_ROOTFS_ALIGNMENT ?= "4096"
 
 XZ_DICTIONARY_SIZE = "128"
-XZ_THREADS = "2"
+XZ_THREADS = "-T 2"
 XZ_COMPRESSION_LEVEL ?= "--verbose --no-adjust --memlimit-compress=6GiB --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
 EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
 
@@ -52,8 +52,8 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 #}
 
 MBR_SIZE ?= "4K"
-BLOCK_SIZE ?= "4096"
-ALIGNMENT ?= "4K"
+BLOCK_SIZE ?= "1024"
+ALIGNMENT ?= "1M"
 
 
 file_size() {

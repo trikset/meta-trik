@@ -1,8 +1,7 @@
 PR="r9"
 DESCRIPTION = "TRIK core base v2"
 IMAGE_FEATURES += "package-management"
-IMAGE_INSTALL = "u-boot-trik \
-        packagegroup-base \
+IMAGE_INSTALL = "packagegroup-base \
 		packagegroup-core-boot \
 		${CORE_IMAGE_EXTRA_INSTALL} \
 		packagegroup-wifi \
@@ -25,6 +24,7 @@ IMAGE_INSTALL = "u-boot-trik \
 		distro-feed-configs \
 		formfactor \
 		coreutils \
+		u-boot-trik \
 		mini-x-session \
 		linux-trik-data \
 		trik-uart-ppp \
@@ -40,6 +40,4 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE = "1048576"
-
-
+IMAGE_ROOTFS_SIZE = "1280000"
