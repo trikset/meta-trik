@@ -26,9 +26,7 @@ SRC_URI = "gitsm://github.com/IgnatSergeev/trikRuntime.git;protocol=https;branch
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined"
-OE_QMAKE_CXXFLAGS += "-O0"
-OE_QMAKE_CFLAGS += "-O0"
+EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined QMAKE_CXXFLAGS_RELEASE+=-O0 QMAKE_CFLAGS_RELEASE+=-O0"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"
