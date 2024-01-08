@@ -11,9 +11,10 @@ KERNEL_MODULE_AUTOLOAD += "jcx_pwm"
 
 MULTI_CONFIG_BASE_SUFFIX = ""
 SRCREV="${AUTOREV}"
-SRC_URI = "git://github.com/IgnatSergeev/ti-linux-kernel.git;protocol=https;branch=trikset-ti-linux-4.14.y \
-	   file://defconfig \
-           file://display_settings.sh \
+SRC_URI = "git://github.com/trikset/ti-linux-kernel;protocol=https;branch=trikset-ti-linux-4.14.y \
+        file://fdt-location.patch \
+	    file://defconfig \
+        file://display_settings.sh \
            "
 
 S = "${WORKDIR}/git"
@@ -21,7 +22,6 @@ LIC_FILES_CHKSUM="file://COPYING;beginline=1;endline=355;md5=bad9197b13faffd10df
 
 PACKAGES += "${PN}-data"
 FILES:${PN}-data = "${datadir} ${sysconfdir}"
-#DEPENDS += "u-boot-mkimage-native"
 RDEPENDS:${PN} += "${PN}-data"
 
 RDEPENDS:${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
