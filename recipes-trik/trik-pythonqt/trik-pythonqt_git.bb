@@ -6,7 +6,9 @@ inherit pkgconfig qmake5
 
 DEPENDS += "python3 qtbase"
 SRCREV="${AUTOREV}"
-SRC_URI = "git://github.com/IgnatSergeev/trik-pythonqt.git;protocol=https;branch=kirkstone"
+SRC_URI = "git://github.com/trikset/trik-pythonqt.git;protocol=https;branch=a593de3f2d6760053a8931454f0392f1181f41ca \
+           file://cpython-path.patch \
+           "
 #SRC_URI = "git:///home/iakov/trik/trik-pythonqt;branch=trik_qt58"
 
 S = "${WORKDIR}/git"
