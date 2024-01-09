@@ -1,0 +1,17 @@
+Index: src/PythonQt.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/PythonQt.cpp b/src/PythonQt.cpp
+--- a/src/PythonQt.cpp	(revision a593de3f2d6760053a8931454f0392f1181f41ca)
++++ b/src/PythonQt.cpp	(revision c3bb641b0a67dfeb87b2dd70be202890c1aeb171)
+@@ -58,7 +58,7 @@
+ 
+ #include <QDir>
+ 
+-#include <pydebug.h>
++#include <cpython/pydebug.h>
+ #include <vector>
+ 
+ #ifdef __linux__
