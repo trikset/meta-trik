@@ -13,13 +13,5 @@ For more info https://github.com/IgnatSergeev/setup-scripts/blob/kirkstone/READM
 5. meta-mono 
 6. meta-java
 
-`trik-image-lang` dependencies:
-1. openembedded-core
-2. meta-openembedded
-3. meta-qt5
-4. meta-ti
-5. meta-mono
-6. meta-java
-
 # TODO
 1. Find ros alternative
