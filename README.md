@@ -3,8 +3,22 @@
 # meta-trik
 Meta layer for trik platform
 
+For more info https://github.com/IgnatSergeev/setup-scripts/blob/kirkstone/README.md
+
+`trik-image-core` dependencies:
+1. openembedded-core
+2. meta-openembedded
+3. meta-qt5
+4. meta-ti
+5. meta-mono  
+
+`trik-image-lang` dependencies:
+1. openembedded-core
+2. meta-openembedded
+3. meta-qt5
+4. meta-ti
+5. meta-mono
+6. meta-java?
+
 # TODO
-1. Add trik-ros
-2. image-mklibs
-3. image-prelink
-4. Remove ti wifi utils(meta ti)
+1. Find ros alternative
