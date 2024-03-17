@@ -48,4 +48,5 @@ tryUpdate
 # If MCU is fresh, there is no i2c responder and firmware variant is forced to 0x10*.
 # Now, i2c is available and we can tell proper MCU variant.
 # Thus, perform a second attempt to update firmware. It does not hurt anyway.
+sleep 3 # give some time for MSP to boot
 tryUpdate
