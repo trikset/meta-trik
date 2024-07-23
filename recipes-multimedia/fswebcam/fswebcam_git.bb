@@ -7,7 +7,7 @@ inherit autotools-brokensep
 
 SRCREV= "66debb20a4ae5ca88d435c85f7bd9431e6f0c444"
 
-SRC_URI = "git://github.com/fsphil/fswebcam.git;rev=${SRCREV}"
+SRC_URI = "git://github.com/fsphil/fswebcam.git;protocol=https;rev=${SRCREV}"
 
 S="${WORKDIR}/git"
 
