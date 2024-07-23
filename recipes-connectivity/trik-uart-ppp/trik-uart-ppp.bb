@@ -10,6 +10,7 @@ RDEPENDS:${PN} += "base-files bash"
 SRC_URI=" \
          file://init_ttyS1.sh \
          file://winclient.chat \
+         file://ttyS1 \
          file://autologin"
 
 FILES:${PN} += "${datadir}"
