@@ -11,13 +11,13 @@ SRC_URI = "file://msp_reset.sh \
 	"
 SRC_URI[md5sum] = "509100434b0d6831bbf434173e136618"
 SRC_URI[sha256sum] = "bc97217374d57dca62e47e05f35d234309b1da7f15d910ba52134103405536b1"
-RDEPENDS_${PN} = "i2c-tools coreutils"
+RDEPENDS:${PN} = "i2c-tools coreutils"
 
 S = "${WORKDIR}"
 
 do_compile[noexec] = "1"
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"
 
 do_install(){
 	install -m 0644 -D -t ${D}/etc/trik/msp430/ ${S}/msp-firmware-*${PV}.txt

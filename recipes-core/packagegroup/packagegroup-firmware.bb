@@ -11,7 +11,7 @@ inherit packagegroup
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
   linux-firmware-wl12xx \
   linux-firmware-ath9k \
   linux-firmware-ralink \
@@ -20,7 +20,7 @@ RDEPENDS_${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
 

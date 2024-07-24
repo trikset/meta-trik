@@ -11,10 +11,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 
 # flex with provide /usr/include/FlexLexer.h
 DEPENDS = "flex-native bison-native flex libexif"
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
-SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz\
-      file://cross_cc.patch"
+SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz \
+      file://cross_cc.patch \
+      file://comment.patch"
 
 SRC_URI[md5sum] = "f31d4917a23606df03406a017e7ee509"
 SRC_URI[sha256sum] = "82816225ae89b246c37a93a95c9c45f88163d56d7d74f681743f19020b525389"

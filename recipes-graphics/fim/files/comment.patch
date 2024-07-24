@@ -1,0 +1,65 @@
+--- fim-0.5-rc3/src/fim.cpp	2017-07-29 12:04:17.000000000 +0300
++++ fim-0.5-rc3/src/fim.cpp	2023-11-08 13:24:33.023451126 +0300
+@@ -302,62 +302,6 @@
+     {0,0,0,0,0,0}
+ };
+ 
+-#if 0
+-// leftovers from the old man file; shall adapt these using .\"
+- .TP
+- .B -f font
+- Set font.  This can be either a pcf console font file or a X11 font
+- spec.  Using X11 fonts requires a font server (The one specified in
+- the environment variable FONTSERVER or on localhost).  The FBFONT
+- environment variable is used as default.  If unset, fim will
+- fallback to 10x20 (X11) / lat1u-16.psf (console).
+- .TP
+- .B --autoup
+- Like autozoom, but scale up only.
+- .TP
+- .B --autodown
+- Like autozoom, but scale down only.
+- .TP
+- .B -u
+- Randomize the order of the filenames.
+- .TP
+- .B -e
+- Enable editing commands.
+- .TP
+- .B -b
+- create backup files (when editing images).
+- .TP
+- .B -p
+- preserve timestamps (when editing images).
+- .TP
+- .B --comments
+- Display comment tags (if present) instead of the filename.  Probaby
+- only useful if you added reasonable comments yourself (using wrjpgcom
+- for example), otherwise you likely just find texts pointing to the
+- software which created the image.
+- P               pause the slideshow (if started with -t, toggle)
+- {number}g    jump to image {number}
+- .SH EDIT IMAGE
+- fim also provides some very basic image editing facilities.  You have
+- to start fim with the -e switch to use them.
+- .P
+- .nf
+- Shift+D         delete image
+- R               rotate 90° clockwise
+- L               rotate 90° counter-clock wise
+- .fi
+- .P
+- The delete function actually wants a capital letter 'D', thus you have
+- to type Shift+D.  This is done to avoid deleting images by mistake
+- because there are no safety bells:  If you ask fim to delete the image,
+- it will be deleted without questions asked.
+- .P
+- The rotate function actually works for JPEG images only because it
+- calls the jpegtran command to perform a lossless rotation if the image.
+- It is especially useful if you review the images of your digital
+- camera.
+-#endif
+-
+ const int fim_options_count=sizeof(fim_options)/sizeof(fim_options_t);
+ struct option options[fim_options_count];
+ 

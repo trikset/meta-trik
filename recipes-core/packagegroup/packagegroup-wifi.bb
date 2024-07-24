@@ -12,7 +12,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
   netcat-openbsd \
   wpa-supplicant \
   packagegroup-base-wifi \
@@ -23,7 +23,7 @@ RDEPENDS_${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
  "
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
 

@@ -1,7 +1,7 @@
 HOMEPAGE 	 = "http://trikset.com"
 LICENSE		 = "Apache-2.0"
 LIC_FILES_CHKSUM ="file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
-RDEPENDS_${PN}   = "common-sensors"
+RDEPENDS:${PN}   = "common-sensors"
 #COMPATIBLE_MACHINE = "trikboard"
 SENSOR_RELEASE_DATE = "180723"
 
@@ -9,14 +9,14 @@ SENSOR_RELEASE_DATE = "180723"
 
 PV = "git${SENSOR_RELEASE_DATE}"
 TAG="${SENSOR_RELEASE_DATE}"
-SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;branch=master;tag=${TAG};destsuffix=arm "
-SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;branch=master;tag=${TAG};destsuffix=dsp"
-
+SRC_URI	="git://github.com/trikset/trik-media-sensors-arm.git;protocol=https;rev=17b549e0dc745d9786b287411060237630f23fd6;destsuffix=arm "
+SRC_URI += "git://github.com/trikset/trik-media-sensors-dsp.git;protocol=https;rev=159fee9f664cb405c65aff495893a35dbefacbe1;destsuffix=dsp"
 # ORLY????
-RDEPENDS_${PN} += "libv4l"
+RDEPENDS:${PN} += "libv4l"
 
-S_DSP_trikboard ="${WORKDIR}/dsp"
-S_ARM_trikboard ="${WORKDIR}/arm"
+S_DSP ="${WORKDIR}/dsp"
+S_ARM ="${WORKDIR}/arm"
+
 do_compile() {
 	:
 }
@@ -34,8 +34,8 @@ do_install() {
 }
 
 
-#FILES_${PN} = "/etc/*"
+#FILES:${PN} = "/etc/*"
 #INHIBIT_PACKAGE_STRIP = "1"
 #INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INSANE_SKIP_${PN}_trikboard = "ldflags arch"
+INSANE_SKIP:${PN} = "ldflags arch"

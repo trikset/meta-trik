@@ -1,2 +1,2 @@
-PACKAGECONFIG_class-native_remove += "directfb"
-PACKAGECONFIG_class-native += "x11 xcb"
+PACKAGECONFIG:class-native:remove += "directfb"
+PACKAGECONFIG:class-native += "x11 xcb"

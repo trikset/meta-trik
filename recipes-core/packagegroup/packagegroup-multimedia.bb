@@ -5,7 +5,7 @@ PR = "r4"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
   alsa-utils \
   espeak \
   v4l-utils \
@@ -20,7 +20,7 @@ RDEPENDS_${PN} = "\
  "
 #vlc
 #  ffmpeg
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
  "
 #pocketsphinx 
 #  sox 

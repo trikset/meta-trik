@@ -6,6 +6,6 @@ DEPENDS ="jpeg"
 inherit autotools-brokensep
 
 SRCREV= "15574fc3da42400243971fa3d0f98894b0f9d947"
-SRC_URI = "git://github.com/twam/v4l2grab.git;rev=${SRCREV}"
+SRC_URI = "git://github.com/twam/v4l2grab.git;protocol=https;rev=${SRCREV}"
 
 S="${WORKDIR}/git"

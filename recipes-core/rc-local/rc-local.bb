@@ -8,7 +8,7 @@ SRC_URI = "file://rc.local.etc \
 
 S = "${WORKDIR}"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
 inherit update-rc.d
 

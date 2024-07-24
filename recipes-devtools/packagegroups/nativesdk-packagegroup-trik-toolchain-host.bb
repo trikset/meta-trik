@@ -5,7 +5,7 @@ PR = "r1"
 
 inherit packagegroup
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
 	nativesdk-cmake \
 	nativesdk-make \
 	nativesdk-protobuf \

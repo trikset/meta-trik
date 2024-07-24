@@ -10,19 +10,19 @@ SRC_URI = "git://github.com/trikset/mjpg-streamer.git;protocol=https;branch=${BR
 	   file://mjpg-streamer"
 PR = "r2"
 DEPENDS = "libv4l"
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
 # Seems like build config problem. Actually, we do not need it.
 DEPENDS += "libsdl"
 
-RRECOMMENDS_${PN} += "jpeg-encoder-ov7670"
-RDEPENDS_${PN} += "bash"
+RRECOMMENDS:${PN} += "jpeg-encoder-ov7670"
+RDEPENDS:${PN} += "bash"
 
 inherit cmake
 
 S ="${WORKDIR}/git/mjpg-streamer-experimental"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/mjpg-streamer ${D}/${sysconfdir}/init.d/
 
@@ -30,7 +30,7 @@ do_install_append() {
 	ln -sf mjpg-streamer ${D}/etc/init.d/mjpg-streamer-webcam
 }
 
-FILES_${PN} += "/usr/lib/*"
+FILES:${PN} += "/usr/lib/*"
 
 
 

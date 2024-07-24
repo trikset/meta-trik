@@ -1,5 +1,5 @@
 # tune font config
-do_install_append() {
+do_install:append() {
 	#remove all default links
 	find ${D}${sysconfdir}/fonts/conf.d/ -type l -exec rm {} +
 	for c in 10-hinting-full 10-sub-pixel-rgb 11-lcdfilter-default 30-metric-aliases 70-yes-bitmaps

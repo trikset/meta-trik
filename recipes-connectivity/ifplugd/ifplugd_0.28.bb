@@ -24,4 +24,4 @@ EXTRA_OECONF = "--disable-lynx"
 INITSCRIPT_NAME = "ifplugd"
 INITSCRIPT_PARAMS = "defaults"
 
-CONFFILES_${PN} = "${sysconfdir}/ifplugd/ifplugd.conf"
+CONFFILES:${PN} = "${sysconfdir}/ifplugd/ifplugd.conf"

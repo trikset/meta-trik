@@ -5,7 +5,7 @@ PR = "r3"
 
 inherit packagegroup
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
 	linux-libc-headers-dev \
 	kernel-dev \
 	alsa-dev \

@@ -1,11 +1,11 @@
 SUMMARY += "(TRIK edition)"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 #until TRIK's own scrtips moved to separate package, we need bash
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         lighttpd-module-alias \
         lighttpd-module-cgi \
         lighttpd-module-rewrite \
@@ -14,7 +14,7 @@ RDEPENDS_${PN} += " \
          lighttpd-module-expire \
 "
 
-SRC_URI_append = "file://wpa-configurator.sh \
+SRC_URI:append = "file://wpa-configurator.sh \
         file://wpa-writer.sh \
         file://wlan-scanner.sh \
         file://lock.png \
@@ -30,7 +30,7 @@ SRC_URI_append = "file://wpa-configurator.sh \
         file://logo.png \
         file://montserrat.ttf \
 "
-do_install_append() {
+do_install:append() {
     install -d ${D}/www/pages/network
     install -d ${D}/www/pages/images
     install -d ${D}/www/pages/styles

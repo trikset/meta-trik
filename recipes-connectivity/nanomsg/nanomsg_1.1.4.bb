@@ -15,6 +15,6 @@ SRC_URI = "https://github.com/nanomsg/nanomsg/archive/1.1.4.zip"
 SRC_URI[md5sum] = "ff4d79693841e553ccc27d258be538ea"
 SRC_URI[sha256sum] = "dcba7622b375ebd87d0d068d89f0907d91982aaf7151cb2890c3ac770a1c6d63"
 
-FILES_${PN}-dev += "${nonarch_libdir}/cmake/${PN}"
+FILES:${PN}-dev += "${nonarch_libdir}/cmake/${PN}"
 
 inherit cmake pkgconfig

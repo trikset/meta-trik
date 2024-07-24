@@ -5,19 +5,19 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=89aea4e17d99a7ca
 PV = "1.0"
 PR = "r1"
 
-RDEPENDS_${PN} += "base-files bash"
+RDEPENDS:${PN} += "base-files bash"
 
-SRC_URI="file://tty_ppp.sh \
-	 file://tty_login.sh \
+SRC_URI=" \
+         file://init_ttyS1.sh \
          file://winclient.chat \
+         file://ttyS1 \
          file://autologin"
 
-FILES_${PN} += "${datadir}"
-RDEPENDS_${PN} += "bash"
+FILES:${PN} += "${datadir}"
 
 do_install() {
 	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/autologin
-	install -m 0755 -D -t ${D}/${datadir}/trik/ ${WORKDIR}/tty_ppp.sh ${WORKDIR}/tty_login.sh
-	ln -s ${datadir}/trik/tty_ppp.sh ${D}/${sysconfdir}/trik/init_tty.sh
+	install -m 0755 -D -t ${D}/${sysconfdir}/trik/ ${WORKDIR}/init_ttyS1.sh
 	install -m 0644 -D -t ${D}/${sysconfdir}/ppp ${WORKDIR}/winclient.chat
+	install -m 0644 -D -t ${D}/${sysconfdir}/default ${WORKDIR}/ttyS1
 }

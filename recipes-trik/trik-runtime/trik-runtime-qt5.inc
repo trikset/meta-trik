@@ -1,19 +1,20 @@
 DESCRIPTION = "Runtime for TRIK controller"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-RDEPENDS_${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mjpg-streamer"
+RDEPENDS:${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mjpg-streamer"
 
-#RRECOMMENDS_${PN} = "vlc"
+#RRECOMMENDS:${PN} = "vlc"
 
 inherit qmake5 pkgconfig
 DEPENDS += "qtmultimedia qtscript"
-#RREPLACES_${PN} += "trik-runtime"
-RCONFLICTS_${PN} += "trik-runtime-qt4"
-RPROVIDES_${PN} += "trik-runtime"
+#RREPLACES:${PN} += "trik-runtime"
+RCONFLICTS:${PN} += "trik-runtime-qt4"
+RPROVIDES:${PN} += "trik-runtime"
 TAG ?= "${PV}-${TRIK_RUNTIME_UPDATE}"
 #GIT_REVISION ?= "tag=${TAG};nobranch=1"
 SRCREV = "${AUTOREV}"
 SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVISION} \
+          file://runtime-cpython-path.patch \
           file://trikGui.sh \
           file://qws_display.sh \
           file://trik_runtime_path.sh \
@@ -26,24 +27,24 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVIS
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined"
+EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=trik_nopython"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"
         oe_runmake
 }
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"
 
 
-FILES_${PN} += "/home/root/trik/"
-#FILES_${PN}-conf += "${sysconfdir}"
-#FILES_${PN}-dev += "${includedir}/trikRuntime/*"
-#FILES_${PN} += "${libdir}"
-FILES_${PN}-dev += "/home/root/trik/*.so"
-#FILES_${PN}-dbg += "/home/root/trik/.debug"
+FILES:${PN} += "/home/root/trik/"
+#FILES:${PN}-conf += "${sysconfdir}"
+#FILES:${PN}-dev += "${includedir}/trikRuntime/*"
+#FILES:${PN} += "${libdir}"
+FILES:${PN}-dev += "/home/root/trik/*.so"
+#FILES:${PN}-dbg += "/home/root/trik/.debug"
 
-pkg_postinst_${PN} () {
+pkg_postinst:${PN} () {
         killall trikGui || true
         sleep 3
         killall -9 trikGui 2> /dev/null || true

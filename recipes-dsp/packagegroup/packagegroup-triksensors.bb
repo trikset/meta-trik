@@ -10,7 +10,7 @@ inherit packagegroup
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
 	edge-line-sensor-ov7670 \
 	line-sensor-ov7670 \
 	line-sensor-webcam \
@@ -21,7 +21,7 @@ RDEPENDS_${PN} = "\
 	motion-sensor-ov7670 \
 	${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
 	"
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
 	${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
 	"
 
