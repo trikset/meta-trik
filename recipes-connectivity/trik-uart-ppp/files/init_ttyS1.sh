@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-device="/dev/ttyS1"
+device="ttyS1"
 baudrate=115200
 
 . /etc/default/ttyS1
