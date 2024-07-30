@@ -1,6 +1,9 @@
-#disable rng-tools, force haveged
-PACKAGECONFIG=""
-RRECOMMENDS:${PN}-sshd:append:class-target += " haveged"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-# should be in BSP somewhere in the machine.conf
-PACKAGE_EXCLUDE:append = " rng-tools"
+SRC_URI += "file://sshd_check_keys"
+
+do_install:append () {
+	install -D -m 0755 ${WORKDIR}/sshd_check_keys ${D}${libexecdir}/${BPN}/sshd_check_keys
+}
+
+FILES:${PN}-sshd += "${libexecdir}/${BPN}/sshd_check_keys"
