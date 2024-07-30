@@ -3,10 +3,10 @@
 # meta-trik
 Meta layer for trik platform
 
-For more info https://github.com/IgnatSergeev/setup-scripts/blob/kirkstone/README.md
+For more info https://github.com/trikset/trik-distro
 
 `trik-image-core` dependencies:
-1. openembedded-core
+1. poky (openembedded-core)
 2. meta-openembedded
 3. meta-qt5
 4. meta-ti
