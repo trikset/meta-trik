@@ -6,7 +6,7 @@ RDEPENDS:${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mj
 #RRECOMMENDS:${PN} = "vlc"
 
 inherit qmake5 pkgconfig
-DEPENDS += "qtmultimedia qtscript"
+DEPENDS += "qtmultimedia qtscript qttools-native"
 #RREPLACES:${PN} += "trik-runtime"
 RCONFLICTS:${PN} += "trik-runtime-qt4"
 RPROVIDES:${PN} += "trik-runtime"
@@ -27,7 +27,6 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVIS
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
-EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=trik_nopython"
 
 do_compile(){
         export CROSS_COMPILE="${TARGET_PREFIX}"

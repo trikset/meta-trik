@@ -14,7 +14,10 @@ DEPENDS += "rsync-native python3"
 #OE_QMAKE_CXXFLAGS:append += " -fno-lto"
 
 #We need to switch precompiled headers off until this issue is fixed in trik-runtime sources
-EXTRA_QMAKEVARS_PRE += " -r CONFIG+=noPch CONFIG+=sanitize_address CONFIG+=sanitize_undefined"
+#We need to disable sanitize_address until the issue with the high memory consumption of asan is fixed
+EXTRA_QMAKEVARS_PRE += "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker \
+			CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=sanitize_undefined \
+			CONFIG+=sanitizer CONFIG-=sanitize_address"
 
 # For script gathering logs information
 RDEPENDS:${PN} += "bash xz"
