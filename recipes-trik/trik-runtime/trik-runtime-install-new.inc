@@ -1,7 +1,7 @@
 RDEPENDS_${PN} += "python3-numpy"
 do_install() {
         install -d ${D}/home/root/trik
-        cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
+        rsync -rlptv --exclude '*.a' ${B}/bin/* ${D}/home/root/trik
         install -d ${D}/home/root/trik/scripts
         install -d ${D}/home/root/trik/images
 	 install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
@@ -35,7 +35,7 @@ do_install() {
         done
 
         install -d ${D}${libdir}
-        cp -rf ${B}/bin/arm-release/lib*.so* ${D}${libdir}
+        rsync -rlptv ${B}/bin/lib*.so* ${D}${libdir}
 
         for lib in $(ls ${D}${libdir}); do
             ln -sf ${libdir}/${lib} ${D}/home/root/trik/${lib}
