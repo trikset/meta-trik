@@ -1,6 +1,6 @@
 SRCREV="${AUTOREV}"
 TRIK_RUNTIME_UPDATE = "${SRCREV}"
-GIT_REVISION = "branch=new_age_dunfell"
+GIT_REVISION = "branch=kirkstone"
 PV = "git${SRCREV}"
 #PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
@@ -17,7 +17,7 @@ DEPENDS += "rsync-native python3"
 #We need to disable sanitize_address until the issue with the high memory consumption of asan is fixed
 EXTRA_QMAKEVARS_PRE += "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker \
 			CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=sanitize_undefined \
-			CONFIG+=sanitizer CONFIG-=sanitize_address"
+			CONFIG+=sanitizer"
 
 # For script gathering logs information
 RDEPENDS:${PN} += "bash xz"
