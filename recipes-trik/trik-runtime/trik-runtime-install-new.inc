@@ -1,12 +1,10 @@
 do_install() {
         install -d ${D}/home/root/trik
         install -m 0666 -t ${D}/home/root/trik/ ${S}/resources/lsan.supp
-        cp -rf ${B}/bin/arm-release/* ${D}/home/root/trik
+        rsync -rlptv --exclude '*.a' ${B}/bin/* ${D}/home/root/trik
         install -d ${D}/home/root/trik/scripts
         install -d ${D}/home/root/trik/images
-	 install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
-
-        install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
+	install -d ${S}/trikControl/configs/ ${D}/home/root/trik/
 
         install -d ${D}/${sysconfdir}/trik/
         install -m 0755 ${WORKDIR}/trikGui.sh ${D}/${sysconfdir}/trik/
@@ -37,7 +35,7 @@ do_install() {
         done
 
         install -d ${D}${libdir}
-        cp -rf ${B}/bin/arm-release/lib*.so* ${D}${libdir}
+        rsync -rlptv ${B}/bin/lib*.so* ${D}${libdir}
 
         for lib in $(ls ${D}${libdir}); do
             ln -sf ${libdir}/${lib} ${D}/home/root/trik/${lib}
