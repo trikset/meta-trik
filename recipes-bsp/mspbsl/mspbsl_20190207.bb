@@ -1,7 +1,7 @@
 DESCRIPTION = "A PC-side Library designed to encapsulate all low level Bootstrap Loader (BSL) commands and common functions"
 HOMEPAGE = "http://github.com/MSP-LaneWestlund/MSPBSL_Library"
 SECTION = "libs"
-LICENSE = "LGPLv2.1+"
+LICENSE = "LGPL-2.1-or-later"
 DEPENDS = "boost hidapi"
 COMPATIBLE_MACHINE = "trikboard"
 

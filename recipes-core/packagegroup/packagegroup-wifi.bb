@@ -1,6 +1,6 @@
 SUMMARY = "Wifi tools"
 DESCRIPTION = "The minimal set of packages required to manupulate wifi"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0-only"
 PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

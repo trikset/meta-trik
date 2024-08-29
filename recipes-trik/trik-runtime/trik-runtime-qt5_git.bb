@@ -17,7 +17,7 @@ DEPENDS += "rsync-native python3"
 #We need to disable sanitize_address until the issue with the high memory consumption of asan is fixed
 EXTRA_QMAKEVARS_PRE += "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker \
 			CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=sanitize_undefined \
-			CONFIG+=sanitizer"
+			CONFIG+=sanitizer CONFIG+=trik_new_age"
 
 # For script gathering logs information
 RDEPENDS:${PN} += "bash xz"
