@@ -3,6 +3,8 @@ LICENSE = "MIT"
 
 PR = "r3"
 
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
+
 inherit packagegroup
 
 RDEPENDS:${PN} += "\
