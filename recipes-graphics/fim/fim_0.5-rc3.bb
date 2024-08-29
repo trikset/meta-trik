@@ -5,7 +5,7 @@ DESCRIPTION = "FIM (Fbi IMproved) aims to be a highly customizable and scriptabl
 SECTION = "utils"
 HOMEPAGE = "http://www.autistici.org/dezperado/fim/"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 
 

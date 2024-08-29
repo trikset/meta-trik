@@ -12,7 +12,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
 
 SRC_URI = " \
-	   git://github.com/nanomsg/nanomsg.git \
+	   git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master \
 	  "
 PE = "-1"
 SRCREV = "7e12a20e038234060d41d03c20721d08117f8607"

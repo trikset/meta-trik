@@ -1,6 +1,6 @@
 SUMMARY = "Multimedia libraries package"
 DESCRIPTION = "Multimedia libraries and utilities"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0-only"
 PR = "r4"
 
 inherit packagegroup
