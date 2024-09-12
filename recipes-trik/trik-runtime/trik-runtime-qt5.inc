@@ -29,7 +29,6 @@ QMAKE_PROFILES = "${S}/trikRuntime.pro"
 EXTRA_QMAKEVARS_PRE = "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker"
 
 do_compile(){
-        export CROSS_COMPILE="${TARGET_PREFIX}"
         oe_runmake
 }
 
