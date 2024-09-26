@@ -21,7 +21,10 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVIS
           file://log_manager.sh \
           file://compress_logs.sh \
           file://say \
-          file://gamepad-service"
+          file://gamepad-service \
+          https://raw.githubusercontent.com/qt/qtbase/refs/tags/v5.15.7-lts-lgpl/mkspecs/features/lrelease.prf"
+          
+SRC_URI[md5sum] = "c422c2dc3d0c0b9fcb39ace0fdf91950"
 
 S = "${WORKDIR}/git"
 
@@ -46,5 +49,9 @@ pkg_postinst_${PN} () {
         killall trikGui || true
         sleep 3
         killall -9 trikGui 2> /dev/null || true
+}
+
+do_configure_prepend() {
+	install -D -t ${S}/mkspecs/features ${WORKDIR}/lrelease.prf
 }
 
