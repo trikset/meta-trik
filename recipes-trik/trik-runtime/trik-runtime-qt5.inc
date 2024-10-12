@@ -28,7 +28,6 @@ S = "${WORKDIR}/git"
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
 
 do_compile(){
-        export CROSS_COMPILE="${TARGET_PREFIX}"
         oe_runmake
 }
 
