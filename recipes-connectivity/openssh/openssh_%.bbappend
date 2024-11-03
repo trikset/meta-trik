@@ -1,9 +1,6 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-SRC_URI += "file://sshd_check_keys"
-
-do_install:append () {
-	install -D -m 0755 ${WORKDIR}/sshd_check_keys ${D}${libexecdir}/${BPN}/sshd_check_keys
+# By default, 3 keys will be generated, this +RSA. 
+# RSA has been generated for a very long time and is outdated anyway, 
+# we explicitly specify which keys we need.
+do_configure:prepend () {
+	sed -i '/^[#[:space:]]*HostKey.*_ecdsa_key\|^[#[:space:]]*HostKey.*_ed25519_key/s/^[#[:space:]]*//' ${WORKDIR}/sshd_config
 }
-
-FILES:${PN}-sshd += "${libexecdir}/${BPN}/sshd_check_keys"
