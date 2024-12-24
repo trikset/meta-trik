@@ -2,7 +2,7 @@ SRCREV="${AUTOREV}"
 TRIK_RUNTIME_UPDATE = "${SRCREV}"
 GIT_REVISION = "branch=master"
 PV = "git${SRCREV}"
-PR = "r20241128"
+PR = "r20241223"
 #PR="r${TRIK_RUNTIME_UPDATE}"
 require trik-runtime-qt5.inc
 require trik-runtime-install-new.inc
