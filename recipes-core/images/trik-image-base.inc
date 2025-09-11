@@ -15,7 +15,6 @@ IMAGE_INSTALL = "packagegroup-base \
 		rc-local\
 		trik-runtime \
 		trik-examples \
-		dsp-modules \
 		softap-udhcpd-config \
 		trik-network \
 		fuse \

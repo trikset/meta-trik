@@ -25,6 +25,9 @@ MEDIA_SENSOR_CMD=status
 VERBOSE_LVL=1
 DEBUG='> /dev/null 2>&1'
 
+DAEMON_NAME=lad_omapl138
+DAEMON=/usr/bin/$DAEMON_NAME
+
 log() {
   if [[ $2 -le $VERBOSE_LVL ]] ; then
     printf "$MEDIA_SENSOR_NAME: $1\n"
@@ -151,17 +154,26 @@ do_reload() {
 }
 
 do_start() {
+  $DAEMON || true
   echo -e "#!/bin/sh\n /etc/init.d/$MEDIA_SENSOR_NAME $VARS $other_options reload" > $CURRENT_MEDIA_SENSOR_PATH
   $SHELL -c 'timeout --foreground 20s inotifyd - /run:n | { while read x && [[ $x != *sensor.out.fifo ]] ; do true ; done ; kill $$ ; }' &
   killall -g $CURRENT_MEDIA_SENSOR_NAME || kill -HUP 1 || true
   wait
-  debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed! See $MEDIA_SENSOR_LOG for details" 0 ; failure 3 ; do_stop; exit 1 ; }
+  
+  # There is no working check for the existence of a named process (always return NOT EXIST). 
+  # It used to work before because the execution never reached the `do_stop` function, 
+  # we need to find out why :). Bug with `failure 3` function.
+
+  # You can simply stop the endless attempts to restart scripts with the command.
+  # debug status $MEDIA_SENSOR_PATH/$MEDIA_SENSOR_NAME || { log "sensor start failed! See $MEDIA_SENSOR_LOG for details" 0 ; failure 3 ; do_stop; exit 1 ; }
 }
 
 do_stop() {
   [ -z "$MEDIA_SENSOR_PID" ] || rm -f $MEDIA_SENSOR_PID
   echo -e "#!/bin/sh\n /etc/init.d/media-sensor-dummy reload" > $CURRENT_MEDIA_SENSOR_PATH
   killall -g $CURRENT_MEDIA_SENSOR_NAME || kill -HUP 1 || true
+
+  killall $DAEMON_NAME || true
 }
 
 clean_caches_plug() {
@@ -201,7 +213,10 @@ init_webcam() {
 fix_camera () {
   case $MEDIA_SENSOR_NAME in
     *-ov7670)
-      fix_ov7670 || { log "ov7670 fix failed" 0 ; do_stop; exit 1 ; }
+      # fix in new firmware occurs in the driver
+      if [ ! -f /sys/bus/i2c/devices/1-0021/reinit ] && [ ! -f /sys/bus/i2c/devices/2-0021/reinit ]; then
+        fix_ov7670 || { log "ov7670 fix failed" 0 ; do_stop; exit 1 ; }
+      fi
       log "ov7670 fixed" 2
       ;;
     *-webcam)
