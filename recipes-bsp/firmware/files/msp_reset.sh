@@ -1,6 +1,18 @@
 #!/bin/sh -e
 echo Resetting MSP ...
 # Put MSP to reset
+if [ ! -d /sys/class/gpio/gpio93 ]; then
+    echo "Export GPIO93"
+    echo 93 > /sys/class/gpio/export
+fi
+echo out > /sys/class/gpio/gpio93/direction
+
+if [ ! -d /sys/class/gpio/gpio80 ]; then
+    echo "Export GPIO80"
+    echo 80 > /sys/class/gpio/export
+fi
+echo out > /sys/class/gpio/gpio80/direction
+
 echo 0 > /sys/class/gpio/gpio93/value
 usleep 10000
 # Drive PUR pin high. Since PUR is wired to USB DP,
