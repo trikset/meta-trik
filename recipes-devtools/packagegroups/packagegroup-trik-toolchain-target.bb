@@ -19,7 +19,6 @@ RDEPENDS:${PN} += "\
 	libusb1-dev \
 	protobuf-dev  \
 	trik-runtime-qt5-dev \
-	trik-libcodecengine-client-staticdev \
 	gcc-sanitizers \
 "
 # trik-ros-dev
