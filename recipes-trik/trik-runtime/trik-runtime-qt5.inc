@@ -26,6 +26,7 @@ SRC_URI = "gitsm://github.com/trikset/trikRuntime.git;protocol=https;${GIT_REVIS
 S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/trikRuntime.pro"
+EXTRA_QMAKEVARS_PRE += "PYTHONQT_GENERATED_PATH=${S}/PythonQt/PythonQt/generated_cpp_`${OE_QMAKE_QMAKE} -query QT_VERSION`_triksdk"
 
 do_compile(){
         oe_runmake
