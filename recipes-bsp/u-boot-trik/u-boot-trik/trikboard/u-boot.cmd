@@ -1,3 +1,2 @@
 setenv console ''
-saveenv
 
