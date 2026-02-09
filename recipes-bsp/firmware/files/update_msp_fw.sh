@@ -1,5 +1,16 @@
 #!/bin/sh -e
 
+# Enables 12V motor power on older TRIK boards.
+# GPIO signal opens the power switch for motor drivers.
+enableMotors12v() {
+    if [ ! -d /sys/class/gpio/gpio62 ]; then
+        echo "Export GPIO62"
+        echo 62 > /sys/class/gpio/export
+    fi
+    echo out > /sys/class/gpio/gpio62/direction
+    echo 1 > /sys/class/gpio/gpio62/value
+}
+
 hex2dec() {
     res=`printf "%d" "$1" 2>/dev/null`
     # do not return correct substring of incorrect string
@@ -44,6 +55,7 @@ tryUpdate() {
     return 0
 }
 
+enableMotors12v
 tryUpdate
 # If MCU is fresh, there is no i2c responder and firmware variant is forced to 0x10*.
 # Now, i2c is available and we can tell proper MCU variant.
