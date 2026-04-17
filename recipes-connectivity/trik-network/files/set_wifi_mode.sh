@@ -53,6 +53,16 @@ killall -q udhcpd
 /etc/init.d/hostapd stop
 ifdown $interface
 
+attempts=5
+while pgrep wpa_supplicant > /dev/null || pgrep hostapd > /dev/null; do
+    attempts=$((attempts - 1))
+    if [ $attempts -eq 0 ]; then
+        echo "Error switch wlan mode: processes still running" >&2
+        exit 1
+    fi
+    sleep 0.2
+done
+
 if [ ! -f $trikrc ]; then
 	touch $trikrc
 fi
