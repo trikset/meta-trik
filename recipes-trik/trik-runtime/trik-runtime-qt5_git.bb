@@ -17,7 +17,7 @@ DEPENDS += "rsync-native python3"
 #We need to disable sanitize_address until the issue with the high memory consumption of asan is fixed
 EXTRA_QMAKEVARS_PRE += "-r CONFIG+=release CONFIG+=ltcg CONFIG+=use_gold_linker \
 			CONFIG+=noPch CONFIG+=sanitize_undefined CONFIG+=sanitizer \
-			CONFIG+=trik_new_age PYTHONQTALL_CONFIG+=PythonQtCore \
+			PYTHONQTALL_CONFIG+=PythonQtCore \
 			PYTHONQTALL_CONFIG+=PythonQtGui"
 TRIK_PYTHON_VERSION = "3.10"
 EXTRA_QMAKEVARS_PRE += "PYTHON_VERSION=${TRIK_PYTHON_VERSION} PKGCONFIG+=python-${TRIK_PYTHON_VERSION}-embed"
