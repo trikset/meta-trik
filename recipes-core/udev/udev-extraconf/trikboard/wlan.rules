@@ -1,0 +1,1 @@
+SUBSYSTEM=="net", ACTION=="add", KERNEL=="wlan*", RUN+="/etc/udev/scripts/wlan-rename.sh %k"
