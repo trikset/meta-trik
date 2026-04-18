@@ -29,6 +29,10 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-uart-ppp \
 		trik-mems \
 		python3-pip \
+		rtw88-mod \
+		rtl8188eu-mod \
+		rtl8188fu-mod \
+		rtl8822bu-mod \
 "
 
 BAD_RECOMMENDATIONS += "rng-tools"
