@@ -58,6 +58,9 @@ sigterm_handler() {
     trap '' SIGTERM SIGINT
     echo "Signal caught, restoring previous mode: '${PREVIOUS_MODE:-client}'" >&2
 
+    # Remove mode before killing
+    sed --in-place '/^trik_wifi_mode=/d' "$trikrc"
+
     killall -q udhcpd
     /etc/init.d/hostapd stop
     ifdown "$interface"
@@ -80,7 +83,6 @@ sigterm_handler() {
         "ap")     start_ap ;;
     esac
 
-    sed --in-place '/^trik_wifi_mode=/d' "$trikrc"
     echo "trik_wifi_mode=${PREVIOUS_MODE:-client}" >> "$trikrc"
 
     exit 2
@@ -119,6 +121,10 @@ if [ ! "$1" = "client" ] && [ ! "$1" = "ap" ]; then
     exit 1
 fi
 
+# Remove mode before killing: ifdown is not instant, and trikGui polls every 5s
+# — it may read stale mode while wpa_supplicant is already dead.
+sed --in-place '/^trik_wifi_mode=/d' "$trikrc"
+
 killall -q udhcpd
 /etc/init.d/hostapd stop
 ifdown "$interface"
@@ -139,7 +145,6 @@ done
 if [ ! -f "$trikrc" ]; then
     touch "$trikrc"
 fi
-sed --in-place '/^trik_wifi_mode=/d' "$trikrc"
 
 case "$1" in
     "client") start_client ;;
