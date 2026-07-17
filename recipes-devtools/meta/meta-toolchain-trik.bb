@@ -8,6 +8,7 @@ require recipes-qt/meta/meta-toolchain-qt5.bb
 
 TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-trik-toolchain-host"
 TOOLCHAIN_TARGET_TASK += "packagegroup-trik-toolchain-target"
+TOOLCHAIN_TARGET_TASK += "packagegroup-trik-toolchain-ros2-target"
 
 #TOOLCHAIN_TARGET_TASK += "packagegroup-ros-comm"
 TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-toolchain-trik-${DISTRO_VERSION}"
