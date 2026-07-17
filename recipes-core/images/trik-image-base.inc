@@ -33,6 +33,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		rtl8188eu-mod \
 		rtl8188fu-mod \
 		rtl8822bu-mod \
+		packagegroup-ros2-base \
 "
 
 BAD_RECOMMENDATIONS += "rng-tools"
