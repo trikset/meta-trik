@@ -19,7 +19,7 @@ IMAGE_INSTALL = "packagegroup-base \
 		trik-network \
 		fuse \
 		eglibc-utils \
-		packagegroup-triksensors \
+		dsp-firmware \
 		distro-feed-configs \
 		formfactor \
 		coreutils \

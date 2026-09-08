@@ -140,10 +140,32 @@ collect() {
 }
 
 
-# Compress files in logs directory 
+# Compress a single collected directory into a .tar.gz and remove the directory
+compress_one() {
+	local d="$1"
+	if [ ! -d "$d" ]; then
+		return 0
+	fi
+	if [ -z "$(ls -A "$d" 2>/dev/null)" ]; then
+		return 0
+	fi
+	tar czf "${d}.tar.gz" -C "$d" . 2>/dev/null || true
+	rm -rf "$d" 2>/dev/null || true
+}
+
+
+# Compress leftover directories in the log folder
 compress() {
-	# Remove empty files so they will not be engaged into compression
-	find ${archive_path} -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -r -n 1 -I {} sh -c 'if [ ! -z "$(ls -A {})" ]; then tar czvf {}.tar.gz -C {} .; rm -r {}; fi'
+	if ! mkdir "${archive_path}/.lock" 2>/dev/null; then
+		return 0
+	fi
+
+	local d
+	while IFS= read -r -d '' d; do
+		compress_one "$d"
+	done < <(find "${archive_path}" -mindepth 1 -maxdepth 1 -type d -print0 2>/dev/null)
+
+	rmdir "${archive_path}/.lock" 2>/dev/null || true
 }
 
 
@@ -159,7 +181,7 @@ main() {
 		local tmp_dir
 		tmp_dir=$(prepare_tmp_dir "false")
 		collect "$tmp_dir"
-		compress
+		compress_one "$tmp_dir"
 		special_echo "${tmp_dir}"
 	else 
 		echo "No such command"
