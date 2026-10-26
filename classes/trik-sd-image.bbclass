@@ -1,11 +1,10 @@
-
-IMAGE_ROOTFS_ALIGNMENT ?= "4096"
+IMAGE_ROOTFS_ALIGNMENT ?= "4194304"
 
 XZ_DICTIONARY_SIZE = "64"
 XZ_THREADS = "5"
 XZ_MEMLIMIT= "6500MiB"
 XZ_COMPRESSION_LEVEL = "--verbose --no-adjust --arm --lzma2=mode=normal,dict=${XZ_DICTIONARY_SIZE}MiB,lc=1,lp=2,pb=2,mf=bt4,nice=192,depth=1024"
-EXTRA_IMAGECMD:ext4 =+ " -E stride=2 -E stripe-width=16 -b 4096 -i 4096 "
+EXTRA_IMAGECMD:ext4 =+ " -b 4096 -N 40960 -E stride=1024,stripe-width=1024,nodiscard -O sparse_super2,^huge_file,dir_index -m 0 -J size=8 "
 
 inherit image_types logging user-partion
 # inherit image-mklibs
@@ -54,7 +53,7 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 MBR_SIZE ?= "4K"
 BLOCK_SIZE ?= "1024"
-ALIGNMENT ?= "1M"
+ALIGNMENT ?= "4M"
 
 
 file_size() {
