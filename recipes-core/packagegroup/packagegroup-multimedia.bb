@@ -14,10 +14,14 @@ RDEPENDS:${PN} = "\
   espeak \
   v4l-utils \
   gstreamer1.0-plugins-good \
+  gstreamer1.0-plugins-bad \
+  gstreamer1.0-plugins-bad-v4l2codecs \
   gstreamer1.0-meta-video \
   gstreamer1.0-plugins-base \
   gstreamer1.0-meta-audio \
   gstreamer1.0-rtsp-server \
+  gstreamer1.0-rockchip \
+  rockchip-mpp \
   flac \
   mjpg-streamer \
   mediamtx \
