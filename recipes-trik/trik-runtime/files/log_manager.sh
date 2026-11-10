@@ -32,7 +32,8 @@ tree_elements_list=(
 utils_list=(
 	"cat /etc/version"
 	"dmesg"
-	"journalctl -b --no-pager"
+	"journalctl -b 0 --no-pager"
+	"journalctl -b -1 --no-pager"
 	"i2cdetect -y 1"
 	"i2cdetect -y 2"
 	"i2cget -y 2 0x48 0xee w"
