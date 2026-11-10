@@ -3,6 +3,8 @@ DESCRIPTION = "Multimedia libraries and utilities"
 LICENSE = "LGPL-2.0-only"
 PR = "r4"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 # MediaMTX is shipped alongside mjpg-streamer, not instead of it. Moving the
