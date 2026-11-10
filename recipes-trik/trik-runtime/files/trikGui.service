@@ -1,7 +1,7 @@
 [Unit]
 Description=TRIK GUI
-After=nrf-fw-update.service trik-wifi-mode@wlan0.service dev-dri-card0.device display-manager.service
-Wants=dev-dri-card0.device display-manager.service
+After=nrf-fw-update.service trik-wifi-mode@wlan0.service display-manager.service
+Wants=display-manager.service
 
 [Service]
 Type=simple
