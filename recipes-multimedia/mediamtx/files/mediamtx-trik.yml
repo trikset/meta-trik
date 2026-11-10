@@ -1,29 +1,29 @@
 logLevel: info
 logDestinations: [stdout]
 
-api: no
-metrics: no
-pprof: no
-playback: no
+api: false
+metrics: false
+pprof: false
+playback: false
 
-rtsp: yes
+rtsp: true
 rtspAddress: :8554
-protocols: [udp, multicast, tcp]
-encryption: "no"
+rtspTransports: [udp, multicast, tcp]
+rtspEncryption: "no"
 
-rtmp: no
-hls: no
+rtmp: false
+hls: false
 
-webrtc: yes
+webrtc: true
 webrtcAddress: :8889
-webrtcEncryption: no
-webrtcAllowOrigin: '*'
+webrtcEncryption: false
+webrtcAllowOrigins: ["*"]
 webrtcLocalUDPAddress: :8189
-webrtcIPsFromInterfaces: yes
+webrtcIPsFromInterfaces: true
 webrtcAdditionalHosts: []
 webrtcICEServers2: []
 
-srt: no
+srt: false
 
 paths:
   all_others:

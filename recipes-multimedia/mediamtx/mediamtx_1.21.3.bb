@@ -5,15 +5,15 @@ SECTION = "multimedia"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=77fd2623bd5398430be5ce60489c2e81"
 
-PV = "1.9.3"
+PV = "1.21.3"
 PR = "r1"
 
 SRC_URI = " \
-    https://github.com/bluenviron/mediamtx/releases/download/v${PV}/mediamtx_v${PV}_linux_arm64v8.tar.gz \
+    https://github.com/bluenviron/mediamtx/releases/download/v${PV}/mediamtx_v${PV}_linux_arm64.tar.gz \
     file://mediamtx-trik.yml \
     file://mediamtx.service \
 "
-SRC_URI[sha256sum] = "f2f02109dd3d88773d7de5ae84385d41041bc9d60d0459eb6c61462cb2da0d1e"
+SRC_URI[sha256sum] = "27f038237cb5f77a724f6afc58eca2798f2bc4edf9989895631a80eeb41a4fe2"
 
 S = "${WORKDIR}"
 
