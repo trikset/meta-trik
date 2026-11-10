@@ -22,5 +22,8 @@ INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INSANE_SKIP:${PN} = "ldflags arch"
+# TODO: this package ships prebuilt binaries built for another platform
+# (32-bit ARM/OMAP, e.g. v4l2-dsp-fb). They cannot run here and should be
+# removed from the models repo; skip file-rdeps until then.
+INSANE_SKIP:${PN} = "ldflags arch file-rdeps"
 
