@@ -53,6 +53,9 @@ RDEPENDS:${PN} = "\
 "
 #  lshw
 
+# Remote X debugging helpers are only shipped on dev boards.
+RDEPENDS:${PN} += "${@bb.utils.contains('TRIKBOARD_VARIANT', 'dev', 'x11vnc xdotool', '', d)}"
+
 RRECOMMENDS:${PN} = "\
   ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
  "
