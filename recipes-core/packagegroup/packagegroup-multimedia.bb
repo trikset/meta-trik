@@ -5,6 +5,10 @@ PR = "r4"
 
 inherit packagegroup
 
+# MediaMTX is shipped alongside mjpg-streamer, not instead of it. Moving the
+# runtime to RTSP/WebRTC needs major trikRuntime changes, so mjpg-streamer
+# stays the default streamer for now. MediaMTX is available to experiment with
+# RTSP/WebRTC manually from the console (e.g. publishing with gstreamer).
 RDEPENDS:${PN} = "\
   alsa-utils \
   espeak \
@@ -16,6 +20,7 @@ RDEPENDS:${PN} = "\
   gstreamer1.0-rtsp-server \
   flac \
   mjpg-streamer \
+  mediamtx \
  "
 #vlc
 #  ffmpeg
