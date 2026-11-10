@@ -22,11 +22,11 @@ inherit cmake
 S ="${WORKDIR}/git/mjpg-streamer-experimental"
 
 do_install:append() {
-	install -d ${D}/${sysconfdir}/init.d/
-	install -m 0755 ${WORKDIR}/mjpg-streamer ${D}/${sysconfdir}/init.d/
+	install -d ${D}${libexecdir}/trik/
+	install -m 0755 ${WORKDIR}/mjpg-streamer ${D}${libexecdir}/trik/
 }
 
-FILES:${PN} += "/usr/lib/*"
+FILES:${PN} += "/usr/lib/* ${libexecdir}/trik/mjpg-streamer"
 
 
 

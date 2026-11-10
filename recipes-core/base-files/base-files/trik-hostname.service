@@ -1,7 +1,8 @@
 [Unit]
 Description=TRIK hostname from MAC
-After=systemd-udev-settle.service
-Before=network.target avahi-daemon.service
+After=sys-subsystem-net-devices-wlan0.device
+Wants=sys-subsystem-net-devices-wlan0.device
+Before=network.target avahi-daemon.service sshd.service sshd@.service sshd.socket
 
 [Service]
 Type=oneshot
