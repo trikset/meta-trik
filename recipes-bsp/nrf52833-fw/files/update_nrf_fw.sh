@@ -15,18 +15,8 @@ set -eu
 BOOT_LINE="20"
 RESET_LINE="11"
 
-# The /dev/gpiochipN number is dynamic, so resolve bank 0 by its label.
-GPIO_CHIP=""
-for chip in /sys/bus/gpio/devices/*; do
-	if [ "$(cat "$chip/label" 2>/dev/null)" = "gpio0" ]; then
-		GPIO_CHIP=$(basename "$chip")
-		break
-	fi
-done
-if [ -z "$GPIO_CHIP" ]; then
-	echo "nrf-fw-update: gpio0 chip not found" >&2
-	exit 1
-fi
+# RK3568 GPIO bank 0 is exposed as gpiochip0.
+GPIO_CHIP="gpiochip0"
 
 BOOTLOADER_PORT="/dev/nrf52833-bl"
 FW_DIR="/usr/libexec/trik/nrf52833"
