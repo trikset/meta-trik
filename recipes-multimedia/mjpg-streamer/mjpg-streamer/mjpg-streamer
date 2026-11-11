@@ -12,9 +12,10 @@
 # cameras can stream at the same time (each on its own HTTP port and PID file).
 #
 # Usage: mjpg-streamer {start|stop|status|restart} <port> [device]
-#   port     TRIK camera port name (video1, video2, usb-camera).
-#   device   device file for usb-camera (e.g. /dev/video2); ignored for ov7670
-#            ports, whose frames come from the DSP JPEG encoder through a FIFO.
+#   port     TRIK camera port name (usb-camera-N).
+#   device   video device file for USB camera ports (passed by the runtime);
+#            ignored for ov7670 ports, whose frames come from the DSP JPEG
+#            encoder through a FIFO.
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
@@ -30,10 +31,10 @@ log() {
 # Each camera port gets its own HTTP port so concurrent streams never clash.
 http_port() {
     case "$1" in
-        video1)      echo 8080 ;;
-        video2)      echo 8081 ;;
-        usb-camera)  echo 8082 ;;
-        *)           echo 8080 ;;
+        usb-camera-1)  echo 8080 ;;
+        usb-camera-2)  echo 8081 ;;
+        usb-camera-3)  echo 8082 ;;
+        *)             echo 8080 ;;
     esac
 }
 
@@ -61,9 +62,11 @@ do_start() {
     fi
 
     case "$port" in
-        usb-camera)
-            # UVC webcam: mjpg-streamer opens the device directly.
-            input="input_uvc.so -d ${device:-/dev/video2} -r 432x240 -f 30"
+        usb-camera-*)
+            # UVC webcam: mjpg-streamer opens the device directly. The runtime
+            # always passes the video device path (the config's "device").
+            [ -n "$device" ] || { log "$port" "no device file given"; return 1; }
+            input="input_uvc.so -d $device -r 432x240 -f 30"
             ;;
         *)
             # ov7670: frames come from the DSP JPEG encoder through a per-port
