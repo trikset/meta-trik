@@ -2,7 +2,7 @@
 Description=TRIK hostname from MAC
 After=sys-subsystem-net-devices-wlan0.device
 Wants=sys-subsystem-net-devices-wlan0.device
-Before=network.target avahi-daemon.service sshd.service sshd@.service sshd.socket
+Before=network.target avahi-daemon.service sshd.service sshd@.service
 
 [Service]
 Type=oneshot
