@@ -1,7 +1,7 @@
 DESCRIPTION = "Runtime for TRIK controller"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-RDEPENDS:${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mjpg-streamer"
+RDEPENDS:${PN} = "locale-default espeak alsa-utils v4l-utils liberation-fonts mjpg-streamer librga"
 
 #RRECOMMENDS:${PN} = "vlc"
 
@@ -9,6 +9,7 @@ inherit qmake5 pkgconfig systemd
 DEPENDS += "qtmultimedia qtscript qttools-native qtserialport"
 DEPENDS += "qtquickcontrols2 qtquickcontrols qtdeclarative qtsvg"
 DEPENDS += "nrf-usb-headers"
+DEPENDS += "librga"
 
 # ros2 depends
 DEPENDS += "rclcpp sensor-msgs"
