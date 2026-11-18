@@ -1,7 +1,7 @@
 SUMMARY = "Provides extra target libs for TRIK toolchain"
 LICENSE = "MIT"
 
-PR = "r3"
+PR = "r4"
 
 PACKAGE_ARCH = "${TUNE_PKGARCH}"
 
@@ -20,6 +20,7 @@ RDEPENDS:${PN} += "\
 	protobuf-dev  \
 	rockchip-mpp-dev \
 	librga-dev \
+	rknpu2-dev \
 	libgles2-mesa-dev \
 	libgles3-mesa-dev \
 	trik-runtime-qt5-dev \
